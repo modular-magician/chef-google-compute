@@ -50,6 +50,10 @@ module Google
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                desired_state: true
+      property :description,
+               String,
+               coerce: ::Google::Compute::Property::String.coerce,
+               desired_state: true
       property :r_label,
                String,
                coerce: ::Google::Compute::Property::String.coerce,
@@ -106,6 +110,10 @@ module Google
           @current_resource = @new_resource.clone
           @current_resource.dest_range =
             ::Google::Compute::Property::String.api_parse(fetch['destRange'])
+          @current_resource.description =
+            ::Google::Compute::Property::String.api_parse(
+              fetch['description']
+            )
           @current_resource.r_label =
             ::Google::Compute::Property::String.api_parse(fetch['name'])
 
@@ -135,6 +143,7 @@ module Google
           request = {
             kind: 'compute#route',
             destRange: new_resource.dest_range,
+            description: new_resource.description,
             name: new_resource.r_label,
             network: new_resource.network,
             priority: new_resource.priority,
@@ -173,6 +182,7 @@ module Google
             name: resource.r_label,
             kind: 'compute#route',
             dest_range: resource.dest_range,
+            description: resource.description,
             network: resource.network,
             priority: resource.priority,
             tags: resource.tags,
