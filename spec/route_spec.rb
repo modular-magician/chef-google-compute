@@ -119,11 +119,13 @@ context 'gcompute_route' do
 
                   gcompute_route 'title0' do
                     action :create
+                    description 'test description#0 data'
                     dest_range 'test dest_range#0 data'
                     network 'resource(network,0)'
                     next_hop_gateway 'test next_hop_gateway#0 data'
                     next_hop_instance 'test next_hop_instance#0 data'
                     next_hop_ip 'test next_hop_ip#0 data'
+                    next_hop_network 'resource(network,0)'
                     next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
                     priority 1108918677
                     tags ['mm', 'nn', 'oo', 'pp']
@@ -133,11 +135,13 @@ context 'gcompute_route' do
 
                   gcompute_route 'title1' do
                     action :create
+                    description 'test description#1 data'
                     dest_range 'test dest_range#1 data'
                     network 'resource(network,1)'
                     next_hop_gateway 'test next_hop_gateway#1 data'
                     next_hop_instance 'test next_hop_instance#1 data'
                     next_hop_ip 'test next_hop_ip#1 data'
+                    next_hop_network 'resource(network,1)'
                     next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#1 data'
                     priority 2217837354
                     tags ['bb', 'cc', 'dd']
@@ -147,11 +151,13 @@ context 'gcompute_route' do
 
                   gcompute_route 'title2' do
                     action :create
+                    description 'test description#2 data'
                     dest_range 'test dest_range#2 data'
                     network 'resource(network,2)'
                     next_hop_gateway 'test next_hop_gateway#2 data'
                     next_hop_instance 'test next_hop_instance#2 data'
                     next_hop_ip 'test next_hop_ip#2 data'
+                    next_hop_network 'resource(network,2)'
                     next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#2 data'
                     priority 3326756031
                     tags ['qq', 'rr']
@@ -176,6 +182,11 @@ context 'gcompute_route' do
               it do
                 is_expected
                   .to have_attributes(dest_range: 'test dest_range#0 data')
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#0 data')
               end
 
               it { is_expected.to have_attributes(r_label: 'title0') }
@@ -214,6 +225,11 @@ context 'gcompute_route' do
                     next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#0 data'
                   )
               end
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'nextHopNetwork' do
+              #   # Add test code here
+              # end
             end
 
             context 'gcompute_route[title1]' do
@@ -224,6 +240,11 @@ context 'gcompute_route' do
               it do
                 is_expected
                   .to have_attributes(dest_range: 'test dest_range#1 data')
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#1 data')
               end
 
               it { is_expected.to have_attributes(r_label: 'title1') }
@@ -262,6 +283,11 @@ context 'gcompute_route' do
                     next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#1 data'
                   )
               end
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'nextHopNetwork' do
+              #   # Add test code here
+              # end
             end
 
             context 'gcompute_route[title2]' do
@@ -272,6 +298,11 @@ context 'gcompute_route' do
               it do
                 is_expected
                   .to have_attributes(dest_range: 'test dest_range#2 data')
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#2 data')
               end
 
               it { is_expected.to have_attributes(r_label: 'title2') }
@@ -310,6 +341,11 @@ context 'gcompute_route' do
                     next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#2 data'
                   )
               end
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'nextHopNetwork' do
+              #   # Add test code here
+              # end
             end
           end
 
@@ -387,11 +423,13 @@ context 'gcompute_route' do
 
                   gcompute_route 'title0' do
                     action :create
+                    description 'test description#0 data'
                     dest_range 'test dest_range#0 data'
                     network 'resource(network,0)'
                     next_hop_gateway 'test next_hop_gateway#0 data'
                     next_hop_instance 'test next_hop_instance#0 data'
                     next_hop_ip 'test next_hop_ip#0 data'
+                    next_hop_network 'resource(network,0)'
                     next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
                     priority 1108918677
                     r_label 'test name#0 data'
@@ -402,11 +440,13 @@ context 'gcompute_route' do
 
                   gcompute_route 'title1' do
                     action :create
+                    description 'test description#1 data'
                     dest_range 'test dest_range#1 data'
                     network 'resource(network,1)'
                     next_hop_gateway 'test next_hop_gateway#1 data'
                     next_hop_instance 'test next_hop_instance#1 data'
                     next_hop_ip 'test next_hop_ip#1 data'
+                    next_hop_network 'resource(network,1)'
                     next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#1 data'
                     priority 2217837354
                     r_label 'test name#1 data'
@@ -417,11 +457,13 @@ context 'gcompute_route' do
 
                   gcompute_route 'title2' do
                     action :create
+                    description 'test description#2 data'
                     dest_range 'test dest_range#2 data'
                     network 'resource(network,2)'
                     next_hop_gateway 'test next_hop_gateway#2 data'
                     next_hop_instance 'test next_hop_instance#2 data'
                     next_hop_ip 'test next_hop_ip#2 data'
+                    next_hop_network 'resource(network,2)'
                     next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#2 data'
                     priority 3326756031
                     r_label 'test name#2 data'
@@ -447,6 +489,11 @@ context 'gcompute_route' do
               it do
                 is_expected
                   .to have_attributes(dest_range: 'test dest_range#0 data')
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#0 data')
               end
 
               it { is_expected.to have_attributes(r_label: 'test name#0 data') }
@@ -485,6 +532,11 @@ context 'gcompute_route' do
                     next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#0 data'
                   )
               end
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'nextHopNetwork' do
+              #   # Add test code here
+              # end
             end
 
             context 'gcompute_route[title1]' do
@@ -495,6 +547,11 @@ context 'gcompute_route' do
               it do
                 is_expected
                   .to have_attributes(dest_range: 'test dest_range#1 data')
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#1 data')
               end
 
               it { is_expected.to have_attributes(r_label: 'test name#1 data') }
@@ -533,6 +590,11 @@ context 'gcompute_route' do
                     next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#1 data'
                   )
               end
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'nextHopNetwork' do
+              #   # Add test code here
+              # end
             end
 
             context 'gcompute_route[title2]' do
@@ -543,6 +605,11 @@ context 'gcompute_route' do
               it do
                 is_expected
                   .to have_attributes(dest_range: 'test dest_range#2 data')
+              end
+
+              it do
+                is_expected
+                  .to have_attributes(description: 'test description#2 data')
               end
 
               it { is_expected.to have_attributes(r_label: 'test name#2 data') }
@@ -581,6 +648,11 @@ context 'gcompute_route' do
                     next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#2 data'
                   )
               end
+
+              # TODO(alexstephen): Implement resourceref test.
+              # it 'nextHopNetwork' do
+              #   # Add test code here
+              # end
             end
           end
 
@@ -639,6 +711,7 @@ context 'gcompute_route' do
               {
                 'kind' => 'compute#route',
                 'destRange' => 'test dest_range#0 data',
+                'description' => 'test description#0 data',
                 'name' => 'title0',
                 'network' => 'selflink(resource(network,0))',
                 'priority' => 1_108_918_677,
@@ -646,7 +719,8 @@ context 'gcompute_route' do
                 'nextHopGateway' => 'test next_hop_gateway#0 data',
                 'nextHopInstance' => 'test next_hop_instance#0 data',
                 'nextHopIp' => 'test next_hop_ip#0 data',
-                'nextHopVpnTunnel' => 'test next_hop_vpn_tunnel#0 data'
+                'nextHopVpnTunnel' => 'test next_hop_vpn_tunnel#0 data',
+                'nextHopNetwork' => 'selflink(resource(network,0))'
               },
               name: 'title0'
             expect_network_get_async 1, name: 'title0'
@@ -689,11 +763,13 @@ context 'gcompute_route' do
 
                 gcompute_route 'title0' do
                   action :create
+                  description 'test description#0 data'
                   dest_range 'test dest_range#0 data'
                   network 'resource(network,0)'
                   next_hop_gateway 'test next_hop_gateway#0 data'
                   next_hop_instance 'test next_hop_instance#0 data'
                   next_hop_ip 'test next_hop_ip#0 data'
+                  next_hop_network 'resource(network,0)'
                   next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
                   priority 1108918677
                   tags ['mm', 'nn', 'oo', 'pp']
@@ -720,6 +796,11 @@ context 'gcompute_route' do
           end
           it do
             is_expected.to have_attributes(dest_range: 'test dest_range#0 data')
+          end
+
+          it do
+            is_expected
+              .to have_attributes(description: 'test description#0 data')
           end
 
           it { is_expected.to have_attributes(r_label: 'title0') }
@@ -758,6 +839,11 @@ context 'gcompute_route' do
                 next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#0 data'
               )
           end
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'nextHopNetwork' do
+          #   # Add test code here
+          # end
         end
 
         # Ensure present: resource missing, ignore, no name, fail
@@ -778,6 +864,7 @@ context 'gcompute_route' do
               1,
               'kind' => 'compute#route',
               'destRange' => 'test dest_range#0 data',
+              'description' => 'test description#0 data',
               'name' => 'test name#0 data',
               'network' => 'selflink(resource(network,0))',
               'priority' => 1_108_918_677,
@@ -785,7 +872,8 @@ context 'gcompute_route' do
               'nextHopGateway' => 'test next_hop_gateway#0 data',
               'nextHopInstance' => 'test next_hop_instance#0 data',
               'nextHopIp' => 'test next_hop_ip#0 data',
-              'nextHopVpnTunnel' => 'test next_hop_vpn_tunnel#0 data'
+              'nextHopVpnTunnel' => 'test next_hop_vpn_tunnel#0 data',
+              'nextHopNetwork' => 'selflink(resource(network,0))'
             expect_network_get_async 1
             expect_network_get_success_network 1
           end
@@ -826,11 +914,13 @@ context 'gcompute_route' do
 
                 gcompute_route 'title0' do
                   action :create
+                  description 'test description#0 data'
                   dest_range 'test dest_range#0 data'
                   network 'resource(network,0)'
                   next_hop_gateway 'test next_hop_gateway#0 data'
                   next_hop_instance 'test next_hop_instance#0 data'
                   next_hop_ip 'test next_hop_ip#0 data'
+                  next_hop_network 'resource(network,0)'
                   next_hop_vpn_tunnel 'test next_hop_vpn_tunnel#0 data'
                   priority 1108918677
                   r_label 'test name#0 data'
@@ -858,6 +948,11 @@ context 'gcompute_route' do
           end
           it do
             is_expected.to have_attributes(dest_range: 'test dest_range#0 data')
+          end
+
+          it do
+            is_expected
+              .to have_attributes(description: 'test description#0 data')
           end
 
           it { is_expected.to have_attributes(r_label: 'test name#0 data') }
@@ -896,6 +991,11 @@ context 'gcompute_route' do
                 next_hop_vpn_tunnel: 'test next_hop_vpn_tunnel#0 data'
               )
           end
+
+          # TODO(alexstephen): Implement resourceref test.
+          # it 'nextHopNetwork' do
+          #   # Add test code here
+          # end
         end
 
         # Ensure present: resource missing, ignore, has name, fail
@@ -916,6 +1016,7 @@ context 'gcompute_route' do
         context 'title == name (pass)' do
           before do
             expect_network_get_failed 1, name: 'title0'
+            expect_network_get_success_network 1
           end
 
           let(:runner) do
@@ -945,8 +1046,17 @@ context 'gcompute_route' do
           let(:chef_run) do
             apply_recipe(
               <<-MANIFEST
+                gcompute_network 'resource(network,0)' do
+                  action :create
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
                 gcompute_route 'title0' do
                   action :delete
+                  dest_range 'test dest_range#0 data'
+                  network 'resource(network,0)'
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -979,6 +1089,7 @@ context 'gcompute_route' do
         context 'title != name (pass)' do
           before do
             expect_network_get_failed 1
+            expect_network_get_success_network 1
           end
 
           let(:runner) do
@@ -1008,8 +1119,17 @@ context 'gcompute_route' do
           let(:chef_run) do
             apply_recipe(
               <<-MANIFEST
+                gcompute_network 'resource(network,0)' do
+                  action :create
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
                 gcompute_route 'title0' do
                   action :delete
+                  dest_range 'test dest_range#0 data'
+                  network 'resource(network,0)'
                   r_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -1047,6 +1167,7 @@ context 'gcompute_route' do
             expect_network_get_success 1, name: 'title0'
             expect_network_delete 1, 'title0'
             expect_network_get_async 1, name: 'title0'
+            expect_network_get_success_network 1
           end
 
           let(:runner) do
@@ -1076,8 +1197,17 @@ context 'gcompute_route' do
           let(:chef_run) do
             apply_recipe(
               <<-MANIFEST
+                gcompute_network 'resource(network,0)' do
+                  action :create
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
                 gcompute_route 'title0' do
                   action :delete
+                  dest_range 'test dest_range#0 data'
+                  network 'resource(network,0)'
                   project 'test project#0 data'
                   credential 'mycred'
                 end
@@ -1116,6 +1246,7 @@ context 'gcompute_route' do
             expect_network_get_success 1
             expect_network_delete 1
             expect_network_get_async 1
+            expect_network_get_success_network 1
           end
 
           let(:runner) do
@@ -1145,8 +1276,17 @@ context 'gcompute_route' do
           let(:chef_run) do
             apply_recipe(
               <<-MANIFEST
+                gcompute_network 'resource(network,0)' do
+                  action :create
+                  n_label 'test name#0 data'
+                  project 'test project#0 data'
+                  credential 'mycred'
+                end
+
                 gcompute_route 'title0' do
                   action :delete
+                  dest_range 'test dest_range#0 data'
+                  network 'resource(network,0)'
                   r_label 'test name#0 data'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -1341,6 +1481,55 @@ context 'gcompute_route' do
     )
   end
 
+  def expect_network_get_success_network(id, data = {})
+    id_data = data.fetch(:name, '').include?('title') ? 'title' : 'name'
+    body = load_network_result_network("success#{id}~" \
+                                                           "#{id_data}.yaml")
+           .to_json
+    uri = uri_data_network(id).merge(data)
+
+    request = double('request')
+    allow(request).to receive(:send).and_return(http_success(body))
+
+    debug_network "!! GET #{uri}"
+    expect(Google::Compute::Network::Get).to receive(:new)
+      .with(self_link_network(uri),
+            instance_of(Google::FakeAuthorization)) do |args|
+      debug_network ">> GET #{args}"
+      request
+    end
+  end
+
+  def load_network_result_network(file)
+    results = File.join(File.dirname(__FILE__), 'data', 'network',
+                        'gcompute_network', file)
+    raise "Network result data file #{results}" unless File.exist?(results)
+    data = YAML.safe_load(File.read(results))
+    raise "Invalid network results #{results}" unless data.class <= Hash
+    data
+  end
+
+  # Creates variable test data to comply with self_link URI parameters
+  # Only used for gcompute_network objects
+  def uri_data_network(id)
+    {
+      project: GoogleTests::Constants::N_PROJECT_DATA[(id - 1) \
+        % GoogleTests::Constants::N_PROJECT_DATA.size],
+      name: GoogleTests::Constants::N_NAME_DATA[(id - 1) \
+        % GoogleTests::Constants::N_NAME_DATA.size]
+    }
+  end
+
+  def self_link_network(data)
+    URI.join(
+      'https://www.googleapis.com/compute/v1/',
+      expand_variables_network(
+        'projects/{{project}}/global/networks/{{name}}',
+        data
+      )
+    )
+  end
+
   def debug(message)
     puts(message) if ENV['RSPEC_DEBUG']
   end
@@ -1348,6 +1537,11 @@ context 'gcompute_route' do
   def debug_network(message)
     puts("Network #{message}") \
       if ENV['RSPEC_DEBUG'] || ENV['RSPEC_HTTP_VERBOSE']
+  end
+
+  def expand_variables_network(template, data, ext_dat = {})
+    Google::GCOMPUTE::Network
+      .action_class.expand_variables(template, data, ext_dat)
   end
 
   def expand_variables_network(template, data, ext_dat = {})
