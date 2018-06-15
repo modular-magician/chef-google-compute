@@ -118,6 +118,10 @@ module Google
             ::Google::Compute::Property::String.api_parse(
               fetch['description']
             )
+          @current_resource.gateway_address =
+            ::Google::Compute::Property::String.api_parse(
+              fetch['gatewayAddress']
+            )
           @current_resource.id =
             ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.s_label =
@@ -160,7 +164,6 @@ module Google
           request = {
             kind: 'compute#subnetwork',
             description: new_resource.description,
-            gatewayAddress: new_resource.gateway_address,
             ipCidrRange: new_resource.ip_cidr_range,
             name: new_resource.s_label,
             network: new_resource.network,

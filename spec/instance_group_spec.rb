@@ -162,6 +162,7 @@ context 'gcompute_instance_group' do
 
                   gcompute_subnetwork 'resource(subnetwork,0)' do
                     action :create
+                    ip_cidr_range 'test ip_cidr_range#0 data'
                     region 'resource(region,0)'
                     s_label 'test name#0 data'
                     project 'test project#0 data'
@@ -170,6 +171,7 @@ context 'gcompute_instance_group' do
 
                   gcompute_subnetwork 'resource(subnetwork,1)' do
                     action :create
+                    ip_cidr_range 'test ip_cidr_range#1 data'
                     region 'resource(region,1)'
                     s_label 'test name#1 data'
                     project 'test project#1 data'
@@ -178,6 +180,7 @@ context 'gcompute_instance_group' do
 
                   gcompute_subnetwork 'resource(subnetwork,2)' do
                     action :create
+                    ip_cidr_range 'test ip_cidr_range#2 data'
                     region 'resource(region,2)'
                     s_label 'test name#2 data'
                     project 'test project#2 data'
@@ -539,6 +542,7 @@ context 'gcompute_instance_group' do
 
                   gcompute_subnetwork 'resource(subnetwork,0)' do
                     action :create
+                    ip_cidr_range 'test ip_cidr_range#0 data'
                     region 'resource(region,0)'
                     s_label 'test name#0 data'
                     project 'test project#0 data'
@@ -547,6 +551,7 @@ context 'gcompute_instance_group' do
 
                   gcompute_subnetwork 'resource(subnetwork,1)' do
                     action :create
+                    ip_cidr_range 'test ip_cidr_range#1 data'
                     region 'resource(region,1)'
                     s_label 'test name#1 data'
                     project 'test project#1 data'
@@ -555,6 +560,7 @@ context 'gcompute_instance_group' do
 
                   gcompute_subnetwork 'resource(subnetwork,2)' do
                     action :create
+                    ip_cidr_range 'test ip_cidr_range#2 data'
                     region 'resource(region,2)'
                     s_label 'test name#2 data'
                     project 'test project#2 data'
@@ -954,6 +960,7 @@ context 'gcompute_instance_group' do
 
                 gcompute_subnetwork 'resource(subnetwork,0)' do
                   action :create
+                  ip_cidr_range 'test ip_cidr_range#0 data'
                   region 'resource(region,0)'
                   s_label 'test name#0 data'
                   project 'test project#0 data'
@@ -1151,6 +1158,7 @@ context 'gcompute_instance_group' do
 
                 gcompute_subnetwork 'resource(subnetwork,0)' do
                   action :create
+                  ip_cidr_range 'test ip_cidr_range#0 data'
                   region 'resource(region,0)'
                   s_label 'test name#0 data'
                   project 'test project#0 data'

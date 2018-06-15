@@ -4678,15 +4678,16 @@ end
   creation time.
 
 * `gateway_address` -
-  The gateway address for default routes to reach destination addresses
-  outside this subnetwork. This field can be set only at resource
-  creation time.
+  Output only. The gateway address for default routes to reach destination
+  addresses
+  outside this subnetwork.
 
 * `id` -
   Output only. The unique identifier for the resource.
 
 * `ip_cidr_range` -
-  The range of internal addresses that are owned by this subnetwork.
+  Required. The range of internal addresses that are owned by this
+  subnetwork.
   Provide this property when you create the subnetwork. For example,
   10.0.0.0/8 or 192.168.0.0/16. Ranges must be unique and
   non-overlapping within a network. Only IPv4 is supported.

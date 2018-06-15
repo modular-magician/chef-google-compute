@@ -151,7 +151,6 @@ context 'gcompute_subnetwork' do
                   gcompute_subnetwork 'title0' do
                     action :create
                     description 'test description#0 data'
-                    gateway_address 'test gateway_address#0 data'
                     ip_cidr_range 'test ip_cidr_range#0 data'
                     network 'resource(network,0)'
                     private_ip_google_access true
@@ -163,7 +162,6 @@ context 'gcompute_subnetwork' do
                   gcompute_subnetwork 'title1' do
                     action :create
                     description 'test description#1 data'
-                    gateway_address 'test gateway_address#1 data'
                     ip_cidr_range 'test ip_cidr_range#1 data'
                     network 'resource(network,1)'
                     private_ip_google_access false
@@ -175,7 +173,6 @@ context 'gcompute_subnetwork' do
                   gcompute_subnetwork 'title2' do
                     action :create
                     description 'test description#2 data'
-                    gateway_address 'test gateway_address#2 data'
                     ip_cidr_range 'test ip_cidr_range#2 data'
                     network 'resource(network,2)'
                     private_ip_google_access true
@@ -201,13 +198,6 @@ context 'gcompute_subnetwork' do
               it do
                 is_expected
                   .to have_attributes(description: 'test description#0 data')
-              end
-
-              it do
-                is_expected
-                  .to have_attributes(
-                    gateway_address: 'test gateway_address#0 data'
-                  )
               end
 
               it do
@@ -247,13 +237,6 @@ context 'gcompute_subnetwork' do
               it do
                 is_expected
                   .to have_attributes(
-                    gateway_address: 'test gateway_address#1 data'
-                  )
-              end
-
-              it do
-                is_expected
-                  .to have_attributes(
                     ip_cidr_range: 'test ip_cidr_range#1 data'
                   )
               end
@@ -283,13 +266,6 @@ context 'gcompute_subnetwork' do
               it do
                 is_expected
                   .to have_attributes(description: 'test description#2 data')
-              end
-
-              it do
-                is_expected
-                  .to have_attributes(
-                    gateway_address: 'test gateway_address#2 data'
-                  )
               end
 
               it do
@@ -417,7 +393,6 @@ context 'gcompute_subnetwork' do
                   gcompute_subnetwork 'title0' do
                     action :create
                     description 'test description#0 data'
-                    gateway_address 'test gateway_address#0 data'
                     ip_cidr_range 'test ip_cidr_range#0 data'
                     network 'resource(network,0)'
                     private_ip_google_access true
@@ -430,7 +405,6 @@ context 'gcompute_subnetwork' do
                   gcompute_subnetwork 'title1' do
                     action :create
                     description 'test description#1 data'
-                    gateway_address 'test gateway_address#1 data'
                     ip_cidr_range 'test ip_cidr_range#1 data'
                     network 'resource(network,1)'
                     private_ip_google_access false
@@ -443,7 +417,6 @@ context 'gcompute_subnetwork' do
                   gcompute_subnetwork 'title2' do
                     action :create
                     description 'test description#2 data'
-                    gateway_address 'test gateway_address#2 data'
                     ip_cidr_range 'test ip_cidr_range#2 data'
                     network 'resource(network,2)'
                     private_ip_google_access true
@@ -470,13 +443,6 @@ context 'gcompute_subnetwork' do
               it do
                 is_expected
                   .to have_attributes(description: 'test description#0 data')
-              end
-
-              it do
-                is_expected
-                  .to have_attributes(
-                    gateway_address: 'test gateway_address#0 data'
-                  )
               end
 
               it do
@@ -516,13 +482,6 @@ context 'gcompute_subnetwork' do
               it do
                 is_expected
                   .to have_attributes(
-                    gateway_address: 'test gateway_address#1 data'
-                  )
-              end
-
-              it do
-                is_expected
-                  .to have_attributes(
                     ip_cidr_range: 'test ip_cidr_range#1 data'
                   )
               end
@@ -552,13 +511,6 @@ context 'gcompute_subnetwork' do
               it do
                 is_expected
                   .to have_attributes(description: 'test description#2 data')
-              end
-
-              it do
-                is_expected
-                  .to have_attributes(
-                    gateway_address: 'test gateway_address#2 data'
-                  )
               end
 
               it do
@@ -643,7 +595,6 @@ context 'gcompute_subnetwork' do
               {
                 'kind' => 'compute#subnetwork',
                 'description' => 'test description#0 data',
-                'gatewayAddress' => 'test gateway_address#0 data',
                 'ipCidrRange' => 'test ip_cidr_range#0 data',
                 'name' => 'title0',
                 'network' => 'selflink(resource(network,0))',
@@ -704,7 +655,6 @@ context 'gcompute_subnetwork' do
                 gcompute_subnetwork 'title0' do
                   action :create
                   description 'test description#0 data'
-                  gateway_address 'test gateway_address#0 data'
                   ip_cidr_range 'test ip_cidr_range#0 data'
                   network 'resource(network,0)'
                   private_ip_google_access true
@@ -733,13 +683,6 @@ context 'gcompute_subnetwork' do
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                gateway_address: 'test gateway_address#0 data'
-              )
           end
 
           it do
@@ -781,7 +724,6 @@ context 'gcompute_subnetwork' do
               {
                 'kind' => 'compute#subnetwork',
                 'description' => 'test description#0 data',
-                'gatewayAddress' => 'test gateway_address#0 data',
                 'ipCidrRange' => 'test ip_cidr_range#0 data',
                 'name' => 'test name#0 data',
                 'network' => 'selflink(resource(network,0))',
@@ -839,7 +781,6 @@ context 'gcompute_subnetwork' do
                 gcompute_subnetwork 'title0' do
                   action :create
                   description 'test description#0 data'
-                  gateway_address 'test gateway_address#0 data'
                   ip_cidr_range 'test ip_cidr_range#0 data'
                   network 'resource(network,0)'
                   private_ip_google_access true
@@ -869,13 +810,6 @@ context 'gcompute_subnetwork' do
           it do
             is_expected
               .to have_attributes(description: 'test description#0 data')
-          end
-
-          it do
-            is_expected
-              .to have_attributes(
-                gateway_address: 'test gateway_address#0 data'
-              )
           end
 
           it do
@@ -958,6 +892,7 @@ context 'gcompute_subnetwork' do
 
                 gcompute_subnetwork 'title0' do
                   action :delete
+                  ip_cidr_range 'test ip_cidr_range#0 data'
                   region 'resource(region,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -1031,6 +966,7 @@ context 'gcompute_subnetwork' do
 
                 gcompute_subnetwork 'title0' do
                   action :delete
+                  ip_cidr_range 'test ip_cidr_range#0 data'
                   region 'resource(region,0)'
                   s_label 'test name#0 data'
                   project 'test project#0 data'
@@ -1113,6 +1049,7 @@ context 'gcompute_subnetwork' do
 
                 gcompute_subnetwork 'title0' do
                   action :delete
+                  ip_cidr_range 'test ip_cidr_range#0 data'
                   region 'resource(region,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -1192,6 +1129,7 @@ context 'gcompute_subnetwork' do
 
                 gcompute_subnetwork 'title0' do
                   action :delete
+                  ip_cidr_range 'test ip_cidr_range#0 data'
                   region 'resource(region,0)'
                   s_label 'test name#0 data'
                   project 'test project#0 data'
