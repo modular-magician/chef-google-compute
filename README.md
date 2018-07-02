@@ -4701,7 +4701,8 @@ end
   assigned external IP addresses.
 
 * `region` -
-  Required. URL of the GCP region for this subnetwork.
+  Required. URL of the region where the regional address resides.
+  This field is not applicable to global addresses.
 
 #### Label
 Set the `s_label` property when attempting to set primary key
