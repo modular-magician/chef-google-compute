@@ -1127,7 +1127,7 @@ end
   Required. A reference to the zone where the disk resides.
 
 * `disk_encryption_key` -
-  Encrypts the disk using a customer-supplied encryption key.
+  Required. Encrypts the disk using a customer-supplied encryption key.
   After you encrypt a disk with a customer-supplied key, you must
   provide the same key if you use the disk later (e.g. to create a disk
   snapshot or an image, or to attach the disk to a virtual machine).
@@ -1147,7 +1147,8 @@ end
   encryption key that protects this resource.
 
 * `source_image_encryption_key` -
-  The customer-supplied encryption key of the source image. Required if
+  Required. The customer-supplied encryption key of the source image.
+  Required if
   the source image is protected by a customer-supplied encryption key.
 
 * `source_image_encryption_key/raw_key`
@@ -1160,14 +1161,16 @@ end
   encryption key that protects this resource.
 
 * `source_image_id` -
-  Output only. The ID value of the image used to create this disk. This value
+  Required. Output only. The ID value of the image used to create this disk.
+  This value
   identifies the exact image that was used to create this persistent
   disk. For example, if you created the persistent disk from an image
   that was later deleted and recreated under the same name, the source
   image ID would identify the exact version of the image that was used.
 
 * `source_snapshot` -
-  The source snapshot used to create this disk. You can provide this as
+  Required. The source snapshot used to create this disk. You can provide
+  this as
   a partial or full URL to the resource. For example, the following are
   valid values:
   * https://www.googleapis.com/compute/v1/projects/project/global/
@@ -1176,7 +1179,8 @@ end
   * global/snapshots/snapshot
 
 * `source_snapshot_encryption_key` -
-  The customer-supplied encryption key of the source snapshot. Required
+  Required. The customer-supplied encryption key of the source snapshot.
+  Required
   if the source snapshot is protected by a customer-supplied encryption
   key.
 
@@ -1190,8 +1194,8 @@ end
   encryption key that protects this resource.
 
 * `source_snapshot_id` -
-  Output only. The unique ID of the snapshot used to create this disk. This
-  value
+  Required. Output only. The unique ID of the snapshot used to create this
+  disk. This value
   identifies the exact snapshot that was used to create this persistent
   disk. For example, if you created the persistent disk from a snapshot
   that was later deleted and recreated under the same name, the source
@@ -4437,13 +4441,14 @@ end
   Labels to apply to this snapshot.
 
 * `source` -
-  A reference to the disk used to create this snapshot.
+  Required. A reference to the disk used to create this snapshot.
 
 * `zone` -
-  A reference to the zone where the disk is hosted.
+  Required. A reference to the zone where the disk is hosted.
 
 * `snapshot_encryption_key` -
-  The customer-supplied encryption key of the snapshot. Required if the
+  Required. The customer-supplied encryption key of the snapshot. Required if
+  the
   source snapshot is protected by a customer-supplied encryption key.
 
 * `snapshot_encryption_key/raw_key`
@@ -4456,7 +4461,8 @@ end
   encryption key that protects this resource.
 
 * `source_disk_encryption_key` -
-  The customer-supplied encryption key of the source snapshot. Required
+  Required. The customer-supplied encryption key of the source snapshot.
+  Required
   if the source snapshot is protected by a customer-supplied encryption
   key.
 

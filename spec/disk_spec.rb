@@ -1283,6 +1283,19 @@ context 'gcompute_disk' do
 
                 gcompute_disk 'title0' do
                   action :delete
+                  disk_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_image_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_snapshot 'test source_snapshot#0 data'
+                  source_snapshot_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
                   zone 'resource(zone,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -1356,6 +1369,19 @@ context 'gcompute_disk' do
                 gcompute_disk 'title0' do
                   action :delete
                   d_label 'test name#0 data'
+                  disk_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_image_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_snapshot 'test source_snapshot#0 data'
+                  source_snapshot_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
                   zone 'resource(zone,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -1434,6 +1460,19 @@ context 'gcompute_disk' do
 
                 gcompute_disk 'title0' do
                   action :delete
+                  disk_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_image_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_snapshot 'test source_snapshot#0 data'
+                  source_snapshot_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
                   zone 'resource(zone,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -1513,6 +1552,19 @@ context 'gcompute_disk' do
                 gcompute_disk 'title0' do
                   action :delete
                   d_label 'test name#0 data'
+                  disk_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_image_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_snapshot 'test source_snapshot#0 data'
+                  source_snapshot_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
                   zone 'resource(zone,0)'
                   project 'test project#0 data'
                   credential 'mycred'

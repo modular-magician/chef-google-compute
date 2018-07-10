@@ -185,6 +185,19 @@ context 'gcompute_instance' do
                   gcompute_disk 'resource(disk,0)' do
                     action :create
                     d_label 'test name#0 data'
+                    disk_encryption_key({
+                      raw_key: 'test raw_key#0 data',
+                      sha256: 'test sha256#0 data'
+                    })
+                    source_image_encryption_key({
+                      raw_key: 'test raw_key#0 data',
+                      sha256: 'test sha256#0 data'
+                    })
+                    source_snapshot 'test source_snapshot#0 data'
+                    source_snapshot_encryption_key({
+                      raw_key: 'test raw_key#0 data',
+                      sha256: 'test sha256#0 data'
+                    })
                     zone 'resource(zone,0)'
                     project 'test project#0 data'
                     credential 'mycred'
@@ -193,6 +206,19 @@ context 'gcompute_instance' do
                   gcompute_disk 'resource(disk,1)' do
                     action :create
                     d_label 'test name#1 data'
+                    disk_encryption_key({
+                      raw_key: 'test raw_key#1 data',
+                      sha256: 'test sha256#1 data'
+                    })
+                    source_image_encryption_key({
+                      raw_key: 'test raw_key#1 data',
+                      sha256: 'test sha256#1 data'
+                    })
+                    source_snapshot 'test source_snapshot#1 data'
+                    source_snapshot_encryption_key({
+                      raw_key: 'test raw_key#1 data',
+                      sha256: 'test sha256#1 data'
+                    })
                     zone 'resource(zone,1)'
                     project 'test project#1 data'
                     credential 'mycred'
@@ -201,6 +227,19 @@ context 'gcompute_instance' do
                   gcompute_disk 'resource(disk,2)' do
                     action :create
                     d_label 'test name#2 data'
+                    disk_encryption_key({
+                      raw_key: 'test raw_key#2 data',
+                      sha256: 'test sha256#2 data'
+                    })
+                    source_image_encryption_key({
+                      raw_key: 'test raw_key#2 data',
+                      sha256: 'test sha256#2 data'
+                    })
+                    source_snapshot 'test source_snapshot#2 data'
+                    source_snapshot_encryption_key({
+                      raw_key: 'test raw_key#2 data',
+                      sha256: 'test sha256#2 data'
+                    })
                     zone 'resource(zone,2)'
                     project 'test project#2 data'
                     credential 'mycred'
@@ -1218,6 +1257,19 @@ context 'gcompute_instance' do
                   gcompute_disk 'resource(disk,0)' do
                     action :create
                     d_label 'test name#0 data'
+                    disk_encryption_key({
+                      raw_key: 'test raw_key#0 data',
+                      sha256: 'test sha256#0 data'
+                    })
+                    source_image_encryption_key({
+                      raw_key: 'test raw_key#0 data',
+                      sha256: 'test sha256#0 data'
+                    })
+                    source_snapshot 'test source_snapshot#0 data'
+                    source_snapshot_encryption_key({
+                      raw_key: 'test raw_key#0 data',
+                      sha256: 'test sha256#0 data'
+                    })
                     zone 'resource(zone,0)'
                     project 'test project#0 data'
                     credential 'mycred'
@@ -1226,6 +1278,19 @@ context 'gcompute_instance' do
                   gcompute_disk 'resource(disk,1)' do
                     action :create
                     d_label 'test name#1 data'
+                    disk_encryption_key({
+                      raw_key: 'test raw_key#1 data',
+                      sha256: 'test sha256#1 data'
+                    })
+                    source_image_encryption_key({
+                      raw_key: 'test raw_key#1 data',
+                      sha256: 'test sha256#1 data'
+                    })
+                    source_snapshot 'test source_snapshot#1 data'
+                    source_snapshot_encryption_key({
+                      raw_key: 'test raw_key#1 data',
+                      sha256: 'test sha256#1 data'
+                    })
                     zone 'resource(zone,1)'
                     project 'test project#1 data'
                     credential 'mycred'
@@ -1234,6 +1299,19 @@ context 'gcompute_instance' do
                   gcompute_disk 'resource(disk,2)' do
                     action :create
                     d_label 'test name#2 data'
+                    disk_encryption_key({
+                      raw_key: 'test raw_key#2 data',
+                      sha256: 'test sha256#2 data'
+                    })
+                    source_image_encryption_key({
+                      raw_key: 'test raw_key#2 data',
+                      sha256: 'test sha256#2 data'
+                    })
+                    source_snapshot 'test source_snapshot#2 data'
+                    source_snapshot_encryption_key({
+                      raw_key: 'test raw_key#2 data',
+                      sha256: 'test sha256#2 data'
+                    })
                     zone 'resource(zone,2)'
                     project 'test project#2 data'
                     credential 'mycred'
@@ -2472,6 +2550,19 @@ context 'gcompute_instance' do
                 gcompute_disk 'resource(disk,0)' do
                   action :create
                   d_label 'test name#0 data'
+                  disk_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_image_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_snapshot 'test source_snapshot#0 data'
+                  source_snapshot_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
                   zone 'resource(zone,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -2480,6 +2571,19 @@ context 'gcompute_instance' do
                 gcompute_disk 'resource(disk,1)' do
                   action :create
                   d_label 'test name#1 data'
+                  disk_encryption_key({
+                    raw_key: 'test raw_key#1 data',
+                    sha256: 'test sha256#1 data'
+                  })
+                  source_image_encryption_key({
+                    raw_key: 'test raw_key#1 data',
+                    sha256: 'test sha256#1 data'
+                  })
+                  source_snapshot 'test source_snapshot#1 data'
+                  source_snapshot_encryption_key({
+                    raw_key: 'test raw_key#1 data',
+                    sha256: 'test sha256#1 data'
+                  })
                   zone 'resource(zone,1)'
                   project 'test project#1 data'
                   credential 'mycred'
@@ -3190,6 +3294,19 @@ context 'gcompute_instance' do
                 gcompute_disk 'resource(disk,0)' do
                   action :create
                   d_label 'test name#0 data'
+                  disk_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_image_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
+                  source_snapshot 'test source_snapshot#0 data'
+                  source_snapshot_encryption_key({
+                    raw_key: 'test raw_key#0 data',
+                    sha256: 'test sha256#0 data'
+                  })
                   zone 'resource(zone,0)'
                   project 'test project#0 data'
                   credential 'mycred'
@@ -3198,6 +3315,19 @@ context 'gcompute_instance' do
                 gcompute_disk 'resource(disk,1)' do
                   action :create
                   d_label 'test name#1 data'
+                  disk_encryption_key({
+                    raw_key: 'test raw_key#1 data',
+                    sha256: 'test sha256#1 data'
+                  })
+                  source_image_encryption_key({
+                    raw_key: 'test raw_key#1 data',
+                    sha256: 'test sha256#1 data'
+                  })
+                  source_snapshot 'test source_snapshot#1 data'
+                  source_snapshot_encryption_key({
+                    raw_key: 'test raw_key#1 data',
+                    sha256: 'test sha256#1 data'
+                  })
                   zone 'resource(zone,1)'
                   project 'test project#1 data'
                   credential 'mycred'
