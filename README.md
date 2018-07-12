@@ -312,8 +312,6 @@ For complete details of the authentication cookbook, visit the
     sending virtual machine's routing table will be dropped.
     A Route resource must have exactly one specification of either
     nextHopGateway, nextHopInstance, nextHopIp, or nextHopVpnTunnel.
-* [`gcompute_router`](#gcompute_router) -
-    Represents a Router resource.
 * [`gcompute_snapshot`](#gcompute_snapshot) -
     Represents a Persistent Disk Snapshot resource.
     Use snapshots to back up data from your persistent disks. Snapshots are
@@ -1040,7 +1038,7 @@ gcompute_disk 'id-for-resource' do
     sha256  string,
   }
   source_image_id                string
-  source_snapshot                string
+  source_snapshot                reference to gcompute_snapshot
   source_snapshot_encryption_key {
     raw_key string,
     sha256  string,
@@ -1048,7 +1046,7 @@ gcompute_disk 'id-for-resource' do
   source_snapshot_id             string
   type                           reference to gcompute_disk_type
   users                          [
-    string,
+    reference to a gcompute_instance,
     ...
   ]
   zone                           reference to gcompute_zone
@@ -1109,6 +1107,14 @@ end
   the value of sizeGb must not be less than the size of the sourceImage
   or the size of the snapshot.
 
+* `type` -
+  URL of the disk type resource describing which disk type to use to
+  create the disk. Provide this when creating the disk.
+
+* `users` -
+  Output only. Links to the users of the disk (attached instances) in form:
+  project/zones/zone/instances/instance
+
 * `source_image` -
   The source image used to create this disk. If the source image is
   deleted, this field will not be set.
@@ -1127,36 +1133,8 @@ end
   image name with family/family-name:
   global/images/family/my-private-family
 
-* `type` -
-  URL of the disk type resource describing which disk type to use to
-  create the disk. Provide this when creating the disk.
-
-* `users` -
-  Output only. Links to the users of the disk (attached instances) in form:
-  project/zones/zone/instances/instance
-
 * `zone` -
   Required. A reference to the zone where the disk resides.
-
-* `disk_encryption_key` -
-  Encrypts the disk using a customer-supplied encryption key.
-  After you encrypt a disk with a customer-supplied key, you must
-  provide the same key if you use the disk later (e.g. to create a disk
-  snapshot or an image, or to attach the disk to a virtual machine).
-  Customer-supplied encryption keys do not protect access to metadata of
-  the disk.
-  If you do not provide an encryption key when creating the disk, then
-  the disk will be encrypted using an automatically generated key and
-  you do not need to provide a key to use the disk later.
-
-* `disk_encryption_key/raw_key`
-  Specifies a 256-bit customer-supplied encryption key, encoded in
-  RFC 4648 base64 to either encrypt or decrypt this resource.
-
-* `disk_encryption_key/sha256`
-  Output only. The RFC 4648 base64 encoded SHA-256 hash of the
-  customer-supplied
-  encryption key that protects this resource.
 
 * `source_image_encryption_key` -
   The customer-supplied encryption key of the source image. Required if
@@ -1178,14 +1156,34 @@ end
   that was later deleted and recreated under the same name, the source
   image ID would identify the exact version of the image that was used.
 
+* `disk_encryption_key` -
+  Encrypts the disk using a customer-supplied encryption key.
+  After you encrypt a disk with a customer-supplied key, you must
+  provide the same key if you use the disk later (e.g. to create a disk
+  snapshot or an image, or to attach the disk to a virtual machine).
+  Customer-supplied encryption keys do not protect access to metadata of
+  the disk.
+  If you do not provide an encryption key when creating the disk, then
+  the disk will be encrypted using an automatically generated key and
+  you do not need to provide a key to use the disk later.
+
+* `disk_encryption_key/raw_key`
+  Specifies a 256-bit customer-supplied encryption key, encoded in
+  RFC 4648 base64 to either encrypt or decrypt this resource.
+
+* `disk_encryption_key/sha256`
+  Output only. The RFC 4648 base64 encoded SHA-256 hash of the
+  customer-supplied
+  encryption key that protects this resource.
+
 * `source_snapshot` -
   The source snapshot used to create this disk. You can provide this as
   a partial or full URL to the resource. For example, the following are
   valid values:
-  * https://www.googleapis.com/compute/v1/projects/project/global/
-  snapshots/snapshot
-  * projects/project/global/snapshots/snapshot
-  * global/snapshots/snapshot
+  *
+  `https://www.googleapis.com/compute/v1/projects/project/global/snapshots/snapshot`
+  * `projects/project/global/snapshots/snapshot`
+  * `global/snapshots/snapshot`
 
 * `source_snapshot_encryption_key` -
   The customer-supplied encryption key of the source snapshot. Required
@@ -4342,147 +4340,6 @@ end
 
 * `next_hop_network` -
   Output only. URL to a Network that should handle matching packets.
-
-#### Label
-Set the `r_label` property when attempting to set primary key
-of this object. The primary key will always be referred to by the initials of
-the resource followed by "_label"
-
-### gcompute_router
-Represents a Router resource.
-
-#### Reference Guides
-* [API Reference](https://cloud.google.com/compute/docs/reference/rest/v1/routers)
-* [Google Cloud Router](https://cloud.google.com/router/docs/)
-
-#### Example
-
-```ruby
-# Router requires a network and a region, so define them in your recipe:
-#   - gcompute_network 'my-network' do ... end
-#   - gcompute_region 'some-region' do ... end
-gcompute_router 'my-router' do
-  action :create
-  bgp(
-    asn 64514
-    advertise_mode 'CUSTOM'
-    advertised_groups ['ALL_SUBNETS']
-    advertised_ip_ranges [
-      {
-        range '1.2.3.4'
-      }
-      {
-        range '6.7.0.0/16'
-      }
-    ]
-  )
-  network 'my-network'
-  region 'some-region'
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-```
-
-#### Reference
-
-```ruby
-gcompute_router 'id-for-resource' do
-  bgp                {
-    advertise_mode       'DEFAULT' or 'CUSTOM',
-    advertised_groups    [
-      string,
-      ...
-    ],
-    advertised_ip_ranges [
-      {
-        description string,
-        range       string,
-      },
-      ...
-    ],
-    asn                  integer,
-  }
-  creation_timestamp time
-  description        string
-  id                 integer
-  name               string
-  network            reference to gcompute_network
-  region             reference to gcompute_region
-  project            string
-  credential         reference to gauth_credential
-end
-```
-
-#### Actions
-
-* `create` -
-  Converges the `gcompute_router` resource into the final
-  state described within the block. If the resource does not exist, Chef will
-  attempt to create it.
-* `delete` -
-  Ensures the `gcompute_router` resource is not present.
-  If the resource already exists Chef will attempt to delete it.
-
-#### Properties
-
-* `id` -
-  Output only. The unique identifier for the resource.
-
-* `creation_timestamp` -
-  Output only. Creation timestamp in RFC3339 text format.
-
-* `name` -
-  Required. Name of the resource. The name must be 1-63 characters long, and
-  comply with RFC1035. Specifically, the name must be 1-63 characters
-  long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?`
-  which means the first character must be a lowercase letter, and all
-  following characters must be a dash, lowercase letter, or digit,
-  except the last character, which cannot be a dash.
-
-* `description` -
-  An optional description of this resource.
-
-* `network` -
-  Required. A reference to the network to which this router belongs.
-
-* `bgp` -
-  BGP information specific to this router.
-
-* `bgp/asn`
-  Required. Local BGP Autonomous System Number (ASN). Must be an RFC6996
-  private ASN, either 16-bit or 32-bit. The value will be fixed for
-  this router resource. All VPN tunnels that link to this router
-  will have the same local ASN.
-
-* `bgp/advertise_mode`
-  User-specified flag to indicate which mode to use for advertisement.
-  Valid values of this enum field are: DEFAULT, CUSTOM
-
-* `bgp/advertised_groups`
-  User-specified list of prefix groups to advertise in custom mode.
-  This field can only be populated if advertiseMode is CUSTOM and
-  is advertised to all peers of the router. These groups will be
-  advertised in addition to any specified prefixes. Leave this field
-  blank to advertise no custom groups.
-  This enum field has the one valid value: ALL_SUBNETS
-
-* `bgp/advertised_ip_ranges`
-  User-specified list of individual IP ranges to advertise in
-  custom mode. This field can only be populated if advertiseMode
-  is CUSTOM and is advertised to all peers of the router. These IP
-  ranges will be advertised in addition to any specified groups.
-  Leave this field blank to advertise no custom IP ranges.
-
-* `bgp/advertised_ip_ranges[]/range`
-  The IP range to advertise. The value must be a
-  CIDR-formatted string.
-
-* `bgp/advertised_ip_ranges[]/description`
-  User-specified description for the IP range.
-
-* `region` -
-  Required. Region where the router resides.
 
 #### Label
 Set the `r_label` property when attempting to set primary key
