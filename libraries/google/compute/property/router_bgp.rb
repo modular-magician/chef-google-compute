@@ -98,7 +98,9 @@ module Google
         def initialize(args)
           @asn = Google::Compute::Property::Integer.api_parse(args['asn'])
           @advertise_mode =
-            Google::Compute::Property::Enum.api_parse(args['advertiseMode'])
+            Google::Compute::Property::AdvertiseModeEnum.api_parse(
+              args['advertiseMode']
+            )
           @advertised_groups = Google::Compute::Property::StringArray.api_parse(
             args['advertisedGroups']
           )
@@ -115,7 +117,9 @@ module Google
         def initialize(args)
           @asn = Google::Compute::Property::Integer.catalog_parse(args[:asn])
           @advertise_mode =
-            Google::Compute::Property::Enum.catalog_parse(args[:advertise_mode])
+            Google::Compute::Property::AdvertiseModeEnum.catalog_parse(
+              args[:advertise_mode]
+            )
           @advertised_groups =
             Google::Compute::Property::StringArray.catalog_parse(
               args[:advertised_groups]
