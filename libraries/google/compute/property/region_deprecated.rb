@@ -102,7 +102,7 @@ module Google
           @deprecated = Google::Compute::Property::Time.api_parse(args['deprecated'])
           @obsolete = Google::Compute::Property::Time.api_parse(args['obsolete'])
           @replacement = Google::Compute::Property::String.api_parse(args['replacement'])
-          @state = Google::Compute::Property::Enum.api_parse(args['state'])
+          @state = Google::Compute::Property::StateEnum.api_parse(args['state'])
         end
       end
 
@@ -114,7 +114,7 @@ module Google
           @deprecated = Google::Compute::Property::Time.catalog_parse(args[:deprecated])
           @obsolete = Google::Compute::Property::Time.catalog_parse(args[:obsolete])
           @replacement = Google::Compute::Property::String.catalog_parse(args[:replacement])
-          @state = Google::Compute::Property::Enum.catalog_parse(args[:state])
+          @state = Google::Compute::Property::StateEnum.catalog_parse(args[:state])
         end
       end
     end

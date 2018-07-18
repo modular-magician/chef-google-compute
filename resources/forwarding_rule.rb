@@ -34,7 +34,9 @@ require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
 require 'google/compute/property/backendservice_selflink'
-require 'google/compute/property/enum'
+require 'google/compute/property/forwarding_rule_ip_protocol'
+require 'google/compute/property/forwarding_rule_ip_version'
+require 'google/compute/property/forwarding_rule_load_balancing_scheme'
 require 'google/compute/property/integer'
 require 'google/compute/property/network_selflink'
 require 'google/compute/property/region_name'
@@ -60,16 +62,17 @@ module Google
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :ip_protocol,
                equal_to: %w[TCP UDP ESP AH SCTP ICMP],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::IPProtocolEnum.coerce, desired_state: true
       property :backend_service,
                [String, ::Google::Compute::Data::BackServSelfLinkRef],
                coerce: ::Google::Compute::Property::BackServSelfLinkRef.coerce, desired_state: true
       property :ip_version,
                equal_to: %w[IPV4 IPV6],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::IpVersionEnum.coerce, desired_state: true
       property :load_balancing_scheme,
                equal_to: %w[INTERNAL EXTERNAL],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::LoadBalancingSchemeEnum.coerce,
+               desired_state: true
       property :fr_label,
                String,
                coerce: ::Google::Compute::Property::String.coerce,
@@ -122,13 +125,15 @@ module Google
           @current_resource.ip_address =
             ::Google::Compute::Property::String.api_parse(fetch['IPAddress'])
           @current_resource.ip_protocol =
-            ::Google::Compute::Property::Enum.api_parse(fetch['IPProtocol'])
+            ::Google::Compute::Property::IPProtocolEnum.api_parse(fetch['IPProtocol'])
           @current_resource.backend_service =
             ::Google::Compute::Property::BackServSelfLinkRef.api_parse(fetch['backendService'])
           @current_resource.ip_version =
-            ::Google::Compute::Property::Enum.api_parse(fetch['ipVersion'])
+            ::Google::Compute::Property::IpVersionEnum.api_parse(fetch['ipVersion'])
           @current_resource.load_balancing_scheme =
-            ::Google::Compute::Property::Enum.api_parse(fetch['loadBalancingScheme'])
+            ::Google::Compute::Property::LoadBalancingSchemeEnum.api_parse(
+              fetch['loadBalancingScheme']
+            )
           @current_resource.fr_label =
             ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.network =

@@ -33,10 +33,10 @@ require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
-require 'google/compute/property/enum'
 require 'google/compute/property/integer'
 require 'google/compute/property/sslcertificate_selflink'
 require 'google/compute/property/string'
+require 'google/compute/property/target_https_proxy_quic_override'
 require 'google/compute/property/time'
 require 'google/compute/property/urlmap_selflink'
 require 'google/hash_utils'
@@ -59,7 +59,7 @@ module Google
                name_property: true, desired_state: true
       property :quic_override,
                equal_to: %w[NONE ENABLE DISABLE],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::QuicOverrideEnum.coerce, desired_state: true
       # ssl_certificates is Array of Google::Compute::Property::SslCertSelfLinkRefArray
       property :ssl_certificates,
                Array,
@@ -98,7 +98,7 @@ module Google
             ::Google::Compute::Property::Time.api_parse(fetch['creationTimestamp'])
           @current_resource.id = ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.quic_override =
-            ::Google::Compute::Property::Enum.api_parse(fetch['quicOverride'])
+            ::Google::Compute::Property::QuicOverrideEnum.api_parse(fetch['quicOverride'])
           @current_resource.ssl_certificates =
             ::Google::Compute::Property::SslCertSelfLinkRefArray.api_parse(
               fetch['sslCertificates']

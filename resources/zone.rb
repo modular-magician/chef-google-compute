@@ -30,12 +30,13 @@ $LOAD_PATH.unshift ::File.expand_path('../libraries', ::File.dirname(__FILE__))
 
 require 'chef/resource'
 require 'google/compute/network/get'
-require 'google/compute/property/enum'
 require 'google/compute/property/integer'
 require 'google/compute/property/region_selflink'
 require 'google/compute/property/string'
 require 'google/compute/property/time'
 require 'google/compute/property/zone_deprecated'
+require 'google/compute/property/zone_state'
+require 'google/compute/property/zone_status'
 require 'google/hash_utils'
 
 module Google
@@ -63,7 +64,7 @@ module Google
                coerce: ::Google::Compute::Property::RegioSelfLinkRef.coerce, desired_state: true
       property :status,
                equal_to: %w[UP DOWN],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::StatusEnum.coerce, desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
@@ -100,7 +101,8 @@ module Google
           @current_resource.z_label = ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.region =
             ::Google::Compute::Property::RegioSelfLinkRef.api_parse(fetch['region'])
-          @current_resource.status = ::Google::Compute::Property::Enum.api_parse(fetch['status'])
+          @current_resource.status =
+            ::Google::Compute::Property::StatusEnum.api_parse(fetch['status'])
           @new_resource.__fetched = fetch
 
           update

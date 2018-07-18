@@ -128,10 +128,10 @@ module Google
           @index = Google::Compute::Property::Integer.api_parse(args['index'])
           @initialize_params =
             Google::Compute::Property::InstaTemplInitiParam.api_parse(args['initializeParams'])
-          @interface = Google::Compute::Property::Enum.api_parse(args['interface'])
-          @mode = Google::Compute::Property::Enum.api_parse(args['mode'])
+          @interface = Google::Compute::Property::InterfaceEnum.api_parse(args['interface'])
+          @mode = Google::Compute::Property::ModeEnum.api_parse(args['mode'])
           @source = Google::Compute::Property::DiskNameRef.api_parse(args['source'])
-          @type = Google::Compute::Property::Enum.api_parse(args['type'])
+          @type = Google::Compute::Property::TypeEnum.api_parse(args['type'])
         end
         # rubocop:enable Metrics/MethodLength
       end
@@ -149,10 +149,10 @@ module Google
           @index = Google::Compute::Property::Integer.catalog_parse(args[:index])
           @initialize_params =
             Google::Compute::Property::InstaTemplInitiParam.catalog_parse(args[:initialize_params])
-          @interface = Google::Compute::Property::Enum.catalog_parse(args[:interface])
-          @mode = Google::Compute::Property::Enum.catalog_parse(args[:mode])
+          @interface = Google::Compute::Property::InterfaceEnum.catalog_parse(args[:interface])
+          @mode = Google::Compute::Property::ModeEnum.catalog_parse(args[:mode])
           @source = Google::Compute::Property::DiskNameRef.catalog_parse(args[:source])
-          @type = Google::Compute::Property::Enum.catalog_parse(args[:type])
+          @type = Google::Compute::Property::TypeEnum.catalog_parse(args[:type])
         end
         # rubocop:enable Metrics/MethodLength
       end

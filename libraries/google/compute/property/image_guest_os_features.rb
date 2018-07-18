@@ -83,7 +83,7 @@ module Google
       # Data is coming from the GCP API
       class ImageGuestOsFeatuApi < ImageGuestOsFeatu
         def initialize(args)
-          @type = Google::Compute::Property::Enum.api_parse(args['type'])
+          @type = Google::Compute::Property::TypeEnum.api_parse(args['type'])
         end
       end
 
@@ -91,7 +91,7 @@ module Google
       # Data is coming from the Chef catalog
       class ImageGuestOsFeatuCatalog < ImageGuestOsFeatu
         def initialize(args)
-          @type = Google::Compute::Property::Enum.catalog_parse(args[:type])
+          @type = Google::Compute::Property::TypeEnum.catalog_parse(args[:type])
         end
       end
     end

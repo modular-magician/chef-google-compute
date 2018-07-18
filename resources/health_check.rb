@@ -33,7 +33,8 @@ require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
-require 'google/compute/property/enum'
+require 'google/compute/property/health_check_proxy_header'
+require 'google/compute/property/health_check_type'
 require 'google/compute/property/healthcheck_http_health_check'
 require 'google/compute/property/healthcheck_https_health_check'
 require 'google/compute/property/healthcheck_ssl_health_check'
@@ -73,7 +74,7 @@ module Google
                coerce: ::Google::Compute::Property::Integer.coerce, default: 2, desired_state: true
       property :type,
                equal_to: %w[TCP SSL HTTP],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::TypeEnum.coerce, desired_state: true
       property :http_health_check,
                [Hash, ::Google::Compute::Data::HealChecHttpHealChec],
                coerce: ::Google::Compute::Property::HealChecHttpHealChec.coerce, desired_state: true
@@ -122,7 +123,7 @@ module Google
             ::Google::Compute::Property::Integer.api_parse(fetch['timeoutSec'])
           @current_resource.unhealthy_threshold =
             ::Google::Compute::Property::Integer.api_parse(fetch['unhealthyThreshold'])
-          @current_resource.type = ::Google::Compute::Property::Enum.api_parse(fetch['type'])
+          @current_resource.type = ::Google::Compute::Property::TypeEnum.api_parse(fetch['type'])
           @current_resource.http_health_check =
             ::Google::Compute::Property::HealChecHttpHealChec.api_parse(fetch['httpHealthCheck'])
           @current_resource.https_health_check =

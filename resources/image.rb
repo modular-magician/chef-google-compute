@@ -34,12 +34,15 @@ require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
 require 'google/compute/property/disk_selflink'
-require 'google/compute/property/enum'
+require 'google/compute/property/image_container_type'
 require 'google/compute/property/image_deprecated'
 require 'google/compute/property/image_guest_os_features'
 require 'google/compute/property/image_image_encryption_key'
 require 'google/compute/property/image_raw_disk'
 require 'google/compute/property/image_source_disk_encryption_key'
+require 'google/compute/property/image_source_type'
+require 'google/compute/property/image_state'
+require 'google/compute/property/image_type'
 require 'google/compute/property/integer'
 require 'google/compute/property/string'
 require 'google/compute/property/string_array'
@@ -96,7 +99,7 @@ module Google
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :source_type,
                equal_to: %w[RAW],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::SourceTypeEnum.coerce, desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
@@ -151,7 +154,7 @@ module Google
           @current_resource.source_disk_id =
             ::Google::Compute::Property::String.api_parse(fetch['sourceDiskId'])
           @current_resource.source_type =
-            ::Google::Compute::Property::Enum.api_parse(fetch['sourceType'])
+            ::Google::Compute::Property::SourceTypeEnum.api_parse(fetch['sourceType'])
 
           update
         end

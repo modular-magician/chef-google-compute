@@ -33,7 +33,7 @@ require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
-require 'google/compute/property/enum'
+require 'google/compute/property/global_address_ip_version'
 require 'google/compute/property/integer'
 require 'google/compute/property/region_selflink'
 require 'google/compute/property/string'
@@ -61,7 +61,7 @@ module Google
                name_property: true, desired_state: true
       property :ip_version,
                equal_to: %w[IPV4 IPV6],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::IpVersionEnum.coerce, desired_state: true
       property :region,
                [String, ::Google::Compute::Data::RegioSelfLinkRef],
                coerce: ::Google::Compute::Property::RegioSelfLinkRef.coerce, desired_state: true
@@ -101,7 +101,7 @@ module Google
           @current_resource.ga_label =
             ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.ip_version =
-            ::Google::Compute::Property::Enum.api_parse(fetch['ipVersion'])
+            ::Google::Compute::Property::IpVersionEnum.api_parse(fetch['ipVersion'])
           @current_resource.region =
             ::Google::Compute::Property::RegioSelfLinkRef.api_parse(fetch['region'])
           @new_resource.__fetched = fetch

@@ -116,7 +116,8 @@ module Google
       class BackendServiceBackendApi < BackendServiceBackend
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
-          @balancing_mode = Google::Compute::Property::Enum.api_parse(args['balancingMode'])
+          @balancing_mode =
+            Google::Compute::Property::BalancingModeEnum.api_parse(args['balancingMode'])
           @capacity_scaler = Google::Compute::Property::Double.api_parse(args['capacityScaler'])
           @description = Google::Compute::Property::String.api_parse(args['description'])
           @group = Google::Compute::Property::InstGrouSelfLinkRef.api_parse(args['group'])
@@ -136,7 +137,8 @@ module Google
       class BackendServiceBackendCatalog < BackendServiceBackend
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
-          @balancing_mode = Google::Compute::Property::Enum.catalog_parse(args[:balancing_mode])
+          @balancing_mode =
+            Google::Compute::Property::BalancingModeEnum.catalog_parse(args[:balancing_mode])
           @capacity_scaler = Google::Compute::Property::Double.catalog_parse(args[:capacity_scaler])
           @description = Google::Compute::Property::String.catalog_parse(args[:description])
           @group = Google::Compute::Property::InstGrouSelfLinkRef.catalog_parse(args[:group])

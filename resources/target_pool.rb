@@ -34,12 +34,12 @@ require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
 require 'google/compute/property/double'
-require 'google/compute/property/enum'
 require 'google/compute/property/httphealthcheck_selflink'
 require 'google/compute/property/instance_selflink'
 require 'google/compute/property/integer'
 require 'google/compute/property/region_name'
 require 'google/compute/property/string'
+require 'google/compute/property/target_pool_session_affinity'
 require 'google/compute/property/targetpool_selflink'
 require 'google/compute/property/time'
 require 'google/hash_utils'
@@ -75,7 +75,7 @@ module Google
                name_property: true, desired_state: true
       property :session_affinity,
                equal_to: %w[NONE CLIENT_IP CLIENT_IP_PROTO],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::SessionAffinityEnum.coerce, desired_state: true
       property :region,
                [String, ::Google::Compute::Data::RegionNameRef],
                coerce: ::Google::Compute::Property::RegionNameRef.coerce, desired_state: true

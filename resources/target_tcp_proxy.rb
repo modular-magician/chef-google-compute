@@ -34,9 +34,9 @@ require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
 require 'google/compute/property/backendservice_selflink'
-require 'google/compute/property/enum'
 require 'google/compute/property/integer'
 require 'google/compute/property/string'
+require 'google/compute/property/target_tcp_proxy_proxy_header'
 require 'google/compute/property/time'
 require 'google/hash_utils'
 
@@ -58,7 +58,7 @@ module Google
                name_property: true, desired_state: true
       property :proxy_header,
                equal_to: %w[NONE PROXY_V1],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::ProxyHeaderEnum.coerce, desired_state: true
       property :service,
                [String, ::Google::Compute::Data::BackServSelfLinkRef],
                coerce: ::Google::Compute::Property::BackServSelfLinkRef.coerce, desired_state: true
@@ -92,7 +92,7 @@ module Google
             ::Google::Compute::Property::Time.api_parse(fetch['creationTimestamp'])
           @current_resource.id = ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.proxy_header =
-            ::Google::Compute::Property::Enum.api_parse(fetch['proxyHeader'])
+            ::Google::Compute::Property::ProxyHeaderEnum.api_parse(fetch['proxyHeader'])
           @current_resource.service =
             ::Google::Compute::Property::BackServSelfLinkRef.api_parse(fetch['service'])
           @new_resource.__fetched = fetch

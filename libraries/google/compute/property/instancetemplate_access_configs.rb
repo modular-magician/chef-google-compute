@@ -93,7 +93,7 @@ module Google
         def initialize(args)
           @name = Google::Compute::Property::String.api_parse(args['name'])
           @nat_ip = Google::Compute::Property::AddressAddressRef.api_parse(args['natIP'])
-          @type = Google::Compute::Property::Enum.api_parse(args['type'])
+          @type = Google::Compute::Property::TypeEnum.api_parse(args['type'])
         end
       end
 
@@ -103,7 +103,7 @@ module Google
         def initialize(args)
           @name = Google::Compute::Property::String.catalog_parse(args[:name])
           @nat_ip = Google::Compute::Property::AddressAddressRef.catalog_parse(args[:nat_ip])
-          @type = Google::Compute::Property::Enum.catalog_parse(args[:type])
+          @type = Google::Compute::Property::TypeEnum.catalog_parse(args[:type])
         end
       end
     end

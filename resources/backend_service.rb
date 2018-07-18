@@ -33,13 +33,15 @@ require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
+require 'google/compute/property/backend_service_balancing_mode'
+require 'google/compute/property/backend_service_protocol'
+require 'google/compute/property/backend_service_session_affinity'
 require 'google/compute/property/backendservice_backends'
 require 'google/compute/property/backendservice_cache_key_policy'
 require 'google/compute/property/backendservice_cdn_policy'
 require 'google/compute/property/backendservice_connection_draining'
 require 'google/compute/property/boolean'
 require 'google/compute/property/double'
-require 'google/compute/property/enum'
 require 'google/compute/property/instancegroup_selflink'
 require 'google/compute/property/integer'
 require 'google/compute/property/region_selflink'
@@ -88,13 +90,13 @@ module Google
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :protocol,
                equal_to: %w[HTTP HTTPS TCP SSL],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::ProtocolEnum.coerce, desired_state: true
       property :region,
                [String, ::Google::Compute::Data::RegioSelfLinkRef],
                coerce: ::Google::Compute::Property::RegioSelfLinkRef.coerce, desired_state: true
       property :session_affinity,
                equal_to: %w[NONE CLIENT_IP GENERATED_COOKIE CLIENT_IP_PROTO CLIENT_IP_PORT_PROTO],
-               coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::SessionAffinityEnum.coerce, desired_state: true
       property :timeout_sec
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
 
@@ -147,11 +149,11 @@ module Google
           @current_resource.port_name =
             ::Google::Compute::Property::String.api_parse(fetch['portName'])
           @current_resource.protocol =
-            ::Google::Compute::Property::Enum.api_parse(fetch['protocol'])
+            ::Google::Compute::Property::ProtocolEnum.api_parse(fetch['protocol'])
           @current_resource.region =
             ::Google::Compute::Property::RegioSelfLinkRef.api_parse(fetch['region'])
           @current_resource.session_affinity =
-            ::Google::Compute::Property::Enum.api_parse(fetch['sessionAffinity'])
+            ::Google::Compute::Property::SessionAffinityEnum.api_parse(fetch['sessionAffinity'])
           @current_resource.timeout_sec =
             ::Google::Compute::Property::Integer.api_parse(fetch['timeoutSec'])
           @new_resource.__fetched = fetch

@@ -30,9 +30,9 @@ $LOAD_PATH.unshift ::File.expand_path('../libraries', ::File.dirname(__FILE__))
 
 require 'chef/resource'
 require 'google/compute/network/get'
-require 'google/compute/property/enum'
 require 'google/compute/property/integer'
 require 'google/compute/property/region_deprecated'
+require 'google/compute/property/region_state'
 require 'google/compute/property/string'
 require 'google/compute/property/string_array'
 require 'google/compute/property/time'
