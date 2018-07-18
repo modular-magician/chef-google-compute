@@ -90,6 +90,8 @@ chef-codegen:
   * chefignore
   * CONTRIBUTING.md
   * Gemfile
+  * lib/google/compute/property/address_address_type.rb
+  * lib/google/compute/property/router_advertise_mode.rb
   * libraries/__init__.rb
   * libraries/google/compute/network/base.rb
   * libraries/google/compute/network/delete.rb
