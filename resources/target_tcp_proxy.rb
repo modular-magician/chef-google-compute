@@ -142,6 +142,26 @@ module Google
             # TODO(nelsonjr): Check w/ Chef... can we print this in red?
             puts # making a newline until we find a better way TODO: find!
             compute_changes.each { |log| puts "    - #{log.strip}\n" }
+    if @dirty[:proxy_header)]:
+      Google::Compute::Network::Post.new(
+        https://www.googleapis.com/compute/v1/projects/{{project}}/global/targetTcpProxies/{{name}}/setProxyHeader,
+        {
+          proxyHeader: @resource[:proxy_header]
+        },
+        fetch_auth(@resource),
+        'application/json'
+      )
+    end
+    if @dirty[:service)]:
+      Google::Compute::Network::Post.new(
+        https://www.googleapis.com/compute/v1/projects/{{project}}/global/targetTcpProxies/{{name}}/setBackendService,
+        {
+          service: @resource[:service]
+        },
+        fetch_auth(@resource),
+        'application/json'
+      )
+    end
             update_req =
               ::Google::Compute::Network::Put.new(self_link(@new_resource),
                                                   fetch_auth(@new_resource),

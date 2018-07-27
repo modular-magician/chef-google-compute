@@ -139,6 +139,16 @@ module Google
             # TODO(nelsonjr): Check w/ Chef... can we print this in red?
             puts # making a newline until we find a better way TODO: find!
             compute_changes.each { |log| puts "    - #{log.strip}\n" }
+    if @dirty[:url_map)]:
+      Google::Compute::Network::Post.new(
+        https://www.googleapis.com/compute/v1/projects/{{project}}/targetHttpProxies/{{name}}/setUrlMap,
+        {
+          urlMap: @resource[:url_map]
+        },
+        fetch_auth(@resource),
+        'application/json'
+      )
+    end
             update_req =
               ::Google::Compute::Network::Put.new(self_link(@new_resource),
                                                   fetch_auth(@new_resource),
