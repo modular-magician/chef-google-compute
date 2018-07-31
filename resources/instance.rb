@@ -69,9 +69,9 @@ module Google
       property :can_ip_forward,
                kind_of: [TrueClass, FalseClass],
                coerce: ::Google::Compute::Property::Boolean.coerce, desired_state: true
-      property :cpu_platform
+      property :cpu_platform,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
-      property :creation_timestamp
+      property :creation_timestamp,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       # disks is Array of Google::Compute::Property::InstanceDisksArray
       property :disks,
@@ -82,9 +82,9 @@ module Google
                Array,
                coerce: ::Google::Compute::Property::InstancGuestAccelerArray.coerce,
                desired_state: true
-      property :id
+      property :id,
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
-      property :label_fingerprint
+      property :label_fingerprint,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :metadata,
                [Hash, ::Google::Compute::Property::NameValues],
@@ -92,7 +92,7 @@ module Google
       property :machine_type,
                [String, ::Google::Compute::Data::MachTypeSelfLinkRef],
                coerce: ::Google::Compute::Property::MachTypeSelfLinkRef.coerce, desired_state: true
-      property :min_cpu_platform
+      property :min_cpu_platform,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :i_label,
                String,
@@ -111,9 +111,9 @@ module Google
                Array,
                coerce: ::Google::Compute::Property::InstancServiceAccountArray.coerce,
                desired_state: true
-      property :status
+      property :status,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
-      property :status_message
+      property :status_message,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :tags,
                [Hash, ::Google::Compute::Data::InstanceTags],
@@ -472,6 +472,55 @@ module Google
 
         def raise_if_errors(response, err_path, msg_field)
           self.class.raise_if_errors(response, err_path, msg_field)
+        end
+
+        def self.encode_request(request)
+          metadata_encoder(request[:metadata]) unless request[:metadata].nil?
+          request
+        end
+
+        def encode_request(resource_request)
+          self.class.encode_request(resource_request)
+        end
+
+        def self.decode_response(response, kind)
+          response = JSON.parse(response.body)
+          return response unless kind == 'compute#instance'
+
+          metadata_decoder(response['metadata']) unless response['metadata'].nil?
+          response
+        end
+
+        # TODO(nelsonjr): Implement updating metadata on exsiting resources.
+
+        # Expose instance 'metadata' as a simple name/value pair hash. However the API
+        # defines metadata as a NestedObject with the following layout:
+        #
+        # metadata {
+        #   fingerprint: 'hash-of-last-metadata'
+        #   items: [
+        #     {
+        #       key: 'metadata1-key'
+        #       value: 'metadata1-value'
+        #     },
+        #     ...
+        #   ]
+        # }
+        #
+        # Fingerpint is an optimistic locking mechanism for updates, which requires
+        # adding the 'fingerprint' of the last metadata to allow update.
+        def self.metadata_encoder(metadata)
+          items = metadata.map { |k, v| { key: k, value: v } }
+          metadata.clear
+          metadata[:items] = items
+        end
+
+        # Map metadata.items[]{key:,value:} => metadata[key]=value
+        def self.metadata_decoder(metadata)
+          metadata_items = metadata['items']
+          metadata.clear
+          metadata.merge!(Hash[metadata_items.map { |i| [i['key'], i['value']] }]) \
+            unless metadata_items.nil?
         end
 
         def self.fetch_resource(resource, self_link, kind)
