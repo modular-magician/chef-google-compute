@@ -45,11 +45,11 @@ module Google
     class TargetHttpProxy < Chef::Resource
       resource_name :gcompute_target_http_proxy
 
-      property :creation_timestamp
+      property :creation_timestamp,
                Time, coerce: ::Google::Compute::Property::Time.coerce, desired_state: true
-      property :description
+      property :description,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
-      property :id
+      property :id,
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
       property :thp_label,
                String,
@@ -139,6 +139,9 @@ module Google
             # TODO(nelsonjr): Check w/ Chef... can we print this in red?
             puts # making a newline until we find a better way TODO: find!
             compute_changes.each { |log| puts "    - #{log.strip}\n" }
+              if (@current_resource.url_map != @new_resource.url_map)
+                urlmap_update(@current_resource)
+              end
             update_req =
               ::Google::Compute::Network::Put.new(self_link(@new_resource),
                                                   fetch_auth(@new_resource),
@@ -165,6 +168,22 @@ module Google
           }.reject { |_, v| v.nil? }
         end
 
+  def urlmap_update(data)
+    Google::Compute::Network::Post.new(
+      URI.join(
+        'https://www.googleapis.com/compute/v1/',
+        expand_variables(
+          'projects/{{project}}/targetHttpProxies/{{name}}/setUrlMap',
+          data
+        )
+      ),
+      fetch_auth(@resource),
+      'application/json',
+      {
+        urlMap: @resource[:url_map]
+      }.to_json
+    ).send
+  end
         # Copied from Chef > Provider > #converge_if_changed
         def compute_changes
           properties = @new_resource.class.state_properties.map(&:name)
