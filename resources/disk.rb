@@ -246,6 +246,39 @@ module Google
         end
         # rubocop:enable Metrics/MethodLength
 
+  def labels_update(data)
+    Google::Compute::Network::Post.new(
+      URI.join(
+        'https://www.googleapis.com/compute/v1/',
+        expand_variables(
+          'projects/{{project}}/zones/{{zone}}/disks/{{name}}/setLabels',
+          data
+        )
+      ),
+      fetch_auth(@resource),
+      'application/json',
+      {
+        labels: @resource[:labels]
+      }.to_json
+    ).send
+  end
+
+  def sizegb_update(data)
+    Google::Compute::Network::Post.new(
+      URI.join(
+        'https://www.googleapis.com/compute/v1/',
+        expand_variables(
+          'projects/{{project}}/zones/{{zone}}/disks/{{name}}/resize',
+          data
+        )
+      ),
+      fetch_auth(@resource),
+      'application/json',
+      {
+        sizeGb: @resource[:size_gb]
+      }.to_json
+    ).send
+  end
         # Copied from Chef > Provider > #converge_if_changed
         def compute_changes
           properties = @new_resource.class.state_properties.map(&:name)
