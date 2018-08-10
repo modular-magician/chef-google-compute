@@ -158,6 +158,12 @@ module Google
             # TODO(nelsonjr): Check w/ Chef... can we print this in red?
             puts # making a newline until we find a better way TODO: find!
             compute_changes.each { |log| puts "    - #{log.strip}\n" }
+              if (@current_resource.ip_cidr_range != @new_resource.ip_cidr_range)
+                ipcidrrange_update(@current_resource)
+              end
+              if (@current_resource.private_ip_google_access != @new_resource.private_ip_google_access)
+                privateipgoogleaccess_update(@current_resource)
+              end
             update_req =
               ::Google::Compute::Network::Put.new(self_link(@new_resource),
                                                   fetch_auth(@new_resource),
@@ -188,6 +194,39 @@ module Google
           }.reject { |_, v| v.nil? }
         end
 
+  def ipcidrrange_update(data)
+    Google::Compute::Network::Post.new(
+      URI.join(
+        'https://www.googleapis.com/compute/v1/',
+        expand_variables(
+          'projects/{{project}}/regions/{{region}}/subnetworks/{{name}}/expandIpCidrRange',
+          data
+        )
+      ),
+      fetch_auth(@resource),
+      'application/json',
+      {
+        ipCidrRange: @resource[:ip_cidr_range]
+      }.to_json
+    ).send
+  end
+
+  def privateipgoogleaccess_update(data)
+    Google::Compute::Network::Post.new(
+      URI.join(
+        'https://www.googleapis.com/compute/v1/',
+        expand_variables(
+          'projects/{{project}}/regions/{{region}}/subnetworks/{{name}}/setPrivateIpGoogleAccess',
+          data
+        )
+      ),
+      fetch_auth(@resource),
+      'application/json',
+      {
+        privateIpGoogleAccess: @resource[:private_ip_google_access]
+      }.to_json
+    ).send
+  end
         # Copied from Chef > Provider > #converge_if_changed
         def compute_changes
           properties = @new_resource.class.state_properties.map(&:name)
