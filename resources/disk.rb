@@ -54,6 +54,9 @@ module Google
     class Disk < Chef::Resource
       resource_name :gcompute_disk
 
+      property :label_fingerprint,
+               [String, ::Google::Compute::Property::String],
+               coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :creation_timestamp,
                Time, coerce: ::Google::Compute::Property::Time.coerce, desired_state: true
       property :description,
@@ -76,14 +79,14 @@ module Google
                name_property: true, desired_state: true
       property :size_gb,
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
+      property :type,
+               [String, ::Google::Compute::Data::DiskTypeSelfLinkRef],
+               coerce: ::Google::Compute::Property::DiskTypeSelfLinkRef.coerce, desired_state: true
       # users is Array of Google::Compute::Property::InstanceSelfLinkRefArray
       property :users,
                Array,
                coerce: ::Google::Compute::Property::InstanceSelfLinkRefArray.coerce,
                desired_state: true
-      property :type,
-               [String, ::Google::Compute::Data::DiskTypeSelfLinkRef],
-               coerce: ::Google::Compute::Property::DiskTypeSelfLinkRef.coerce, desired_state: true
       property :source_image,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :zone,
@@ -134,6 +137,8 @@ module Google
           end
         else
           @current_resource = @new_resource.clone
+          @current_resource.label_fingerprint =
+            ::Google::Compute::Property::String.api_parse(fetch['labelFingerprint'])
           @current_resource.creation_timestamp =
             ::Google::Compute::Property::Time.api_parse(fetch['creationTimestamp'])
           @current_resource.description =
@@ -149,10 +154,10 @@ module Google
             ::Google::Compute::Property::StringArray.api_parse(fetch['licenses'])
           @current_resource.size_gb =
             ::Google::Compute::Property::Integer.api_parse(fetch['sizeGb'])
-          @current_resource.users =
-            ::Google::Compute::Property::InstanceSelfLinkRefArray.api_parse(fetch['users'])
           @current_resource.type =
             ::Google::Compute::Property::DiskTypeSelfLinkRef.api_parse(fetch['type'])
+          @current_resource.users =
+            ::Google::Compute::Property::InstanceSelfLinkRefArray.api_parse(fetch['users'])
           @new_resource.__fetched = fetch
 
           update
@@ -207,9 +212,14 @@ module Google
             # TODO(nelsonjr): Check w/ Chef... can we print this in red?
             puts # making a newline until we find a better way TODO: find!
             compute_changes.each { |log| puts "    - #{log.strip}\n" }
-            message = 'Disk cannot be edited'
-            Chef::Log.fatal message
-            raise message
+            if (@current_resource.labels != @new_resource.labels)
+              labelfingerprint_update(@current_resource)
+            end
+            if (@current_resource.size_gb != @new_resource.size_gb)
+              sizegb_update(@current_resource)
+            end
+            return fetch_resource(@new_resource, self_link(@new_resource),
+                                  'compute#disk')
           end
         end
 
@@ -224,6 +234,7 @@ module Google
             project: resource.project,
             name: resource.d_label,
             kind: 'compute#disk',
+            label_fingerprint: resource.label_fingerprint,
             creation_timestamp: resource.creation_timestamp,
             description: resource.description,
             id: resource.id,
@@ -232,8 +243,8 @@ module Google
             labels: resource.labels,
             licenses: resource.licenses,
             size_gb: resource.size_gb,
-            users: resource.users,
             type: resource.type,
+            users: resource.users,
             source_image: resource.source_image,
             zone: resource.zone,
             source_image_encryption_key: resource.source_image_encryption_key,
@@ -246,6 +257,40 @@ module Google
         end
         # rubocop:enable Metrics/MethodLength
 
+  def labelfingerprint_update(data)
+    ::Google::Compute::Network::Post.new(
+      URI.join(
+        'https://www.googleapis.com/compute/v1/',
+        expand_variables(
+          'projects/{{project}}/zones/{{zone}}/disks/{{name}}/setLabels',
+          data
+        )
+      ),
+      fetch_auth(@new_resource),
+      'application/json',
+      {
+        labelFingerprint: @new_resource.__fetched['labelFingerprint'],
+        labels: @new_resource.labels
+      }.to_json
+    ).send
+  end
+
+  def sizegb_update(data)
+    ::Google::Compute::Network::Post.new(
+      URI.join(
+        'https://www.googleapis.com/compute/v1/',
+        expand_variables(
+          'projects/{{project}}/zones/{{zone}}/disks/{{name}}/resize',
+          data
+        )
+      ),
+      fetch_auth(@new_resource),
+      'application/json',
+      {
+        sizeGb: @new_resource.size_gb
+      }.to_json
+    ).send
+  end
         # Copied from Chef > Provider > #converge_if_changed
         def compute_changes
           properties = @new_resource.class.state_properties.map(&:name)
