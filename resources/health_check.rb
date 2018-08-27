@@ -95,7 +95,8 @@ module Google
       property :project, String, desired_state: false, required: true
 
       action :create do
-        fetch = fetch_resource(@new_resource, self_link(@new_resource), 'compute#healthCheck')
+        fetch = fetch_resource(@new_resource, self_link(@new_resource),
+                               'compute#healthCheck')
         if fetch.nil?
           converge_by "Creating gcompute_health_check[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
@@ -148,7 +149,8 @@ module Google
       end
 
       action :delete do
-        fetch = fetch_resource(@new_resource, self_link(@new_resource), 'compute#healthCheck')
+        fetch = fetch_resource(@new_resource, self_link(@new_resource),
+                               'compute#healthCheck')
         unless fetch.nil?
           converge_by "Deleting gcompute_health_check[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(

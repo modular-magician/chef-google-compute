@@ -108,7 +108,8 @@ module Google
       property :__fetched, Hash, desired_state: false, required: false
 
       action :create do
-        fetch = fetch_resource(@new_resource, self_link(@new_resource), 'compute#backendService')
+        fetch = fetch_resource(@new_resource, self_link(@new_resource),
+                               'compute#backendService')
         if fetch.nil?
           converge_by "Creating gcompute_backend_service[#{new_resource.name}]" do
             # TODO(nelsonjr): Show a list of variables to create
@@ -162,7 +163,8 @@ module Google
       end
 
       action :delete do
-        fetch = fetch_resource(@new_resource, self_link(@new_resource), 'compute#backendService')
+        fetch = fetch_resource(@new_resource, self_link(@new_resource),
+                               'compute#backendService')
         unless fetch.nil?
           converge_by "Deleting gcompute_backend_service[#{new_resource.name}]" do
             delete_req = ::Google::Compute::Network::Delete.new(
