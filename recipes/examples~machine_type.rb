@@ -60,13 +60,7 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_zone 'us-west1-a' do
-  action :create
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-gcompute_machine_type 'n1-standard-1' do
+gcompute_machine_type 'custom-type' do
   action :create
   zone 'us-west1-a'
   project ENV['PROJECT'] # ex: 'my-test-project'
