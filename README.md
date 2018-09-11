@@ -30,12 +30,6 @@ gauth_credential 'mycred' do
   ]
 end
 
-gcompute_zone 'us-west1-a' do
-  action :create
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
 gcompute_disk 'instance-test-os-1' do
   action :create
   source_image 'projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts'
@@ -50,22 +44,9 @@ gcompute_network 'mynetwork-test' do
   credential 'mycred'
 end
 
-gcompute_region 'us-west1' do
-  action :create
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
 gcompute_address 'instance-test-ip' do
   action :create
   region 'us-west1'
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-gcompute_machine_type 'n1-standard-1' do
-  action :create
-  zone 'us-west1-a'
   project ENV['PROJECT'] # ex: 'my-test-project'
   credential 'mycred'
 end
@@ -375,16 +356,10 @@ static.
 #### Example
 
 ```ruby
-gcompute_region 'some-region' do
-  action :create
-  r_label 'us-west1'
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
 
 gcompute_address 'test1' do
   action :create
-  region 'some-region'
+  region 'us-west1'
   project ENV['PROJECT'] # ex: 'my-test-project'
   credential 'mycred'
 end
@@ -866,17 +841,6 @@ of disk to use, such as a pd-ssd or pd-standard. To reference a disk
 type, use the disk type's full or partial URL.
 
 
-#### Example
-
-```ruby
-gcompute_disk_type 'pd-standard' do
-  action :create
-  zone 'us-central1-a'
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-```
 
 #### Reference
 
@@ -901,15 +865,6 @@ gcompute_disk_type 'id-for-resource' do
 end
 ```
 
-#### Actions
-
-* `create` -
-  Converges the `gcompute_disk_type` resource into the final
-  state described within the block. If the resource does not exist, Chef will
-  attempt to create it.
-* `delete` -
-  Ensures the `gcompute_disk_type` resource is not present.
-  If the resource already exists Chef will attempt to delete it.
 
 #### Properties
 
@@ -1477,7 +1432,7 @@ gcompute_forwarding_rule 'fwd-rule-test' do
   ip_protocol 'TCP'
   port_range '80'
   target 'target-pool'
-  region 'some-region'
+  region 'us-west1'
   project ENV['PROJECT'] # ex: 'my-test-project'
   credential 'mycred'
 end
@@ -2421,10 +2376,9 @@ so that leftover disks are not left behind on machine deletion.
 # Power Tips:
 #   1) Remember to define the resources needed to allocate the VM:
 #      a) gcompute_disk_type (to be used in 'diskType' property)
-#      b) gcompute_machine_type (to be used in 'machine_type' property)
-#      c) gcompute_network (to be used in 'network_interfaces' property)
-#      d) gcompute_subnetwork (to be used in the 'subnetwork' property)
-#      e) gcompute_disk (to be used in the 'sourceDisk' property)
+#      b) gcompute_network (to be used in 'network_interfaces' property)
+#      c) gcompute_subnetwork (to be used in the 'subnetwork' property)
+#      d) gcompute_disk (to be used in the 'sourceDisk' property)
 #   2) Don't forget to define a source_image for the OS of the boot disk
 gcompute_instance_template 'instance-template-test' do
   action :create
@@ -2882,15 +2836,6 @@ track software usage in images, persistent disks, snapshots, and virtual
 machine instances.
 
 
-#### Example
-
-```ruby
-gcompute_license 'test-license' do
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-```
 
 #### Reference
 
@@ -2903,15 +2848,6 @@ gcompute_license 'id-for-resource' do
 end
 ```
 
-#### Actions
-
-* `create` -
-  Converges the `gcompute_license` resource into the final
-  state described within the block. If the resource does not exist, Chef will
-  attempt to create it.
-* `delete` -
-  Ensures the `gcompute_license` resource is not present.
-  If the resource already exists Chef will attempt to delete it.
 
 #### Properties
 
@@ -3189,8 +3125,6 @@ An instance is a virtual machine (VM) hosted on Google's infrastructure.
 #      b) gcompute_network (to be used in 'network' property)
 #      c) gcompute_address (to be used in 'access_configs', if your machine
 #         needs external ingress access)
-#      d) gcompute_zone (to determine where the VM will be allocated)
-#      e) gcompute_machine_type (to determine the kind of machine to be created)
 #   2) Don't forget to define a source_image for the OS of the boot disk
 #      a) You can use the provided gcompute_image_family function to specify the
 #         latest version of an operating system of a given family
@@ -3668,9 +3602,8 @@ and add instances to an instance group manually.
 #### Example
 
 ```ruby
-# Instance group requires a network and a region, so define them in your recipe:
+# Instance group requires a network so define one in your recipe:
 #   - gcompute_network 'my-network' do ... end
-#   - gcompute_zone 'my-zone' do ... end
 gcompute_instance_group 'my-masters' do
   action :create
   named_ports [
@@ -3965,17 +3898,6 @@ hardware specifications of your virtual machine instances, such as the
 amount of memory or number of virtual CPUs.
 
 
-#### Example
-
-```ruby
-gcompute_machine_type 'n1-standard-1' do
-  action :create
-  zone 'us-west1-a'
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-```
 
 #### Reference
 
@@ -4003,15 +3925,6 @@ gcompute_machine_type 'id-for-resource' do
 end
 ```
 
-#### Actions
-
-* `create` -
-  Converges the `gcompute_machine_type` resource into the final
-  state described within the block. If the resource does not exist, Chef will
-  attempt to create it.
-* `delete` -
-  Ensures the `gcompute_machine_type` resource is not present.
-  If the resource already exists Chef will attempt to delete it.
 
 #### Properties
 
@@ -4199,16 +4112,6 @@ location where you can run your resources. Each region has one or more
 zones
 
 
-#### Example
-
-```ruby
-gcompute_region 'us-west1' do
-  action :create
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-```
 
 #### Reference
 
@@ -4234,15 +4137,6 @@ gcompute_region 'id-for-resource' do
 end
 ```
 
-#### Actions
-
-* `create` -
-  Converges the `gcompute_region` resource into the final
-  state described within the block. If the resource does not exist, Chef will
-  attempt to create it.
-* `delete` -
-  Ensures the `gcompute_region` resource is not present.
-  If the resource already exists Chef will attempt to delete it.
 
 #### Properties
 
@@ -4324,9 +4218,8 @@ nextHopGateway, nextHopInstance, nextHopIp, or nextHopVpnTunnel.
 #### Example
 
 ```ruby
-# Subnetwork requires a network and a region, so define them in your recipe:
+# Route requires a network so define one in your recipe:
 #   - gcompute_network 'my-network' do ... end
-#   - gcompute_region 'some-region' do ... end
 gcompute_route 'corp-route' do
   action :create
   dest_range '192.168.6.0/24'
@@ -4445,9 +4338,8 @@ Represents a Router resource.
 #### Example
 
 ```ruby
-# Router requires a network and a region, so define them in your recipe:
+# Router requires a network so define one in your recipe:
 #   - gcompute_network 'my-network' do ... end
-#   - gcompute_region 'some-region' do ... end
 gcompute_router 'my-router' do
   action :create
   bgp(
@@ -4464,7 +4356,7 @@ gcompute_router 'my-router' do
     ]
   )
   network 'my-network'
-  region 'some-region'
+  region 'us-west1'
   project ENV['PROJECT'] # ex: 'my-test-project'
   credential 'mycred'
 end
@@ -4872,14 +4764,13 @@ of the network, even entire subnets, using firewall rules.
 #### Example
 
 ```ruby
-# Subnetwork requires a network and a region, so define them in your recipe:
+# Subnetwork requires a network so define one in your recipe:
 #   - gcompute_network 'my-network' do ... end
-#   - gcompute_region 'some-region' do ... end
 gcompute_subnetwork 'servers' do
   action :create
   ip_cidr_range '172.16.0.0/16'
   network 'mynetwork-subnetwork'
-  region 'some-region'
+  region 'us-west1'
   project ENV['PROJECT'] # ex: 'my-test-project'
   credential 'mycred'
 end
@@ -5437,19 +5328,12 @@ gcompute_network 'mynetwork' do
   credential 'mycred'
 end
 
-gcompute_region 'some-region' do
-  action :create
-  r_label 'us-west1'
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
 gcompute_target_vpn_gateway 'mygateway' do
   action :create
   project ENV['PROJECT'] # ex: 'my-test-project'
   credential 'mycred'
   network 'mynetwork'
-  region 'some-region'
+  region 'us-west1'
 end
 
 ```
@@ -5711,19 +5595,12 @@ gcompute_network 'mynetwork' do
   credential 'mycred'
 end
 
-gcompute_region 'some-region' do
-  action :create
-  r_label 'us-west1'
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
 gcompute_target_vpn_gateway 'mygateway' do
   action :create
   project ENV['PROJECT'] # ex: 'my-test-project'
   credential 'mycred'
   network 'mynetwork'
-  region 'some-region'
+  region 'us-west1'
 end
 
 gcompute_vpn_tunnel 'mytunnel' do
@@ -5731,7 +5608,7 @@ gcompute_vpn_tunnel 'mytunnel' do
   project ENV['PROJECT'] # ex: 'my-test-project'
   credential 'mycred'
   target_vpn_gateway 'mygateway'
-  region 'some-region'
+  region 'us-west1'
 end
 
 ```
@@ -5844,16 +5721,6 @@ the resource followed by "_label"
 ### gcompute_zone
 Represents a Zone resource.
 
-#### Example
-
-```ruby
-gcompute_zone 'us-west1-a' do
-  action :create
-  project ENV['PROJECT'] # ex: 'my-test-project'
-  credential 'mycred'
-end
-
-```
 
 #### Reference
 
@@ -5877,15 +5744,6 @@ gcompute_zone 'id-for-resource' do
 end
 ```
 
-#### Actions
-
-* `create` -
-  Converges the `gcompute_zone` resource into the final
-  state described within the block. If the resource does not exist, Chef will
-  attempt to create it.
-* `delete` -
-  Ensures the `gcompute_zone` resource is not present.
-  If the resource already exists Chef will attempt to delete it.
 
 #### Properties
 
