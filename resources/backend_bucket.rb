@@ -33,9 +33,11 @@ require 'google/compute/network/delete'
 require 'google/compute/network/get'
 require 'google/compute/network/post'
 require 'google/compute/network/put'
+require 'google/compute/property/backendbucket_cdn_policy'
 require 'google/compute/property/boolean'
 require 'google/compute/property/integer'
 require 'google/compute/property/string'
+require 'google/compute/property/string_array'
 require 'google/compute/property/time'
 require 'google/hash_utils'
 
@@ -48,6 +50,10 @@ module Google
 
       property :bucket_name,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
+      property :cdn_policy,
+               [Hash, ::Google::Compute::Data::BackendBucketCdnPolicy],
+               coerce: ::Google::Compute::Property::BackendBucketCdnPolicy.coerce,
+               desired_state: true
       property :creation_timestamp,
                Time, coerce: ::Google::Compute::Property::Time.coerce, desired_state: true
       property :description,
@@ -88,6 +94,8 @@ module Google
           @current_resource = @new_resource.clone
           @current_resource.bucket_name =
             ::Google::Compute::Property::String.api_parse(fetch['bucketName'])
+          @current_resource.cdn_policy =
+            ::Google::Compute::Property::BackendBucketCdnPolicy.api_parse(fetch['cdnPolicy'])
           @current_resource.creation_timestamp =
             ::Google::Compute::Property::Time.api_parse(fetch['creationTimestamp'])
           @current_resource.description =
@@ -117,6 +125,7 @@ module Google
 
       def exports
         {
+          name: bb_label,
           self_link: __fetched['selfLink']
         }
       end
@@ -128,6 +137,7 @@ module Google
           request = {
             kind: 'compute#backendBucket',
             bucketName: new_resource.bucket_name,
+            cdnPolicy: new_resource.cdn_policy,
             description: new_resource.description,
             enableCdn: new_resource.enable_cdn,
             name: new_resource.bb_label
@@ -156,6 +166,7 @@ module Google
             name: resource.bb_label,
             kind: 'compute#backendBucket',
             bucket_name: resource.bucket_name,
+            cdn_policy: resource.cdn_policy,
             creation_timestamp: resource.creation_timestamp,
             description: resource.description,
             enable_cdn: resource.enable_cdn,

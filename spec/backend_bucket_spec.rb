@@ -96,6 +96,10 @@ context 'gcompute_backend_bucket' do
                   gcompute_backend_bucket 'title0' do
                     action :create
                     bucket_name 'test bucket_name#0 data'
+                    cdn_policy({
+                      signed_url_cache_max_age_sec: 3600,
+                      signed_url_key_names: ['jj', 'kk', 'll']
+                    })
                     description 'test description#0 data'
                     enable_cdn true
                     project 'test project#0 data'
@@ -105,6 +109,10 @@ context 'gcompute_backend_bucket' do
                   gcompute_backend_bucket 'title1' do
                     action :create
                     bucket_name 'test bucket_name#1 data'
+                    cdn_policy({
+                      signed_url_cache_max_age_sec: 3600,
+                      signed_url_key_names: ['uu', 'vv', 'ww', 'xx']
+                    })
                     description 'test description#1 data'
                     enable_cdn false
                     project 'test project#1 data'
@@ -114,6 +122,10 @@ context 'gcompute_backend_bucket' do
                   gcompute_backend_bucket 'title2' do
                     action :create
                     bucket_name 'test bucket_name#2 data'
+                    cdn_policy({
+                      signed_url_cache_max_age_sec: 3600,
+                      signed_url_key_names: ['gg', 'hh']
+                    })
                     description 'test description#2 data'
                     enable_cdn true
                     project 'test project#2 data'
@@ -136,6 +148,11 @@ context 'gcompute_backend_bucket' do
 
               it { is_expected.to have_attributes(bucket_name: 'test bucket_name#0 data') }
 
+              # TODO(nelsonjr): Implement complex nested property object test.
+              # it 'cdnPolicy' do
+              #   # Add test code here
+              # end
+
               it { is_expected.to have_attributes(description: 'test description#0 data') }
 
               it { is_expected.to have_attributes(enable_cdn: true) }
@@ -150,6 +167,11 @@ context 'gcompute_backend_bucket' do
 
               it { is_expected.to have_attributes(bucket_name: 'test bucket_name#1 data') }
 
+              # TODO(nelsonjr): Implement complex nested property object test.
+              # it 'cdnPolicy' do
+              #   # Add test code here
+              # end
+
               it { is_expected.to have_attributes(description: 'test description#1 data') }
 
               it { is_expected.to have_attributes(enable_cdn: false) }
@@ -163,6 +185,11 @@ context 'gcompute_backend_bucket' do
               end
 
               it { is_expected.to have_attributes(bucket_name: 'test bucket_name#2 data') }
+
+              # TODO(nelsonjr): Implement complex nested property object test.
+              # it 'cdnPolicy' do
+              #   # Add test code here
+              # end
 
               it { is_expected.to have_attributes(description: 'test description#2 data') }
 
@@ -224,6 +251,10 @@ context 'gcompute_backend_bucket' do
                     action :create
                     bb_label 'test name#0 data'
                     bucket_name 'test bucket_name#0 data'
+                    cdn_policy({
+                      signed_url_cache_max_age_sec: 3600,
+                      signed_url_key_names: ['jj', 'kk', 'll']
+                    })
                     description 'test description#0 data'
                     enable_cdn true
                     project 'test project#0 data'
@@ -234,6 +265,10 @@ context 'gcompute_backend_bucket' do
                     action :create
                     bb_label 'test name#1 data'
                     bucket_name 'test bucket_name#1 data'
+                    cdn_policy({
+                      signed_url_cache_max_age_sec: 3600,
+                      signed_url_key_names: ['uu', 'vv', 'ww', 'xx']
+                    })
                     description 'test description#1 data'
                     enable_cdn false
                     project 'test project#1 data'
@@ -244,6 +279,10 @@ context 'gcompute_backend_bucket' do
                     action :create
                     bb_label 'test name#2 data'
                     bucket_name 'test bucket_name#2 data'
+                    cdn_policy({
+                      signed_url_cache_max_age_sec: 3600,
+                      signed_url_key_names: ['gg', 'hh']
+                    })
                     description 'test description#2 data'
                     enable_cdn true
                     project 'test project#2 data'
@@ -266,6 +305,11 @@ context 'gcompute_backend_bucket' do
 
               it { is_expected.to have_attributes(bucket_name: 'test bucket_name#0 data') }
 
+              # TODO(nelsonjr): Implement complex nested property object test.
+              # it 'cdnPolicy' do
+              #   # Add test code here
+              # end
+
               it { is_expected.to have_attributes(description: 'test description#0 data') }
 
               it { is_expected.to have_attributes(enable_cdn: true) }
@@ -280,6 +324,11 @@ context 'gcompute_backend_bucket' do
 
               it { is_expected.to have_attributes(bucket_name: 'test bucket_name#1 data') }
 
+              # TODO(nelsonjr): Implement complex nested property object test.
+              # it 'cdnPolicy' do
+              #   # Add test code here
+              # end
+
               it { is_expected.to have_attributes(description: 'test description#1 data') }
 
               it { is_expected.to have_attributes(enable_cdn: false) }
@@ -293,6 +342,11 @@ context 'gcompute_backend_bucket' do
               end
 
               it { is_expected.to have_attributes(bucket_name: 'test bucket_name#2 data') }
+
+              # TODO(nelsonjr): Implement complex nested property object test.
+              # it 'cdnPolicy' do
+              #   # Add test code here
+              # end
 
               it { is_expected.to have_attributes(description: 'test description#2 data') }
 
@@ -357,6 +411,10 @@ context 'gcompute_backend_bucket' do
               {
                 'kind' => 'compute#backendBucket',
                 'bucketName' => 'test bucket_name#0 data',
+                'cdnPolicy' => {
+                  'signedUrlKeyNames' => %w[jj kk ll],
+                  'signedUrlCacheMaxAgeSec' => 3_600
+                },
                 'description' => 'test description#0 data',
                 'enableCdn' => true,
                 'name' => 'title0'
@@ -395,6 +453,10 @@ context 'gcompute_backend_bucket' do
                 gcompute_backend_bucket 'title0' do
                   action :create
                   bucket_name 'test bucket_name#0 data'
+                  cdn_policy({
+                    signed_url_cache_max_age_sec: 3600,
+                    signed_url_key_names: ['jj', 'kk', 'll']
+                  })
                   description 'test description#0 data'
                   enable_cdn true
                   project 'test project#0 data'
@@ -419,6 +481,11 @@ context 'gcompute_backend_bucket' do
                                        'title0')
           end
           it { is_expected.to have_attributes(bucket_name: 'test bucket_name#0 data') }
+
+          # TODO(nelsonjr): Implement complex nested property object test.
+          # it 'cdnPolicy' do
+          #   # Add test code here
+          # end
 
           it { is_expected.to have_attributes(description: 'test description#0 data') }
 
@@ -445,6 +512,10 @@ context 'gcompute_backend_bucket' do
               1,
               'kind' => 'compute#backendBucket',
               'bucketName' => 'test bucket_name#0 data',
+              'cdnPolicy' => {
+                'signedUrlKeyNames' => %w[jj kk ll],
+                'signedUrlCacheMaxAgeSec' => 3_600
+              },
               'description' => 'test description#0 data',
               'enableCdn' => true,
               'name' => 'test name#0 data'
@@ -482,6 +553,10 @@ context 'gcompute_backend_bucket' do
                   action :create
                   bb_label 'test name#0 data'
                   bucket_name 'test bucket_name#0 data'
+                  cdn_policy({
+                    signed_url_cache_max_age_sec: 3600,
+                    signed_url_key_names: ['jj', 'kk', 'll']
+                  })
                   description 'test description#0 data'
                   enable_cdn true
                   project 'test project#0 data'
@@ -506,6 +581,11 @@ context 'gcompute_backend_bucket' do
                                        'title0')
           end
           it { is_expected.to have_attributes(bucket_name: 'test bucket_name#0 data') }
+
+          # TODO(nelsonjr): Implement complex nested property object test.
+          # it 'cdnPolicy' do
+          #   # Add test code here
+          # end
 
           it { is_expected.to have_attributes(description: 'test description#0 data') }
 

@@ -99,6 +99,7 @@ chef-codegen:
   * libraries/google/compute/property/address_address.rb
   * libraries/google/compute/property/address_address_type.rb
   * libraries/google/compute/property/array.rb
+  * libraries/google/compute/property/backendbucket_cdn_policy.rb
   * libraries/google/compute/property/backendservice_backends.rb
   * libraries/google/compute/property/backendservice_cache_key_policy.rb
   * libraries/google/compute/property/backendservice_cdn_policy.rb
