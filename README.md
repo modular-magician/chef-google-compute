@@ -5580,7 +5580,7 @@ end
   The list of HostRules to use against the URL.
 
 * `host_rules[]/description`
-  An optional description of this resource. Provide this property
+  An optional description of this HostRule. Provide this property
   when you create the resource.
 
 * `host_rules[]/hosts`
@@ -5638,7 +5638,7 @@ end
   matched.
 
 * `tests` -
-  The list of expected URL mappings. Request to update this UrlMap will
+  The list of expected URL mappings. Requests to update this UrlMap will
   succeed only if all of the test cases pass.
 
 * `tests[]/description`
