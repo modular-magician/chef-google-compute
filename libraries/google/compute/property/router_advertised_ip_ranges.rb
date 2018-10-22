@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for AdvertisedIpRanges for router.
-      class RouterAdvertisedIpRanges
+      class RouterAdvertisedipranges
         include Comparable
 
         attr_reader :range
@@ -51,7 +51,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? RouterAdvertisedIpRanges
+          return false unless other.is_a? RouterAdvertisedipranges
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -60,7 +60,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? RouterAdvertisedIpRanges
+          return false unless other.is_a? RouterAdvertisedipranges
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -83,18 +83,18 @@ module Google
         end
       end
 
-      # Manages a RouterAdvertisedIpRanges nested object
+      # Manages a RouterAdvertisedipranges nested object
       # Data is coming from the GCP API
-      class RouterAdvertisedIpRangesApi < RouterAdvertisedIpRanges
+      class RouterAdvertisediprangesApi < RouterAdvertisedipranges
         def initialize(args)
           @range = Google::Compute::Property::String.api_parse(args['range'])
           @description = Google::Compute::Property::String.api_parse(args['description'])
         end
       end
 
-      # Manages a RouterAdvertisedIpRanges nested object
+      # Manages a RouterAdvertisedipranges nested object
       # Data is coming from the Chef catalog
-      class RouterAdvertisedIpRangesCatalog < RouterAdvertisedIpRanges
+      class RouterAdvertisediprangesCatalog < RouterAdvertisedipranges
         def initialize(args)
           @range = Google::Compute::Property::String.catalog_parse(args[:range])
           @description = Google::Compute::Property::String.catalog_parse(args[:description])
@@ -104,46 +104,46 @@ module Google
 
     module Property
       # A class to manage input to AdvertisedIpRanges for router.
-      class RouterAdvertisedIpRanges
+      class RouterAdvertisedipranges
         def self.coerce
-          ->(x) { ::Google::Compute::Property::RouterAdvertisedIpRanges.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::RouterAdvertisedipranges.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::RouterAdvertisedIpRanges
-          Data::RouterAdvertisedIpRangesCatalog.new(value)
+          return value if value.is_a? Data::RouterAdvertisedipranges
+          Data::RouterAdvertisediprangesCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::RouterAdvertisedIpRanges
-          Data::RouterAdvertisedIpRangesApi.new(value)
+          return value if value.is_a? Data::RouterAdvertisedipranges
+          Data::RouterAdvertisediprangesApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class RouterAdvertisedIpRangesArray < Google::Compute::Property::Array
+      class RouterAdvertisediprangesArray < Google::Compute::Property::Array
         def self.coerce
-          ->(x) { ::Google::Compute::Property::RouterAdvertisedIpRangesArray.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::RouterAdvertisediprangesArray.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return RouterAdvertisedIpRanges.catalog_parse(value) \
+          return RouterAdvertisedipranges.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| RouterAdvertisedIpRanges.catalog_parse(v) }
+          value.map { |v| RouterAdvertisedipranges.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return RouterAdvertisedIpRanges.api_parse(value) \
+          return RouterAdvertisedipranges.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| RouterAdvertisedIpRanges.api_parse(v) }
+          value.map { |v| RouterAdvertisedipranges.api_parse(v) }
         end
       end
     end

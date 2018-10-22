@@ -69,10 +69,10 @@ module Google
                coerce: ::Google::Compute::Property::Boolean.coerce, desired_state: true
       property :creation_timestamp,
                Time, coerce: ::Google::Compute::Property::Time.coerce, desired_state: true
-      # routing_config is Array of Google::Compute::Property::NetworkRoutingConfigArray
+      # routing_config is Array of Google::Compute::Property::NetworkRoutingconfigArray
       property :routing_config,
                Array,
-               coerce: ::Google::Compute::Property::NetworkRoutingConfigArray.coerce,
+               coerce: ::Google::Compute::Property::NetworkRoutingconfigArray.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true
@@ -107,7 +107,7 @@ module Google
           @current_resource.creation_timestamp =
             ::Google::Compute::Property::Time.api_parse(fetch['creationTimestamp'])
           @current_resource.routing_config =
-            ::Google::Compute::Property::NetworkRoutingConfigArray.api_parse(
+            ::Google::Compute::Property::NetworkRoutingconfigArray.api_parse(
               fetch['routingConfig']
             )
           @new_resource.__fetched = fetch

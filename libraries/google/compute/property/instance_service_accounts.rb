@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for ServiceAccounts for instance.
-      class InstanceServiceAccounts
+      class InstanceServiceaccounts
         include Comparable
 
         attr_reader :email
@@ -51,7 +51,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceServiceAccounts
+          return false unless other.is_a? InstanceServiceaccounts
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -60,7 +60,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceServiceAccounts
+          return false unless other.is_a? InstanceServiceaccounts
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -83,18 +83,18 @@ module Google
         end
       end
 
-      # Manages a InstanceServiceAccounts nested object
+      # Manages a InstanceServiceaccounts nested object
       # Data is coming from the GCP API
-      class InstanceServiceAccountsApi < InstanceServiceAccounts
+      class InstanceServiceaccountsApi < InstanceServiceaccounts
         def initialize(args)
           @email = Google::Compute::Property::String.api_parse(args['email'])
           @scopes = Google::Compute::Property::StringArray.api_parse(args['scopes'])
         end
       end
 
-      # Manages a InstanceServiceAccounts nested object
+      # Manages a InstanceServiceaccounts nested object
       # Data is coming from the Chef catalog
-      class InstanceServiceAccountsCatalog < InstanceServiceAccounts
+      class InstanceServiceaccountsCatalog < InstanceServiceaccounts
         def initialize(args)
           @email = Google::Compute::Property::String.catalog_parse(args[:email])
           @scopes = Google::Compute::Property::StringArray.catalog_parse(args[:scopes])
@@ -104,46 +104,46 @@ module Google
 
     module Property
       # A class to manage input to ServiceAccounts for instance.
-      class InstanceServiceAccounts
+      class InstanceServiceaccounts
         def self.coerce
-          ->(x) { ::Google::Compute::Property::InstanceServiceAccounts.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::InstanceServiceaccounts.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceServiceAccounts
-          Data::InstanceServiceAccountsCatalog.new(value)
+          return value if value.is_a? Data::InstanceServiceaccounts
+          Data::InstanceServiceaccountsCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceServiceAccounts
-          Data::InstanceServiceAccountsApi.new(value)
+          return value if value.is_a? Data::InstanceServiceaccounts
+          Data::InstanceServiceaccountsApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class InstanceServiceAccountsArray < Google::Compute::Property::Array
+      class InstanceServiceaccountsArray < Google::Compute::Property::Array
         def self.coerce
-          ->(x) { ::Google::Compute::Property::InstanceServiceAccountsArray.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::InstanceServiceaccountsArray.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return InstanceServiceAccounts.catalog_parse(value) \
+          return InstanceServiceaccounts.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceServiceAccounts.catalog_parse(v) }
+          value.map { |v| InstanceServiceaccounts.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return InstanceServiceAccounts.api_parse(value) \
+          return InstanceServiceaccounts.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceServiceAccounts.api_parse(v) }
+          value.map { |v| InstanceServiceaccounts.api_parse(v) }
         end
       end
     end

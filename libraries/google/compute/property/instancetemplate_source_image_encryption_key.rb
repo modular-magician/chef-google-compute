@@ -29,7 +29,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for SourceImageEncryptionKey for instance_template.
-      class InstanceTemplateSourceImageEncryptionKey
+      class InstanceTemplateSourceimageencryptionkey
         include Comparable
 
         attr_reader :raw_key
@@ -50,7 +50,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceTemplateSourceImageEncryptionKey
+          return false unless other.is_a? InstanceTemplateSourceimageencryptionkey
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -59,7 +59,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceTemplateSourceImageEncryptionKey
+          return false unless other.is_a? InstanceTemplateSourceimageencryptionkey
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -82,18 +82,18 @@ module Google
         end
       end
 
-      # Manages a InstanceTemplateSourceImageEncryptionKey nested object
+      # Manages a InstanceTemplateSourceimageencryptionkey nested object
       # Data is coming from the GCP API
-      class InstanceTemplateSourceImageEncryptionKeyApi < InstanceTemplateSourceImageEncryptionKey
+      class InstanceTemplateSourceimageencryptionkeyApi < InstanceTemplateSourceimageencryptionkey
         def initialize(args)
           @raw_key = Google::Compute::Property::String.api_parse(args['rawKey'])
           @sha256 = Google::Compute::Property::String.api_parse(args['sha256'])
         end
       end
 
-      # Manages a InstanceTemplateSourceImageEncryptionKey nested object
+      # Manages a InstanceTemplateSourceimageencryptionkey nested object
       # Data is coming from the Chef catalog
-      class InstanceTemplateSourceImageEncryptionKeyCatalog < InstanceTemplateSourceImageEncryptionKey
+      class InstanceTemplateSourceimageencryptionkeyCatalog < InstanceTemplateSourceimageencryptionkey
         def initialize(args)
           @raw_key = Google::Compute::Property::String.catalog_parse(args[:raw_key])
           @sha256 = Google::Compute::Property::String.catalog_parse(args[:sha256])
@@ -103,25 +103,25 @@ module Google
 
     module Property
       # A class to manage input to SourceImageEncryptionKey for instance_template.
-      class InstanceTemplateSourceImageEncryptionKey
+      class InstanceTemplateSourceimageencryptionkey
         def self.coerce
           lambda do |x|
-            ::Google::Compute::Property::InstanceTemplateSourceImageEncryptionKey.catalog_parse(x)
+            ::Google::Compute::Property::InstanceTemplateSourceimageencryptionkey.catalog_parse(x)
           end
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceTemplateSourceImageEncryptionKey
-          Data::InstanceTemplateSourceImageEncryptionKeyCatalog.new(value)
+          return value if value.is_a? Data::InstanceTemplateSourceimageencryptionkey
+          Data::InstanceTemplateSourceimageencryptionkeyCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceTemplateSourceImageEncryptionKey
-          Data::InstanceTemplateSourceImageEncryptionKeyApi.new(value)
+          return value if value.is_a? Data::InstanceTemplateSourceimageencryptionkey
+          Data::InstanceTemplateSourceimageencryptionkeyApi.new(value)
         end
       end
     end

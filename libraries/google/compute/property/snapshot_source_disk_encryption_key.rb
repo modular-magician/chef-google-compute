@@ -29,7 +29,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for SourceDiskEncryptionKey for snapshot.
-      class SnapshotSourceDiskEncryptionKey
+      class SnapshotSourcediskencryptionkey
         include Comparable
 
         attr_reader :raw_key
@@ -50,7 +50,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? SnapshotSourceDiskEncryptionKey
+          return false unless other.is_a? SnapshotSourcediskencryptionkey
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -59,7 +59,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? SnapshotSourceDiskEncryptionKey
+          return false unless other.is_a? SnapshotSourcediskencryptionkey
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -82,18 +82,18 @@ module Google
         end
       end
 
-      # Manages a SnapshotSourceDiskEncryptionKey nested object
+      # Manages a SnapshotSourcediskencryptionkey nested object
       # Data is coming from the GCP API
-      class SnapshotSourceDiskEncryptionKeyApi < SnapshotSourceDiskEncryptionKey
+      class SnapshotSourcediskencryptionkeyApi < SnapshotSourcediskencryptionkey
         def initialize(args)
           @raw_key = Google::Compute::Property::String.api_parse(args['rawKey'])
           @sha256 = Google::Compute::Property::String.api_parse(args['sha256'])
         end
       end
 
-      # Manages a SnapshotSourceDiskEncryptionKey nested object
+      # Manages a SnapshotSourcediskencryptionkey nested object
       # Data is coming from the Chef catalog
-      class SnapshotSourceDiskEncryptionKeyCatalog < SnapshotSourceDiskEncryptionKey
+      class SnapshotSourcediskencryptionkeyCatalog < SnapshotSourcediskencryptionkey
         def initialize(args)
           @raw_key = Google::Compute::Property::String.catalog_parse(args[:raw_key])
           @sha256 = Google::Compute::Property::String.catalog_parse(args[:sha256])
@@ -103,23 +103,23 @@ module Google
 
     module Property
       # A class to manage input to SourceDiskEncryptionKey for snapshot.
-      class SnapshotSourceDiskEncryptionKey
+      class SnapshotSourcediskencryptionkey
         def self.coerce
-          ->(x) { ::Google::Compute::Property::SnapshotSourceDiskEncryptionKey.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::SnapshotSourcediskencryptionkey.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::SnapshotSourceDiskEncryptionKey
-          Data::SnapshotSourceDiskEncryptionKeyCatalog.new(value)
+          return value if value.is_a? Data::SnapshotSourcediskencryptionkey
+          Data::SnapshotSourcediskencryptionkeyCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::SnapshotSourceDiskEncryptionKey
-          Data::SnapshotSourceDiskEncryptionKeyApi.new(value)
+          return value if value.is_a? Data::SnapshotSourcediskencryptionkey
+          Data::SnapshotSourcediskencryptionkeyApi.new(value)
         end
       end
     end

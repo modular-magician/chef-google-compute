@@ -64,18 +64,18 @@ module Google
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
       property :network,
-               [String, ::Google::Compute::Data::NetworkSelfLinkRef],
-               coerce: ::Google::Compute::Property::NetworkSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::NetworkSelflinkRef],
+               coerce: ::Google::Compute::Property::NetworkSelflinkRef.coerce, desired_state: true
       property :enable_flow_logs,
                kind_of: [TrueClass, FalseClass],
                coerce: ::Google::Compute::Property::Boolean.coerce, desired_state: true
       property :fingerprint,
                [String, ::Google::Compute::Property::String],
                coerce: ::Google::Compute::Property::String.coerce, desired_state: true
-      # secondary_ip_ranges is Array of Google::Compute::Property::SubnetworkSecondaryIpRangesArray
+      # secondary_ip_ranges is Array of Google::Compute::Property::SubnetworkSecondaryiprangesArray
       property :secondary_ip_ranges,
                Array,
-               coerce: ::Google::Compute::Property::SubnetworkSecondaryIpRangesArray.coerce,
+               coerce: ::Google::Compute::Property::SubnetworkSecondaryiprangesArray.coerce,
                desired_state: true
       property :private_ip_google_access,
                kind_of: [TrueClass, FalseClass],
@@ -123,7 +123,7 @@ module Google
           @current_resource.fingerprint =
             ::Google::Compute::Property::String.api_parse(fetch['fingerprint'])
           @current_resource.secondary_ip_ranges =
-            ::Google::Compute::Property::SubnetworkSecondaryIpRangesArray.api_parse(
+            ::Google::Compute::Property::SubnetworkSecondaryiprangesArray.api_parse(
               fetch['secondaryIpRanges']
             )
           @current_resource.private_ip_google_access =

@@ -61,13 +61,13 @@ module Google
                equal_to: %w[NONE PROXY_V1],
                coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
       property :service,
-               [String, ::Google::Compute::Data::BackendServiceSelfLinkRef],
-               coerce: ::Google::Compute::Property::BackendServiceSelfLinkRef.coerce,
+               [String, ::Google::Compute::Data::BackendServiceSelflinkRef],
+               coerce: ::Google::Compute::Property::BackendServiceSelflinkRef.coerce,
                desired_state: true
-      # ssl_certificates is Array of Google::Compute::Property::SslCertificateSelfLinkRefArray
+      # ssl_certificates is Array of Google::Compute::Property::SslCertificateSelflinkRefArray
       property :ssl_certificates,
                Array,
-               coerce: ::Google::Compute::Property::SslCertificateSelfLinkRefArray.coerce,
+               coerce: ::Google::Compute::Property::SslCertificateSelflinkRefArray.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true
@@ -100,9 +100,9 @@ module Google
           @current_resource.proxy_header =
             ::Google::Compute::Property::Enum.api_parse(fetch['proxyHeader'])
           @current_resource.service =
-            ::Google::Compute::Property::BackendServiceSelfLinkRef.api_parse(fetch['service'])
+            ::Google::Compute::Property::BackendServiceSelflinkRef.api_parse(fetch['service'])
           @current_resource.ssl_certificates =
-            ::Google::Compute::Property::SslCertificateSelfLinkRefArray.api_parse(
+            ::Google::Compute::Property::SslCertificateSelflinkRefArray.api_parse(
               fetch['sslCertificates']
             )
           @new_resource.__fetched = fetch

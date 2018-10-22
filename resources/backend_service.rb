@@ -64,12 +64,12 @@ module Google
                coerce: ::Google::Compute::Property::BackendServiceBackendsArray.coerce,
                desired_state: true
       property :cdn_policy,
-               [Hash, ::Google::Compute::Data::BackendServiceCdnPolicy],
-               coerce: ::Google::Compute::Property::BackendServiceCdnPolicy.coerce,
+               [Hash, ::Google::Compute::Data::BackendServiceCdnpolicy],
+               coerce: ::Google::Compute::Property::BackendServiceCdnpolicy.coerce,
                desired_state: true
       property :connection_draining,
-               [Hash, ::Google::Compute::Data::BackendServiceConnectionDraining],
-               coerce: ::Google::Compute::Property::BackendServiceConnectionDraining.coerce,
+               [Hash, ::Google::Compute::Data::BackendServiceConnectiondraining],
+               coerce: ::Google::Compute::Property::BackendServiceConnectiondraining.coerce,
                desired_state: true
       property :creation_timestamp,
                Time, coerce: ::Google::Compute::Property::Time.coerce, desired_state: true
@@ -99,8 +99,8 @@ module Google
                equal_to: %w[HTTP HTTPS TCP SSL],
                coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
       property :region,
-               [String, ::Google::Compute::Data::RegionSelfLinkRef],
-               coerce: ::Google::Compute::Property::RegionSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::RegionSelflinkRef],
+               coerce: ::Google::Compute::Property::RegionSelflinkRef.coerce, desired_state: true
       property :session_affinity,
                equal_to: %w[NONE CLIENT_IP GENERATED_COOKIE CLIENT_IP_PROTO CLIENT_IP_PORT_PROTO],
                coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
@@ -136,9 +136,9 @@ module Google
           @current_resource.backends =
             ::Google::Compute::Property::BackendServiceBackendsArray.api_parse(fetch['backends'])
           @current_resource.cdn_policy =
-            ::Google::Compute::Property::BackendServiceCdnPolicy.api_parse(fetch['cdnPolicy'])
+            ::Google::Compute::Property::BackendServiceCdnpolicy.api_parse(fetch['cdnPolicy'])
           @current_resource.connection_draining =
-            ::Google::Compute::Property::BackendServiceConnectionDraining.api_parse(
+            ::Google::Compute::Property::BackendServiceConnectiondraining.api_parse(
               fetch['connectionDraining']
             )
           @current_resource.creation_timestamp =
@@ -161,7 +161,7 @@ module Google
           @current_resource.protocol =
             ::Google::Compute::Property::Enum.api_parse(fetch['protocol'])
           @current_resource.region =
-            ::Google::Compute::Property::RegionSelfLinkRef.api_parse(fetch['region'])
+            ::Google::Compute::Property::RegionSelflinkRef.api_parse(fetch['region'])
           @current_resource.session_affinity =
             ::Google::Compute::Property::Enum.api_parse(fetch['sessionAffinity'])
           @current_resource.timeout_sec =

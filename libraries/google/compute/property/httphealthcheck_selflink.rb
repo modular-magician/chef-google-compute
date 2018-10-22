@@ -31,11 +31,11 @@ module Google
     module Data
       # Base class for ResourceRefs
       # Imports self_link from http_health_check
-      class HttpHealthCheckSelfLinkRef
+      class HttpHealthCheckSelflinkRef
         include Comparable
 
         def ==(other)
-          return false unless other.is_a? HttpHealthCheckSelfLinkRef
+          return false unless other.is_a? HttpHealthCheckSelflinkRef
           return false if resource != other.resource
           true
         end
@@ -53,7 +53,7 @@ module Google
 
       # A class to fetch the resource value from a referenced block
       # Will return the value exported from a different Chef resource
-      class HttpHealthCheckSelfLinkRefCatalog < HttpHealthCheckSelfLinkRef
+      class HttpHealthCheckSelflinkRefCatalog < HttpHealthCheckSelflinkRef
         def initialize(title, parent_resource)
           @title = title
           @parent_resource = parent_resource
@@ -84,7 +84,7 @@ module Google
 
       # A class to manage a JSON blob from GCP API
       # Will immediately return value from JSON blob without changes
-      class HttpHealthCheckSelfLinkRefApi < HttpHealthCheckSelfLinkRef
+      class HttpHealthCheckSelflinkRefApi < HttpHealthCheckSelflinkRef
         attr_reader :resource
 
         def initialize(resource)
@@ -103,9 +103,9 @@ module Google
 
     module Property
       # A class to manage fetching self_link from a http_health_check
-      class HttpHealthCheckSelfLinkRef
+      class HttpHealthCheckSelflinkRef
         def self.coerce
-          ->(parent_resource, value) { ::Google::Compute::Property::HttpHealthCheckSelfLinkRef.catalog_parse(value, parent_resource) }
+          ->(parent_resource, value) { ::Google::Compute::Property::HttpHealthCheckSelflinkRef.catalog_parse(value, parent_resource) }
         end
 
         def catalog_parse(value, parent_resource = nil)
@@ -115,15 +115,15 @@ module Google
 
         def self.catalog_parse(value, parent_resource = nil)
           return if value.nil?
-          return value if value.is_a? Data::HttpHealthCheckSelfLinkRef
-          Data::HttpHealthCheckSelfLinkRefCatalog.new(value, parent_resource)
+          return value if value.is_a? Data::HttpHealthCheckSelflinkRef
+          Data::HttpHealthCheckSelflinkRefCatalog.new(value, parent_resource)
         end
 
         # Used for fetched JSON values
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::HttpHealthCheckSelfLinkRef
-          Data::HttpHealthCheckSelfLinkRefApi.new(value)
+          return value if value.is_a? Data::HttpHealthCheckSelflinkRef
+          Data::HttpHealthCheckSelflinkRefApi.new(value)
         end
       end
     end

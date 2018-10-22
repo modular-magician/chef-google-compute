@@ -32,11 +32,11 @@ module Google
     module Data
       # Base class for ResourceRefs
       # Imports self_link from ssl_certificate
-      class SslCertificateSelfLinkRef
+      class SslCertificateSelflinkRef
         include Comparable
 
         def ==(other)
-          return false unless other.is_a? SslCertificateSelfLinkRef
+          return false unless other.is_a? SslCertificateSelflinkRef
           return false if resource != other.resource
           true
         end
@@ -54,7 +54,7 @@ module Google
 
       # A class to fetch the resource value from a referenced block
       # Will return the value exported from a different Chef resource
-      class SslCertificateSelfLinkRefCatalog < SslCertificateSelfLinkRef
+      class SslCertificateSelflinkRefCatalog < SslCertificateSelflinkRef
         def initialize(title, parent_resource)
           @title = title
           @parent_resource = parent_resource
@@ -85,7 +85,7 @@ module Google
 
       # A class to manage a JSON blob from GCP API
       # Will immediately return value from JSON blob without changes
-      class SslCertificateSelfLinkRefApi < SslCertificateSelfLinkRef
+      class SslCertificateSelflinkRefApi < SslCertificateSelflinkRef
         attr_reader :resource
 
         def initialize(resource)
@@ -104,9 +104,9 @@ module Google
 
     module Property
       # A class to manage fetching self_link from a ssl_certificate
-      class SslCertificateSelfLinkRef
+      class SslCertificateSelflinkRef
         def self.coerce
-          ->(parent_resource, value) { ::Google::Compute::Property::SslCertificateSelfLinkRef.catalog_parse(value, parent_resource) }
+          ->(parent_resource, value) { ::Google::Compute::Property::SslCertificateSelflinkRef.catalog_parse(value, parent_resource) }
         end
 
         def catalog_parse(value, parent_resource = nil)
@@ -116,38 +116,38 @@ module Google
 
         def self.catalog_parse(value, parent_resource = nil)
           return if value.nil?
-          return value if value.is_a? Data::SslCertificateSelfLinkRef
-          Data::SslCertificateSelfLinkRefCatalog.new(value, parent_resource)
+          return value if value.is_a? Data::SslCertificateSelflinkRef
+          Data::SslCertificateSelflinkRefCatalog.new(value, parent_resource)
         end
 
         # Used for fetched JSON values
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::SslCertificateSelfLinkRef
-          Data::SslCertificateSelfLinkRefApi.new(value)
+          return value if value.is_a? Data::SslCertificateSelflinkRef
+          Data::SslCertificateSelflinkRefApi.new(value)
         end
       end
 
-      # A Chef property that holds an Array of SslCertificateSelfLinkRef
-      class SslCertificateSelfLinkRefArray < Google::Compute::Property::Array
+      # A Chef property that holds an Array of SslCertificateSelflinkRef
+      class SslCertificateSelflinkRefArray < Google::Compute::Property::Array
         def self.coerce
-          ->(x) { ::Google::Compute::Property::SslCertificateSelfLinkRefArray.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::SslCertificateSelflinkRefArray.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value, parent_resource = nil)
           return if value.nil?
-          return SslCertificateSelfLinkRef.catalog_parse(value, parent_resource) \
+          return SslCertificateSelflinkRef.catalog_parse(value, parent_resource) \
             unless value.is_a?(::Array)
-          value.map { |v| SslCertificateSelfLinkRef.catalog_parse(v, parent_resource) }
+          value.map { |v| SslCertificateSelflinkRef.catalog_parse(v, parent_resource) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return SslCertificateSelfLinkRef.api_parse(value) \
+          return SslCertificateSelflinkRef.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| SslCertificateSelfLinkRef.api_parse(v) }
+          value.map { |v| SslCertificateSelflinkRef.api_parse(v) }
         end
       end
     end

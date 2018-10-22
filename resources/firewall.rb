@@ -79,8 +79,8 @@ module Google
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
       property :network,
-               [String, ::Google::Compute::Data::NetworkSelfLinkRef],
-               coerce: ::Google::Compute::Property::NetworkSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::NetworkSelflinkRef],
+               coerce: ::Google::Compute::Property::NetworkSelflinkRef.coerce, desired_state: true
       property :priority,
                Integer,
                coerce: ::Google::Compute::Property::Integer.coerce,
@@ -141,7 +141,7 @@ module Google
             ::Google::Compute::Property::Boolean.api_parse(fetch['disabled'])
           @current_resource.id = ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.network =
-            ::Google::Compute::Property::NetworkSelfLinkRef.api_parse(fetch['network'])
+            ::Google::Compute::Property::NetworkSelflinkRef.api_parse(fetch['network'])
           @current_resource.priority =
             ::Google::Compute::Property::Integer.api_parse(fetch['priority'])
           @current_resource.source_ranges =

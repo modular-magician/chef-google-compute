@@ -29,7 +29,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for RawDisk for image.
-      class ImageRawDisk
+      class ImageRawdisk
         include Comparable
 
         attr_reader :container_type
@@ -53,7 +53,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? ImageRawDisk
+          return false unless other.is_a? ImageRawdisk
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -62,7 +62,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? ImageRawDisk
+          return false unless other.is_a? ImageRawdisk
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -86,9 +86,9 @@ module Google
         end
       end
 
-      # Manages a ImageRawDisk nested object
+      # Manages a ImageRawdisk nested object
       # Data is coming from the GCP API
-      class ImageRawDiskApi < ImageRawDisk
+      class ImageRawdiskApi < ImageRawdisk
         def initialize(args)
           @container_type = Google::Compute::Property::Enum.api_parse(args['containerType'])
           @sha1_checksum = Google::Compute::Property::String.api_parse(args['sha1Checksum'])
@@ -96,9 +96,9 @@ module Google
         end
       end
 
-      # Manages a ImageRawDisk nested object
+      # Manages a ImageRawdisk nested object
       # Data is coming from the Chef catalog
-      class ImageRawDiskCatalog < ImageRawDisk
+      class ImageRawdiskCatalog < ImageRawdisk
         def initialize(args)
           @container_type = Google::Compute::Property::Enum.catalog_parse(args[:container_type])
           @sha1_checksum = Google::Compute::Property::String.catalog_parse(args[:sha1_checksum])
@@ -109,23 +109,23 @@ module Google
 
     module Property
       # A class to manage input to RawDisk for image.
-      class ImageRawDisk
+      class ImageRawdisk
         def self.coerce
-          ->(x) { ::Google::Compute::Property::ImageRawDisk.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::ImageRawdisk.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::ImageRawDisk
-          Data::ImageRawDiskCatalog.new(value)
+          return value if value.is_a? Data::ImageRawdisk
+          Data::ImageRawdiskCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::ImageRawDisk
-          Data::ImageRawDiskApi.new(value)
+          return value if value.is_a? Data::ImageRawdisk
+          Data::ImageRawdiskApi.new(value)
         end
       end
     end

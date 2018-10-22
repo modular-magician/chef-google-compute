@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for PathRules for url_map.
-      class UrlMapPathRules
+      class UrlMapPathrules
         include Comparable
 
         attr_reader :paths
@@ -51,7 +51,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? UrlMapPathRules
+          return false unless other.is_a? UrlMapPathrules
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -60,7 +60,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? UrlMapPathRules
+          return false unless other.is_a? UrlMapPathrules
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -83,68 +83,68 @@ module Google
         end
       end
 
-      # Manages a UrlMapPathRules nested object
+      # Manages a UrlMapPathrules nested object
       # Data is coming from the GCP API
-      class UrlMapPathRulesApi < UrlMapPathRules
+      class UrlMapPathrulesApi < UrlMapPathrules
         def initialize(args)
           @paths = Google::Compute::Property::StringArray.api_parse(args['paths'])
-          @service = Google::Compute::Property::BackendServiceSelfLinkRef.api_parse(args['service'])
+          @service = Google::Compute::Property::BackendServiceSelflinkRef.api_parse(args['service'])
         end
       end
 
-      # Manages a UrlMapPathRules nested object
+      # Manages a UrlMapPathrules nested object
       # Data is coming from the Chef catalog
-      class UrlMapPathRulesCatalog < UrlMapPathRules
+      class UrlMapPathrulesCatalog < UrlMapPathrules
         def initialize(args)
           @paths = Google::Compute::Property::StringArray.catalog_parse(args[:paths])
           @service =
-            Google::Compute::Property::BackendServiceSelfLinkRef.catalog_parse(args[:service])
+            Google::Compute::Property::BackendServiceSelflinkRef.catalog_parse(args[:service])
         end
       end
     end
 
     module Property
       # A class to manage input to PathRules for url_map.
-      class UrlMapPathRules
+      class UrlMapPathrules
         def self.coerce
-          ->(x) { ::Google::Compute::Property::UrlMapPathRules.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::UrlMapPathrules.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::UrlMapPathRules
-          Data::UrlMapPathRulesCatalog.new(value)
+          return value if value.is_a? Data::UrlMapPathrules
+          Data::UrlMapPathrulesCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::UrlMapPathRules
-          Data::UrlMapPathRulesApi.new(value)
+          return value if value.is_a? Data::UrlMapPathrules
+          Data::UrlMapPathrulesApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class UrlMapPathRulesArray < Google::Compute::Property::Array
+      class UrlMapPathrulesArray < Google::Compute::Property::Array
         def self.coerce
-          ->(x) { ::Google::Compute::Property::UrlMapPathRulesArray.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::UrlMapPathrulesArray.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return UrlMapPathRules.catalog_parse(value) \
+          return UrlMapPathrules.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| UrlMapPathRules.catalog_parse(v) }
+          value.map { |v| UrlMapPathrules.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return UrlMapPathRules.api_parse(value) \
+          return UrlMapPathrules.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| UrlMapPathRules.api_parse(v) }
+          value.map { |v| UrlMapPathrules.api_parse(v) }
         end
       end
     end

@@ -78,32 +78,32 @@ module Google
                name_property: true, desired_state: true
       property :size_gb,
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
-      # users is Array of Google::Compute::Property::InstanceSelfLinkRefArray
+      # users is Array of Google::Compute::Property::InstanceSelflinkRefArray
       property :users,
                Array,
-               coerce: ::Google::Compute::Property::InstanceSelfLinkRefArray.coerce,
+               coerce: ::Google::Compute::Property::InstanceSelflinkRefArray.coerce,
                desired_state: true
-      # replica_zones is Array of Google::Compute::Property::ZoneSelfLinkRefArray
+      # replica_zones is Array of Google::Compute::Property::ZoneSelflinkRefArray
       property :replica_zones,
                Array,
-               coerce: ::Google::Compute::Property::ZoneSelfLinkRefArray.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::ZoneSelflinkRefArray.coerce, desired_state: true
       property :type,
-               [String, ::Google::Compute::Data::RegionDiskTypeSelfLinkRef],
-               coerce: ::Google::Compute::Property::RegionDiskTypeSelfLinkRef.coerce,
+               [String, ::Google::Compute::Data::RegionDiskTypeSelflinkRef],
+               coerce: ::Google::Compute::Property::RegionDiskTypeSelflinkRef.coerce,
                desired_state: true
       property :region,
                [String, ::Google::Compute::Data::RegionNameRef],
                coerce: ::Google::Compute::Property::RegionNameRef.coerce, desired_state: true
       property :disk_encryption_key,
-               [Hash, ::Google::Compute::Data::RegionDiskDiskEncryptionKey],
-               coerce: ::Google::Compute::Property::RegionDiskDiskEncryptionKey.coerce,
+               [Hash, ::Google::Compute::Data::RegionDiskDiskencryptionkey],
+               coerce: ::Google::Compute::Property::RegionDiskDiskencryptionkey.coerce,
                desired_state: true
       property :source_snapshot,
-               [String, ::Google::Compute::Data::SnapshotSelfLinkRef],
-               coerce: ::Google::Compute::Property::SnapshotSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::SnapshotSelflinkRef],
+               coerce: ::Google::Compute::Property::SnapshotSelflinkRef.coerce, desired_state: true
       property :source_snapshot_encryption_key,
-               [Hash, ::Google::Compute::Data::RegionDiskSourceSnapshotEncryptionKey],
-               coerce: ::Google::Compute::Property::RegionDiskSourceSnapshotEncryptionKey.coerce,
+               [Hash, ::Google::Compute::Data::RegionDiskSourcesnapshotencryptionkey],
+               coerce: ::Google::Compute::Property::RegionDiskSourcesnapshotencryptionkey.coerce,
                desired_state: true
       property :source_snapshot_id,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
@@ -150,11 +150,11 @@ module Google
           @current_resource.size_gb =
             ::Google::Compute::Property::Integer.api_parse(fetch['sizeGb'])
           @current_resource.users =
-            ::Google::Compute::Property::InstanceSelfLinkRefArray.api_parse(fetch['users'])
+            ::Google::Compute::Property::InstanceSelflinkRefArray.api_parse(fetch['users'])
           @current_resource.replica_zones =
-            ::Google::Compute::Property::ZoneSelfLinkRefArray.api_parse(fetch['replicaZones'])
+            ::Google::Compute::Property::ZoneSelflinkRefArray.api_parse(fetch['replicaZones'])
           @current_resource.type =
-            ::Google::Compute::Property::RegionDiskTypeSelfLinkRef.api_parse(fetch['type'])
+            ::Google::Compute::Property::RegionDiskTypeSelflinkRef.api_parse(fetch['type'])
           @new_resource.__fetched = fetch
 
           update

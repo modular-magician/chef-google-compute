@@ -77,20 +77,20 @@ module Google
                equal_to: %w[TCP SSL HTTP HTTPS],
                coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
       property :http_health_check,
-               [Hash, ::Google::Compute::Data::HealthCheckHttpHealthCheck],
-               coerce: ::Google::Compute::Property::HealthCheckHttpHealthCheck.coerce,
+               [Hash, ::Google::Compute::Data::HealthCheckHttphealthcheck],
+               coerce: ::Google::Compute::Property::HealthCheckHttphealthcheck.coerce,
                desired_state: true
       property :https_health_check,
-               [Hash, ::Google::Compute::Data::HealthCheckHttpsHealthCheck],
-               coerce: ::Google::Compute::Property::HealthCheckHttpsHealthCheck.coerce,
+               [Hash, ::Google::Compute::Data::HealthCheckHttpshealthcheck],
+               coerce: ::Google::Compute::Property::HealthCheckHttpshealthcheck.coerce,
                desired_state: true
       property :tcp_health_check,
-               [Hash, ::Google::Compute::Data::HealthCheckTcpHealthCheck],
-               coerce: ::Google::Compute::Property::HealthCheckTcpHealthCheck.coerce,
+               [Hash, ::Google::Compute::Data::HealthCheckTcphealthcheck],
+               coerce: ::Google::Compute::Property::HealthCheckTcphealthcheck.coerce,
                desired_state: true
       property :ssl_health_check,
-               [Hash, ::Google::Compute::Data::HealthCheckSslHealthCheck],
-               coerce: ::Google::Compute::Property::HealthCheckSslHealthCheck.coerce,
+               [Hash, ::Google::Compute::Data::HealthCheckSslhealthcheck],
+               coerce: ::Google::Compute::Property::HealthCheckSslhealthcheck.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true
@@ -132,19 +132,19 @@ module Google
             ::Google::Compute::Property::Integer.api_parse(fetch['unhealthyThreshold'])
           @current_resource.type = ::Google::Compute::Property::Enum.api_parse(fetch['type'])
           @current_resource.http_health_check =
-            ::Google::Compute::Property::HealthCheckHttpHealthCheck.api_parse(
+            ::Google::Compute::Property::HealthCheckHttphealthcheck.api_parse(
               fetch['httpHealthCheck']
             )
           @current_resource.https_health_check =
-            ::Google::Compute::Property::HealthCheckHttpsHealthCheck.api_parse(
+            ::Google::Compute::Property::HealthCheckHttpshealthcheck.api_parse(
               fetch['httpsHealthCheck']
             )
           @current_resource.tcp_health_check =
-            ::Google::Compute::Property::HealthCheckTcpHealthCheck.api_parse(
+            ::Google::Compute::Property::HealthCheckTcphealthcheck.api_parse(
               fetch['tcpHealthCheck']
             )
           @current_resource.ssl_health_check =
-            ::Google::Compute::Property::HealthCheckSslHealthCheck.api_parse(
+            ::Google::Compute::Property::HealthCheckSslhealthcheck.api_parse(
               fetch['sslHealthCheck']
             )
           @new_resource.__fetched = fetch

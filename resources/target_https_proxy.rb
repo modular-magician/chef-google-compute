@@ -60,14 +60,14 @@ module Google
       property :quic_override,
                equal_to: %w[NONE ENABLE DISABLE],
                coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
-      # ssl_certificates is Array of Google::Compute::Property::SslCertificateSelfLinkRefArray
+      # ssl_certificates is Array of Google::Compute::Property::SslCertificateSelflinkRefArray
       property :ssl_certificates,
                Array,
-               coerce: ::Google::Compute::Property::SslCertificateSelfLinkRefArray.coerce,
+               coerce: ::Google::Compute::Property::SslCertificateSelflinkRefArray.coerce,
                desired_state: true
       property :url_map,
-               [String, ::Google::Compute::Data::UrlMapSelfLinkRef],
-               coerce: ::Google::Compute::Property::UrlMapSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::UrlMapSelflinkRef],
+               coerce: ::Google::Compute::Property::UrlMapSelflinkRef.coerce, desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
@@ -99,11 +99,11 @@ module Google
           @current_resource.quic_override =
             ::Google::Compute::Property::Enum.api_parse(fetch['quicOverride'])
           @current_resource.ssl_certificates =
-            ::Google::Compute::Property::SslCertificateSelfLinkRefArray.api_parse(
+            ::Google::Compute::Property::SslCertificateSelflinkRefArray.api_parse(
               fetch['sslCertificates']
             )
           @current_resource.url_map =
-            ::Google::Compute::Property::UrlMapSelfLinkRef.api_parse(fetch['urlMap'])
+            ::Google::Compute::Property::UrlMapSelflinkRef.api_parse(fetch['urlMap'])
           @new_resource.__fetched = fetch
 
           update

@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for HostRules for url_map.
-      class UrlMapHostRules
+      class UrlMapHostrules
         include Comparable
 
         attr_reader :description
@@ -54,7 +54,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? UrlMapHostRules
+          return false unless other.is_a? UrlMapHostrules
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -63,7 +63,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? UrlMapHostRules
+          return false unless other.is_a? UrlMapHostrules
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -87,9 +87,9 @@ module Google
         end
       end
 
-      # Manages a UrlMapHostRules nested object
+      # Manages a UrlMapHostrules nested object
       # Data is coming from the GCP API
-      class UrlMapHostRulesApi < UrlMapHostRules
+      class UrlMapHostrulesApi < UrlMapHostrules
         def initialize(args)
           @description = Google::Compute::Property::String.api_parse(args['description'])
           @hosts = Google::Compute::Property::StringArray.api_parse(args['hosts'])
@@ -97,9 +97,9 @@ module Google
         end
       end
 
-      # Manages a UrlMapHostRules nested object
+      # Manages a UrlMapHostrules nested object
       # Data is coming from the Chef catalog
-      class UrlMapHostRulesCatalog < UrlMapHostRules
+      class UrlMapHostrulesCatalog < UrlMapHostrules
         def initialize(args)
           @description = Google::Compute::Property::String.catalog_parse(args[:description])
           @hosts = Google::Compute::Property::StringArray.catalog_parse(args[:hosts])
@@ -110,46 +110,46 @@ module Google
 
     module Property
       # A class to manage input to HostRules for url_map.
-      class UrlMapHostRules
+      class UrlMapHostrules
         def self.coerce
-          ->(x) { ::Google::Compute::Property::UrlMapHostRules.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::UrlMapHostrules.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::UrlMapHostRules
-          Data::UrlMapHostRulesCatalog.new(value)
+          return value if value.is_a? Data::UrlMapHostrules
+          Data::UrlMapHostrulesCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::UrlMapHostRules
-          Data::UrlMapHostRulesApi.new(value)
+          return value if value.is_a? Data::UrlMapHostrules
+          Data::UrlMapHostrulesApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class UrlMapHostRulesArray < Google::Compute::Property::Array
+      class UrlMapHostrulesArray < Google::Compute::Property::Array
         def self.coerce
-          ->(x) { ::Google::Compute::Property::UrlMapHostRulesArray.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::UrlMapHostrulesArray.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return UrlMapHostRules.catalog_parse(value) \
+          return UrlMapHostrules.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| UrlMapHostRules.catalog_parse(v) }
+          value.map { |v| UrlMapHostrules.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return UrlMapHostRules.api_parse(value) \
+          return UrlMapHostrules.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| UrlMapHostRules.api_parse(v) }
+          value.map { |v| UrlMapHostrules.api_parse(v) }
         end
       end
     end

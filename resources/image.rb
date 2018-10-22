@@ -66,16 +66,16 @@ module Google
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
       property :family,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
-      # guest_os_features is Array of Google::Compute::Property::ImageGuestOsFeaturesArray
+      # guest_os_features is Array of Google::Compute::Property::ImageGuestosfeaturesArray
       property :guest_os_features,
                Array,
-               coerce: ::Google::Compute::Property::ImageGuestOsFeaturesArray.coerce,
+               coerce: ::Google::Compute::Property::ImageGuestosfeaturesArray.coerce,
                desired_state: true
       property :id,
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
       property :image_encryption_key,
-               [Hash, ::Google::Compute::Data::ImageImageEncryptionKey],
-               coerce: ::Google::Compute::Property::ImageImageEncryptionKey.coerce,
+               [Hash, ::Google::Compute::Data::ImageImageencryptionkey],
+               coerce: ::Google::Compute::Property::ImageImageencryptionkey.coerce,
                desired_state: true
       # licenses is Array of Google::Compute::Property::StringArray
       property :licenses,
@@ -85,14 +85,14 @@ module Google
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
       property :raw_disk,
-               [Hash, ::Google::Compute::Data::ImageRawDisk],
-               coerce: ::Google::Compute::Property::ImageRawDisk.coerce, desired_state: true
+               [Hash, ::Google::Compute::Data::ImageRawdisk],
+               coerce: ::Google::Compute::Property::ImageRawdisk.coerce, desired_state: true
       property :source_disk,
-               [String, ::Google::Compute::Data::DiskSelfLinkRef],
-               coerce: ::Google::Compute::Property::DiskSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::DiskSelflinkRef],
+               coerce: ::Google::Compute::Property::DiskSelflinkRef.coerce, desired_state: true
       property :source_disk_encryption_key,
-               [Hash, ::Google::Compute::Data::ImageSourceDiskEncryptionKey],
-               coerce: ::Google::Compute::Property::ImageSourceDiskEncryptionKey.coerce,
+               [Hash, ::Google::Compute::Data::ImageSourcediskencryptionkey],
+               coerce: ::Google::Compute::Property::ImageSourcediskencryptionkey.coerce,
                desired_state: true
       property :source_disk_id,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
@@ -132,23 +132,23 @@ module Google
           @current_resource.family =
             ::Google::Compute::Property::String.api_parse(fetch['family'])
           @current_resource.guest_os_features =
-            ::Google::Compute::Property::ImageGuestOsFeaturesArray.api_parse(
+            ::Google::Compute::Property::ImageGuestosfeaturesArray.api_parse(
               fetch['guestOsFeatures']
             )
           @current_resource.id = ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.image_encryption_key =
-            ::Google::Compute::Property::ImageImageEncryptionKey.api_parse(
+            ::Google::Compute::Property::ImageImageencryptionkey.api_parse(
               fetch['imageEncryptionKey']
             )
           @current_resource.licenses =
             ::Google::Compute::Property::StringArray.api_parse(fetch['licenses'])
           @current_resource.i_label = ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.raw_disk =
-            ::Google::Compute::Property::ImageRawDisk.api_parse(fetch['rawDisk'])
+            ::Google::Compute::Property::ImageRawdisk.api_parse(fetch['rawDisk'])
           @current_resource.source_disk =
-            ::Google::Compute::Property::DiskSelfLinkRef.api_parse(fetch['sourceDisk'])
+            ::Google::Compute::Property::DiskSelflinkRef.api_parse(fetch['sourceDisk'])
           @current_resource.source_disk_encryption_key =
-            ::Google::Compute::Property::ImageSourceDiskEncryptionKey.api_parse(
+            ::Google::Compute::Property::ImageSourcediskencryptionkey.api_parse(
               fetch['sourceDiskEncryptionKey']
             )
           @current_resource.source_disk_id =

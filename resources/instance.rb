@@ -77,10 +77,10 @@ module Google
       property :disks,
                Array,
                coerce: ::Google::Compute::Property::InstanceDisksArray.coerce, desired_state: true
-      # guest_accelerators is Array of Google::Compute::Property::InstanceGuestAcceleratorsArray
+      # guest_accelerators is Array of Google::Compute::Property::InstanceGuestacceleratorsArray
       property :guest_accelerators,
                Array,
-               coerce: ::Google::Compute::Property::InstanceGuestAcceleratorsArray.coerce,
+               coerce: ::Google::Compute::Property::InstanceGuestacceleratorsArray.coerce,
                desired_state: true
       property :id,
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
@@ -90,8 +90,8 @@ module Google
                [Hash, ::Google::Compute::Property::NameValues],
                coerce: ::Google::Compute::Property::NameValues.coerce, desired_state: true
       property :machine_type,
-               [String, ::Google::Compute::Data::MachineTypeSelfLinkRef],
-               coerce: ::Google::Compute::Property::MachineTypeSelfLinkRef.coerce,
+               [String, ::Google::Compute::Data::MachineTypeSelflinkRef],
+               coerce: ::Google::Compute::Property::MachineTypeSelflinkRef.coerce,
                desired_state: true
       property :min_cpu_platform,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
@@ -99,18 +99,18 @@ module Google
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
-      # network_interfaces is Array of Google::Compute::Property::InstanceNetworkInterfacesArray
+      # network_interfaces is Array of Google::Compute::Property::InstanceNetworkinterfacesArray
       property :network_interfaces,
                Array,
-               coerce: ::Google::Compute::Property::InstanceNetworkInterfacesArray.coerce,
+               coerce: ::Google::Compute::Property::InstanceNetworkinterfacesArray.coerce,
                desired_state: true
       property :scheduling,
                [Hash, ::Google::Compute::Data::InstanceScheduling],
                coerce: ::Google::Compute::Property::InstanceScheduling.coerce, desired_state: true
-      # service_accounts is Array of Google::Compute::Property::InstanceServiceAccountsArray
+      # service_accounts is Array of Google::Compute::Property::InstanceServiceaccountsArray
       property :service_accounts,
                Array,
-               coerce: ::Google::Compute::Property::InstanceServiceAccountsArray.coerce,
+               coerce: ::Google::Compute::Property::InstanceServiceaccountsArray.coerce,
                desired_state: true
       property :status,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
@@ -154,7 +154,7 @@ module Google
           @current_resource.creation_timestamp =
             ::Google::Compute::Property::String.api_parse(fetch['creationTimestamp'])
           @current_resource.guest_accelerators =
-            ::Google::Compute::Property::InstanceGuestAcceleratorsArray.api_parse(
+            ::Google::Compute::Property::InstanceGuestacceleratorsArray.api_parse(
               fetch['guestAccelerators']
             )
           @current_resource.id = ::Google::Compute::Property::Integer.api_parse(fetch['id'])
@@ -163,18 +163,18 @@ module Google
           @current_resource.metadata =
             ::Google::Compute::Property::NameValues.api_parse(fetch['metadata'])
           @current_resource.machine_type =
-            ::Google::Compute::Property::MachineTypeSelfLinkRef.api_parse(fetch['machineType'])
+            ::Google::Compute::Property::MachineTypeSelflinkRef.api_parse(fetch['machineType'])
           @current_resource.min_cpu_platform =
             ::Google::Compute::Property::String.api_parse(fetch['minCpuPlatform'])
           @current_resource.i_label = ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.network_interfaces =
-            ::Google::Compute::Property::InstanceNetworkInterfacesArray.api_parse(
+            ::Google::Compute::Property::InstanceNetworkinterfacesArray.api_parse(
               fetch['networkInterfaces']
             )
           @current_resource.scheduling =
             ::Google::Compute::Property::InstanceScheduling.api_parse(fetch['scheduling'])
           @current_resource.service_accounts =
-            ::Google::Compute::Property::InstanceServiceAccountsArray.api_parse(
+            ::Google::Compute::Property::InstanceServiceaccountsArray.api_parse(
               fetch['serviceAccounts']
             )
           @current_resource.status =
