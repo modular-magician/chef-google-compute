@@ -56,15 +56,15 @@ module Google
       property :description,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :private_interconnect_info,
-               [Hash, ::Google::Compute::Data::InterconnectAttachmentPrivateInterconnectInfo],
+               [Hash, ::Google::Compute::Data::InterconnectAttachmentPrivateinterconnectinfo],
                coerce: \
-                 ::Google::Compute::Property::InterconnectAttachmentPrivateInterconnectInfo.coerce,
+                 ::Google::Compute::Property::InterconnectAttachmentPrivateinterconnectinfo.coerce,
                desired_state: true
       property :google_reference_id,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :router,
-               [String, ::Google::Compute::Data::RouterSelfLinkRef],
-               coerce: ::Google::Compute::Property::RouterSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::RouterSelflinkRef],
+               coerce: ::Google::Compute::Property::RouterSelflinkRef.coerce, desired_state: true
       property :creation_timestamp,
                Time, coerce: ::Google::Compute::Property::Time.coerce, desired_state: true
       property :id, String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
@@ -73,8 +73,8 @@ module Google
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
       property :region,
-               [String, ::Google::Compute::Data::RegionSelfLinkRef],
-               coerce: ::Google::Compute::Property::RegionSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::RegionSelflinkRef],
+               coerce: ::Google::Compute::Property::RegionSelflinkRef.coerce, desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
@@ -111,13 +111,13 @@ module Google
           @current_resource.description =
             ::Google::Compute::Property::String.api_parse(fetch['description'])
           @current_resource.private_interconnect_info =
-            ::Google::Compute::Property::InterconnectAttachmentPrivateInterconnectInfo.api_parse(
+            ::Google::Compute::Property::InterconnectAttachmentPrivateinterconnectinfo.api_parse(
               fetch['privateInterconnectInfo']
             )
           @current_resource.google_reference_id =
             ::Google::Compute::Property::String.api_parse(fetch['googleReferenceId'])
           @current_resource.router =
-            ::Google::Compute::Property::RouterSelfLinkRef.api_parse(fetch['router'])
+            ::Google::Compute::Property::RouterSelflinkRef.api_parse(fetch['router'])
           @current_resource.creation_timestamp =
             ::Google::Compute::Property::Time.api_parse(fetch['creationTimestamp'])
           @current_resource.id = ::Google::Compute::Property::String.api_parse(fetch['id'])

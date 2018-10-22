@@ -29,7 +29,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for DiskEncryptionKey for region_disk.
-      class RegionDiskDiskEncryptionKey
+      class RegionDiskDiskencryptionkey
         include Comparable
 
         attr_reader :raw_key
@@ -50,7 +50,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? RegionDiskDiskEncryptionKey
+          return false unless other.is_a? RegionDiskDiskencryptionkey
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -59,7 +59,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? RegionDiskDiskEncryptionKey
+          return false unless other.is_a? RegionDiskDiskencryptionkey
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -82,18 +82,18 @@ module Google
         end
       end
 
-      # Manages a RegionDiskDiskEncryptionKey nested object
+      # Manages a RegionDiskDiskencryptionkey nested object
       # Data is coming from the GCP API
-      class RegionDiskDiskEncryptionKeyApi < RegionDiskDiskEncryptionKey
+      class RegionDiskDiskencryptionkeyApi < RegionDiskDiskencryptionkey
         def initialize(args)
           @raw_key = Google::Compute::Property::String.api_parse(args['rawKey'])
           @sha256 = Google::Compute::Property::String.api_parse(args['sha256'])
         end
       end
 
-      # Manages a RegionDiskDiskEncryptionKey nested object
+      # Manages a RegionDiskDiskencryptionkey nested object
       # Data is coming from the Chef catalog
-      class RegionDiskDiskEncryptionKeyCatalog < RegionDiskDiskEncryptionKey
+      class RegionDiskDiskencryptionkeyCatalog < RegionDiskDiskencryptionkey
         def initialize(args)
           @raw_key = Google::Compute::Property::String.catalog_parse(args[:raw_key])
           @sha256 = Google::Compute::Property::String.catalog_parse(args[:sha256])
@@ -103,23 +103,23 @@ module Google
 
     module Property
       # A class to manage input to DiskEncryptionKey for region_disk.
-      class RegionDiskDiskEncryptionKey
+      class RegionDiskDiskencryptionkey
         def self.coerce
-          ->(x) { ::Google::Compute::Property::RegionDiskDiskEncryptionKey.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::RegionDiskDiskencryptionkey.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::RegionDiskDiskEncryptionKey
-          Data::RegionDiskDiskEncryptionKeyCatalog.new(value)
+          return value if value.is_a? Data::RegionDiskDiskencryptionkey
+          Data::RegionDiskDiskencryptionkeyCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::RegionDiskDiskEncryptionKey
-          Data::RegionDiskDiskEncryptionKeyApi.new(value)
+          return value if value.is_a? Data::RegionDiskDiskencryptionkey
+          Data::RegionDiskDiskencryptionkeyApi.new(value)
         end
       end
     end

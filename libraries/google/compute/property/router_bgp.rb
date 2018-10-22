@@ -102,7 +102,7 @@ module Google
           @advertised_groups =
             Google::Compute::Property::StringArray.api_parse(args['advertisedGroups'])
           @advertised_ip_ranges =
-            Google::Compute::Property::RouterAdvertisedIpRangesArray.api_parse(
+            Google::Compute::Property::RouterAdvertisediprangesArray.api_parse(
               args['advertisedIpRanges']
             )
         end
@@ -118,7 +118,7 @@ module Google
           @advertised_groups =
             Google::Compute::Property::StringArray.catalog_parse(args[:advertised_groups])
           @advertised_ip_ranges =
-            Google::Compute::Property::RouterAdvertisedIpRangesArray.catalog_parse(
+            Google::Compute::Property::RouterAdvertisediprangesArray.catalog_parse(
               args[:advertised_ip_ranges]
             )
         end

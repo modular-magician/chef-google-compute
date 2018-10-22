@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for SecondaryIpRanges for subnetwork.
-      class SubnetworkSecondaryIpRanges
+      class SubnetworkSecondaryipranges
         include Comparable
 
         attr_reader :range_name
@@ -51,7 +51,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? SubnetworkSecondaryIpRanges
+          return false unless other.is_a? SubnetworkSecondaryipranges
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -60,7 +60,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? SubnetworkSecondaryIpRanges
+          return false unless other.is_a? SubnetworkSecondaryipranges
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -83,18 +83,18 @@ module Google
         end
       end
 
-      # Manages a SubnetworkSecondaryIpRanges nested object
+      # Manages a SubnetworkSecondaryipranges nested object
       # Data is coming from the GCP API
-      class SubnetworkSecondaryIpRangesApi < SubnetworkSecondaryIpRanges
+      class SubnetworkSecondaryiprangesApi < SubnetworkSecondaryipranges
         def initialize(args)
           @range_name = Google::Compute::Property::String.api_parse(args['rangeName'])
           @ip_cidr_range = Google::Compute::Property::String.api_parse(args['ipCidrRange'])
         end
       end
 
-      # Manages a SubnetworkSecondaryIpRanges nested object
+      # Manages a SubnetworkSecondaryipranges nested object
       # Data is coming from the Chef catalog
-      class SubnetworkSecondaryIpRangesCatalog < SubnetworkSecondaryIpRanges
+      class SubnetworkSecondaryiprangesCatalog < SubnetworkSecondaryipranges
         def initialize(args)
           @range_name = Google::Compute::Property::String.catalog_parse(args[:range_name])
           @ip_cidr_range = Google::Compute::Property::String.catalog_parse(args[:ip_cidr_range])
@@ -104,46 +104,46 @@ module Google
 
     module Property
       # A class to manage input to SecondaryIpRanges for subnetwork.
-      class SubnetworkSecondaryIpRanges
+      class SubnetworkSecondaryipranges
         def self.coerce
-          ->(x) { ::Google::Compute::Property::SubnetworkSecondaryIpRanges.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::SubnetworkSecondaryipranges.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::SubnetworkSecondaryIpRanges
-          Data::SubnetworkSecondaryIpRangesCatalog.new(value)
+          return value if value.is_a? Data::SubnetworkSecondaryipranges
+          Data::SubnetworkSecondaryiprangesCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::SubnetworkSecondaryIpRanges
-          Data::SubnetworkSecondaryIpRangesApi.new(value)
+          return value if value.is_a? Data::SubnetworkSecondaryipranges
+          Data::SubnetworkSecondaryiprangesApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class SubnetworkSecondaryIpRangesArray < Google::Compute::Property::Array
+      class SubnetworkSecondaryiprangesArray < Google::Compute::Property::Array
         def self.coerce
-          ->(x) { ::Google::Compute::Property::SubnetworkSecondaryIpRangesArray.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::SubnetworkSecondaryiprangesArray.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return SubnetworkSecondaryIpRanges.catalog_parse(value) \
+          return SubnetworkSecondaryipranges.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| SubnetworkSecondaryIpRanges.catalog_parse(v) }
+          value.map { |v| SubnetworkSecondaryipranges.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return SubnetworkSecondaryIpRanges.api_parse(value) \
+          return SubnetworkSecondaryipranges.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| SubnetworkSecondaryIpRanges.api_parse(v) }
+          value.map { |v| SubnetworkSecondaryipranges.api_parse(v) }
         end
       end
     end

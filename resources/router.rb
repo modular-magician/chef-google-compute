@@ -61,8 +61,8 @@ module Google
       property :description,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :network,
-               [String, ::Google::Compute::Data::NetworkSelfLinkRef],
-               coerce: ::Google::Compute::Property::NetworkSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::NetworkSelflinkRef],
+               coerce: ::Google::Compute::Property::NetworkSelflinkRef.coerce, desired_state: true
       property :bgp,
                [Hash, ::Google::Compute::Data::RouterBgp],
                coerce: ::Google::Compute::Property::RouterBgp.coerce, desired_state: true

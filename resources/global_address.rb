@@ -64,8 +64,8 @@ module Google
                equal_to: %w[IPV4 IPV6],
                coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
       property :region,
-               [String, ::Google::Compute::Data::RegionSelfLinkRef],
-               coerce: ::Google::Compute::Property::RegionSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::RegionSelflinkRef],
+               coerce: ::Google::Compute::Property::RegionSelflinkRef.coerce, desired_state: true
       property :address_type,
                equal_to: %w[EXTERNAL INTERNAL],
                coerce: ::Google::Compute::Property::AddressTypeEnum.coerce,
@@ -107,7 +107,7 @@ module Google
           @current_resource.ip_version =
             ::Google::Compute::Property::Enum.api_parse(fetch['ipVersion'])
           @current_resource.region =
-            ::Google::Compute::Property::RegionSelfLinkRef.api_parse(fetch['region'])
+            ::Google::Compute::Property::RegionSelflinkRef.api_parse(fetch['region'])
           @current_resource.address_type =
             ::Google::Compute::Property::AddressTypeEnum.api_parse(fetch['addressType'])
           @new_resource.__fetched = fetch

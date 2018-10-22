@@ -119,7 +119,7 @@ module Google
           @balancing_mode = Google::Compute::Property::Enum.api_parse(args['balancingMode'])
           @capacity_scaler = Google::Compute::Property::Double.api_parse(args['capacityScaler'])
           @description = Google::Compute::Property::String.api_parse(args['description'])
-          @group = Google::Compute::Property::InstanceGroupSelfLinkRef.api_parse(args['group'])
+          @group = Google::Compute::Property::InstanceGroupSelflinkRef.api_parse(args['group'])
           @max_connections = Google::Compute::Property::Integer.api_parse(args['maxConnections'])
           @max_connections_per_instance =
             Google::Compute::Property::Integer.api_parse(args['maxConnectionsPerInstance'])
@@ -139,7 +139,7 @@ module Google
           @balancing_mode = Google::Compute::Property::Enum.catalog_parse(args[:balancing_mode])
           @capacity_scaler = Google::Compute::Property::Double.catalog_parse(args[:capacity_scaler])
           @description = Google::Compute::Property::String.catalog_parse(args[:description])
-          @group = Google::Compute::Property::InstanceGroupSelfLinkRef.catalog_parse(args[:group])
+          @group = Google::Compute::Property::InstanceGroupSelflinkRef.catalog_parse(args[:group])
           @max_connections =
             Google::Compute::Property::Integer.catalog_parse(args[:max_connections])
           @max_connections_per_instance =

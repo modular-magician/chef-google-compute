@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for AccessConfigs for instance_template.
-      class InstanceTemplateAccessConfigs
+      class InstanceTemplateAccessconfigs
         include Comparable
 
         attr_reader :name
@@ -54,7 +54,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceTemplateAccessConfigs
+          return false unless other.is_a? InstanceTemplateAccessconfigs
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -63,7 +63,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceTemplateAccessConfigs
+          return false unless other.is_a? InstanceTemplateAccessconfigs
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -87,9 +87,9 @@ module Google
         end
       end
 
-      # Manages a InstanceTemplateAccessConfigs nested object
+      # Manages a InstanceTemplateAccessconfigs nested object
       # Data is coming from the GCP API
-      class InstanceTemplateAccessConfigsApi < InstanceTemplateAccessConfigs
+      class InstanceTemplateAccessconfigsApi < InstanceTemplateAccessconfigs
         def initialize(args)
           @name = Google::Compute::Property::String.api_parse(args['name'])
           @nat_ip = Google::Compute::Property::AddressAddressRef.api_parse(args['natIP'])
@@ -97,9 +97,9 @@ module Google
         end
       end
 
-      # Manages a InstanceTemplateAccessConfigs nested object
+      # Manages a InstanceTemplateAccessconfigs nested object
       # Data is coming from the Chef catalog
-      class InstanceTemplateAccessConfigsCatalog < InstanceTemplateAccessConfigs
+      class InstanceTemplateAccessconfigsCatalog < InstanceTemplateAccessconfigs
         def initialize(args)
           @name = Google::Compute::Property::String.catalog_parse(args[:name])
           @nat_ip = Google::Compute::Property::AddressAddressRef.catalog_parse(args[:nat_ip])
@@ -110,46 +110,46 @@ module Google
 
     module Property
       # A class to manage input to AccessConfigs for instance_template.
-      class InstanceTemplateAccessConfigs
+      class InstanceTemplateAccessconfigs
         def self.coerce
-          ->(x) { ::Google::Compute::Property::InstanceTemplateAccessConfigs.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::InstanceTemplateAccessconfigs.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceTemplateAccessConfigs
-          Data::InstanceTemplateAccessConfigsCatalog.new(value)
+          return value if value.is_a? Data::InstanceTemplateAccessconfigs
+          Data::InstanceTemplateAccessconfigsCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceTemplateAccessConfigs
-          Data::InstanceTemplateAccessConfigsApi.new(value)
+          return value if value.is_a? Data::InstanceTemplateAccessconfigs
+          Data::InstanceTemplateAccessconfigsApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class InstanceTemplateAccessConfigsArray < Google::Compute::Property::Array
+      class InstanceTemplateAccessconfigsArray < Google::Compute::Property::Array
         def self.coerce
-          ->(x) { ::Google::Compute::Property::InstanceTemplateAccessConfigsArray.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::InstanceTemplateAccessconfigsArray.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return InstanceTemplateAccessConfigs.catalog_parse(value) \
+          return InstanceTemplateAccessconfigs.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceTemplateAccessConfigs.catalog_parse(v) }
+          value.map { |v| InstanceTemplateAccessconfigs.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return InstanceTemplateAccessConfigs.api_parse(value) \
+          return InstanceTemplateAccessconfigs.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceTemplateAccessConfigs.api_parse(v) }
+          value.map { |v| InstanceTemplateAccessconfigs.api_parse(v) }
         end
       end
     end

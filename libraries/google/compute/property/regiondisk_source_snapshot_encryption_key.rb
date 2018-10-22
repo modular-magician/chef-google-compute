@@ -29,7 +29,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for SourceSnapshotEncryptionKey for region_disk.
-      class RegionDiskSourceSnapshotEncryptionKey
+      class RegionDiskSourcesnapshotencryptionkey
         include Comparable
 
         attr_reader :raw_key
@@ -50,7 +50,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? RegionDiskSourceSnapshotEncryptionKey
+          return false unless other.is_a? RegionDiskSourcesnapshotencryptionkey
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -59,7 +59,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? RegionDiskSourceSnapshotEncryptionKey
+          return false unless other.is_a? RegionDiskSourcesnapshotencryptionkey
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -82,18 +82,18 @@ module Google
         end
       end
 
-      # Manages a RegionDiskSourceSnapshotEncryptionKey nested object
+      # Manages a RegionDiskSourcesnapshotencryptionkey nested object
       # Data is coming from the GCP API
-      class RegionDiskSourceSnapshotEncryptionKeyApi < RegionDiskSourceSnapshotEncryptionKey
+      class RegionDiskSourcesnapshotencryptionkeyApi < RegionDiskSourcesnapshotencryptionkey
         def initialize(args)
           @raw_key = Google::Compute::Property::String.api_parse(args['rawKey'])
           @sha256 = Google::Compute::Property::String.api_parse(args['sha256'])
         end
       end
 
-      # Manages a RegionDiskSourceSnapshotEncryptionKey nested object
+      # Manages a RegionDiskSourcesnapshotencryptionkey nested object
       # Data is coming from the Chef catalog
-      class RegionDiskSourceSnapshotEncryptionKeyCatalog < RegionDiskSourceSnapshotEncryptionKey
+      class RegionDiskSourcesnapshotencryptionkeyCatalog < RegionDiskSourcesnapshotencryptionkey
         def initialize(args)
           @raw_key = Google::Compute::Property::String.catalog_parse(args[:raw_key])
           @sha256 = Google::Compute::Property::String.catalog_parse(args[:sha256])
@@ -103,25 +103,25 @@ module Google
 
     module Property
       # A class to manage input to SourceSnapshotEncryptionKey for region_disk.
-      class RegionDiskSourceSnapshotEncryptionKey
+      class RegionDiskSourcesnapshotencryptionkey
         def self.coerce
           lambda do |x|
-            ::Google::Compute::Property::RegionDiskSourceSnapshotEncryptionKey.catalog_parse(x)
+            ::Google::Compute::Property::RegionDiskSourcesnapshotencryptionkey.catalog_parse(x)
           end
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::RegionDiskSourceSnapshotEncryptionKey
-          Data::RegionDiskSourceSnapshotEncryptionKeyCatalog.new(value)
+          return value if value.is_a? Data::RegionDiskSourcesnapshotencryptionkey
+          Data::RegionDiskSourcesnapshotencryptionkeyCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::RegionDiskSourceSnapshotEncryptionKey
-          Data::RegionDiskSourceSnapshotEncryptionKeyApi.new(value)
+          return value if value.is_a? Data::RegionDiskSourcesnapshotencryptionkey
+          Data::RegionDiskSourcesnapshotencryptionkeyApi.new(value)
         end
       end
     end

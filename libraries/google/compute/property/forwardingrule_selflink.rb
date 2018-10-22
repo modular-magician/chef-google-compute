@@ -32,11 +32,11 @@ module Google
     module Data
       # Base class for ResourceRefs
       # Imports self_link from forwarding_rule
-      class ForwardingRuleSelfLinkRef
+      class ForwardingRuleSelflinkRef
         include Comparable
 
         def ==(other)
-          return false unless other.is_a? ForwardingRuleSelfLinkRef
+          return false unless other.is_a? ForwardingRuleSelflinkRef
           return false if resource != other.resource
           true
         end
@@ -54,7 +54,7 @@ module Google
 
       # A class to fetch the resource value from a referenced block
       # Will return the value exported from a different Chef resource
-      class ForwardingRuleSelfLinkRefCatalog < ForwardingRuleSelfLinkRef
+      class ForwardingRuleSelflinkRefCatalog < ForwardingRuleSelflinkRef
         def initialize(title, parent_resource)
           @title = title
           @parent_resource = parent_resource
@@ -85,7 +85,7 @@ module Google
 
       # A class to manage a JSON blob from GCP API
       # Will immediately return value from JSON blob without changes
-      class ForwardingRuleSelfLinkRefApi < ForwardingRuleSelfLinkRef
+      class ForwardingRuleSelflinkRefApi < ForwardingRuleSelflinkRef
         attr_reader :resource
 
         def initialize(resource)
@@ -104,9 +104,9 @@ module Google
 
     module Property
       # A class to manage fetching self_link from a forwarding_rule
-      class ForwardingRuleSelfLinkRef
+      class ForwardingRuleSelflinkRef
         def self.coerce
-          ->(parent_resource, value) { ::Google::Compute::Property::ForwardingRuleSelfLinkRef.catalog_parse(value, parent_resource) }
+          ->(parent_resource, value) { ::Google::Compute::Property::ForwardingRuleSelflinkRef.catalog_parse(value, parent_resource) }
         end
 
         def catalog_parse(value, parent_resource = nil)
@@ -116,38 +116,38 @@ module Google
 
         def self.catalog_parse(value, parent_resource = nil)
           return if value.nil?
-          return value if value.is_a? Data::ForwardingRuleSelfLinkRef
-          Data::ForwardingRuleSelfLinkRefCatalog.new(value, parent_resource)
+          return value if value.is_a? Data::ForwardingRuleSelflinkRef
+          Data::ForwardingRuleSelflinkRefCatalog.new(value, parent_resource)
         end
 
         # Used for fetched JSON values
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::ForwardingRuleSelfLinkRef
-          Data::ForwardingRuleSelfLinkRefApi.new(value)
+          return value if value.is_a? Data::ForwardingRuleSelflinkRef
+          Data::ForwardingRuleSelflinkRefApi.new(value)
         end
       end
 
-      # A Chef property that holds an Array of ForwardingRuleSelfLinkRef
-      class ForwardingRuleSelfLinkRefArray < Google::Compute::Property::Array
+      # A Chef property that holds an Array of ForwardingRuleSelflinkRef
+      class ForwardingRuleSelflinkRefArray < Google::Compute::Property::Array
         def self.coerce
-          ->(x) { ::Google::Compute::Property::ForwardingRuleSelfLinkRefArray.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::ForwardingRuleSelflinkRefArray.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value, parent_resource = nil)
           return if value.nil?
-          return ForwardingRuleSelfLinkRef.catalog_parse(value, parent_resource) \
+          return ForwardingRuleSelflinkRef.catalog_parse(value, parent_resource) \
             unless value.is_a?(::Array)
-          value.map { |v| ForwardingRuleSelfLinkRef.catalog_parse(v, parent_resource) }
+          value.map { |v| ForwardingRuleSelflinkRef.catalog_parse(v, parent_resource) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return ForwardingRuleSelfLinkRef.api_parse(value) \
+          return ForwardingRuleSelflinkRef.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| ForwardingRuleSelfLinkRef.api_parse(v) }
+          value.map { |v| ForwardingRuleSelflinkRef.api_parse(v) }
         end
       end
     end

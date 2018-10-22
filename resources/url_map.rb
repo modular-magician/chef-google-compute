@@ -53,15 +53,15 @@ module Google
       property :creation_timestamp,
                Time, coerce: ::Google::Compute::Property::Time.coerce, desired_state: true
       property :default_service,
-               [String, ::Google::Compute::Data::BackendServiceSelfLinkRef],
-               coerce: ::Google::Compute::Property::BackendServiceSelfLinkRef.coerce,
+               [String, ::Google::Compute::Data::BackendServiceSelflinkRef],
+               coerce: ::Google::Compute::Property::BackendServiceSelflinkRef.coerce,
                desired_state: true
       property :description,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
-      # host_rules is Array of Google::Compute::Property::UrlMapHostRulesArray
+      # host_rules is Array of Google::Compute::Property::UrlMapHostrulesArray
       property :host_rules,
                Array,
-               coerce: ::Google::Compute::Property::UrlMapHostRulesArray.coerce, desired_state: true
+               coerce: ::Google::Compute::Property::UrlMapHostrulesArray.coerce, desired_state: true
       property :id,
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
       property :fingerprint,
@@ -71,10 +71,10 @@ module Google
                String,
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
-      # path_matchers is Array of Google::Compute::Property::UrlMapPathMatchersArray
+      # path_matchers is Array of Google::Compute::Property::UrlMapPathmatchersArray
       property :path_matchers,
                Array,
-               coerce: ::Google::Compute::Property::UrlMapPathMatchersArray.coerce,
+               coerce: ::Google::Compute::Property::UrlMapPathmatchersArray.coerce,
                desired_state: true
       # tests is Array of Google::Compute::Property::UrlMapTestsArray
       property :tests,
@@ -108,18 +108,18 @@ module Google
           @current_resource.creation_timestamp =
             ::Google::Compute::Property::Time.api_parse(fetch['creationTimestamp'])
           @current_resource.default_service =
-            ::Google::Compute::Property::BackendServiceSelfLinkRef.api_parse(
+            ::Google::Compute::Property::BackendServiceSelflinkRef.api_parse(
               fetch['defaultService']
             )
           @current_resource.description =
             ::Google::Compute::Property::String.api_parse(fetch['description'])
           @current_resource.host_rules =
-            ::Google::Compute::Property::UrlMapHostRulesArray.api_parse(fetch['hostRules'])
+            ::Google::Compute::Property::UrlMapHostrulesArray.api_parse(fetch['hostRules'])
           @current_resource.id = ::Google::Compute::Property::Integer.api_parse(fetch['id'])
           @current_resource.fingerprint =
             ::Google::Compute::Property::String.api_parse(fetch['fingerprint'])
           @current_resource.path_matchers =
-            ::Google::Compute::Property::UrlMapPathMatchersArray.api_parse(fetch['pathMatchers'])
+            ::Google::Compute::Property::UrlMapPathmatchersArray.api_parse(fetch['pathMatchers'])
           @current_resource.tests =
             ::Google::Compute::Property::UrlMapTestsArray.api_parse(fetch['tests'])
           @new_resource.__fetched = fetch

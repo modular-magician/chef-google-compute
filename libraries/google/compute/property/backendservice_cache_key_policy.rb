@@ -29,7 +29,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for CacheKeyPolicy for backend_service.
-      class BackendServiceCacheKeyPolicy
+      class BackendServiceCachekeypolicy
         include Comparable
 
         attr_reader :include_host
@@ -59,7 +59,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? BackendServiceCacheKeyPolicy
+          return false unless other.is_a? BackendServiceCachekeypolicy
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -68,7 +68,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? BackendServiceCacheKeyPolicy
+          return false unless other.is_a? BackendServiceCachekeypolicy
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -94,9 +94,9 @@ module Google
         end
       end
 
-      # Manages a BackendServiceCacheKeyPolicy nested object
+      # Manages a BackendServiceCachekeypolicy nested object
       # Data is coming from the GCP API
-      class BackendServiceCacheKeyPolicyApi < BackendServiceCacheKeyPolicy
+      class BackendServiceCachekeypolicyApi < BackendServiceCachekeypolicy
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
           @include_host = Google::Compute::Property::Boolean.api_parse(args['includeHost'])
@@ -111,9 +111,9 @@ module Google
         # rubocop:enable Metrics/MethodLength
       end
 
-      # Manages a BackendServiceCacheKeyPolicy nested object
+      # Manages a BackendServiceCachekeypolicy nested object
       # Data is coming from the Chef catalog
-      class BackendServiceCacheKeyPolicyCatalog < BackendServiceCacheKeyPolicy
+      class BackendServiceCachekeypolicyCatalog < BackendServiceCachekeypolicy
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
           @include_host = Google::Compute::Property::Boolean.catalog_parse(args[:include_host])
@@ -132,23 +132,23 @@ module Google
 
     module Property
       # A class to manage input to CacheKeyPolicy for backend_service.
-      class BackendServiceCacheKeyPolicy
+      class BackendServiceCachekeypolicy
         def self.coerce
-          ->(x) { ::Google::Compute::Property::BackendServiceCacheKeyPolicy.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::BackendServiceCachekeypolicy.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::BackendServiceCacheKeyPolicy
-          Data::BackendServiceCacheKeyPolicyCatalog.new(value)
+          return value if value.is_a? Data::BackendServiceCachekeypolicy
+          Data::BackendServiceCachekeypolicyCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::BackendServiceCacheKeyPolicy
-          Data::BackendServiceCacheKeyPolicyApi.new(value)
+          return value if value.is_a? Data::BackendServiceCachekeypolicy
+          Data::BackendServiceCachekeypolicyApi.new(value)
         end
       end
     end

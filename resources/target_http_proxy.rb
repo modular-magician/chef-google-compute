@@ -56,8 +56,8 @@ module Google
                coerce: ::Google::Compute::Property::String.coerce,
                name_property: true, desired_state: true
       property :url_map,
-               [String, ::Google::Compute::Data::UrlMapSelfLinkRef],
-               coerce: ::Google::Compute::Property::UrlMapSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::UrlMapSelflinkRef],
+               coerce: ::Google::Compute::Property::UrlMapSelflinkRef.coerce, desired_state: true
 
       property :credential, String, desired_state: false, required: true
       property :project, String, desired_state: false, required: true
@@ -91,7 +91,7 @@ module Google
           @current_resource.thp_label =
             ::Google::Compute::Property::String.api_parse(fetch['name'])
           @current_resource.url_map =
-            ::Google::Compute::Property::UrlMapSelfLinkRef.api_parse(fetch['urlMap'])
+            ::Google::Compute::Property::UrlMapSelflinkRef.api_parse(fetch['urlMap'])
           @new_resource.__fetched = fetch
 
           update

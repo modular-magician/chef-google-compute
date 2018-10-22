@@ -98,7 +98,7 @@ module Google
           @description = Google::Compute::Property::String.api_parse(args['description'])
           @host = Google::Compute::Property::String.api_parse(args['host'])
           @path = Google::Compute::Property::String.api_parse(args['path'])
-          @service = Google::Compute::Property::BackendServiceSelfLinkRef.api_parse(args['service'])
+          @service = Google::Compute::Property::BackendServiceSelflinkRef.api_parse(args['service'])
         end
       end
 
@@ -110,7 +110,7 @@ module Google
           @host = Google::Compute::Property::String.catalog_parse(args[:host])
           @path = Google::Compute::Property::String.catalog_parse(args[:path])
           @service =
-            Google::Compute::Property::BackendServiceSelfLinkRef.catalog_parse(args[:service])
+            Google::Compute::Property::BackendServiceSelflinkRef.catalog_parse(args[:service])
         end
       end
     end

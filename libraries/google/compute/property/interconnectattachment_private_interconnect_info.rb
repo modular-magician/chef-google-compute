@@ -29,7 +29,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for PrivateInterconnectInfo for interconnect_attachment.
-      class InterconnectAttachmentPrivateInterconnectInfo
+      class InterconnectAttachmentPrivateinterconnectinfo
         include Comparable
 
         attr_reader :tag8021q
@@ -47,7 +47,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InterconnectAttachmentPrivateInterconnectInfo
+          return false unless other.is_a? InterconnectAttachmentPrivateinterconnectinfo
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -56,7 +56,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InterconnectAttachmentPrivateInterconnectInfo
+          return false unless other.is_a? InterconnectAttachmentPrivateinterconnectinfo
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -78,17 +78,17 @@ module Google
         end
       end
 
-      # Manages a InterconnectAttachmentPrivateInterconnectInfo nested object
+      # Manages a InterconnectAttachmentPrivateinterconnectinfo nested object
       # Data is coming from the GCP API
-      class InterconnectAttachmentPrivateInterconnectInfoApi < InterconnectAttachmentPrivateInterconnectInfo
+      class InterconnectAttachmentPrivateinterconnectinfoApi < InterconnectAttachmentPrivateinterconnectinfo
         def initialize(args)
           @tag8021q = Google::Compute::Property::Integer.api_parse(args['tag8021q'])
         end
       end
 
-      # Manages a InterconnectAttachmentPrivateInterconnectInfo nested object
+      # Manages a InterconnectAttachmentPrivateinterconnectinfo nested object
       # Data is coming from the Chef catalog
-      class InterconnectAttachmentPrivateInterconnectInfoCatalog < InterconnectAttachmentPrivateInterconnectInfo
+      class InterconnectAttachmentPrivateinterconnectinfoCatalog < InterconnectAttachmentPrivateinterconnectinfo
         def initialize(args)
           @tag8021q = Google::Compute::Property::Integer.catalog_parse(args[:tag8021q])
         end
@@ -97,10 +97,10 @@ module Google
 
     module Property
       # A class to manage input to PrivateInterconnectInfo for interconnect_attachment.
-      class InterconnectAttachmentPrivateInterconnectInfo
+      class InterconnectAttachmentPrivateinterconnectinfo
         def self.coerce
           lambda do |x|
-            type = ::Google::Compute::Property::InterconnectAttachmentPrivateInterconnectInfo
+            type = ::Google::Compute::Property::InterconnectAttachmentPrivateinterconnectinfo
             type.catalog_parse(x)
           end
         end
@@ -108,15 +108,15 @@ module Google
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InterconnectAttachmentPrivateInterconnectInfo
-          Data::InterconnectAttachmentPrivateInterconnectInfoCatalog.new(value)
+          return value if value.is_a? Data::InterconnectAttachmentPrivateinterconnectinfo
+          Data::InterconnectAttachmentPrivateinterconnectinfoCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InterconnectAttachmentPrivateInterconnectInfo
-          Data::InterconnectAttachmentPrivateInterconnectInfoApi.new(value)
+          return value if value.is_a? Data::InterconnectAttachmentPrivateinterconnectinfo
+          Data::InterconnectAttachmentPrivateinterconnectinfoApi.new(value)
         end
       end
     end

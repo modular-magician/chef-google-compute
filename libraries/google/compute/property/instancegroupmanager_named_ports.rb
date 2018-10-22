@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for NamedPorts for instance_group_manager.
-      class InstanceGroupManagerNamedPorts
+      class InstanceGroupManagerNamedports
         include Comparable
 
         attr_reader :name
@@ -51,7 +51,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceGroupManagerNamedPorts
+          return false unless other.is_a? InstanceGroupManagerNamedports
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -60,7 +60,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceGroupManagerNamedPorts
+          return false unless other.is_a? InstanceGroupManagerNamedports
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -83,18 +83,18 @@ module Google
         end
       end
 
-      # Manages a InstanceGroupManagerNamedPorts nested object
+      # Manages a InstanceGroupManagerNamedports nested object
       # Data is coming from the GCP API
-      class InstanceGroupManagerNamedPortsApi < InstanceGroupManagerNamedPorts
+      class InstanceGroupManagerNamedportsApi < InstanceGroupManagerNamedports
         def initialize(args)
           @name = Google::Compute::Property::String.api_parse(args['name'])
           @port = Google::Compute::Property::Integer.api_parse(args['port'])
         end
       end
 
-      # Manages a InstanceGroupManagerNamedPorts nested object
+      # Manages a InstanceGroupManagerNamedports nested object
       # Data is coming from the Chef catalog
-      class InstanceGroupManagerNamedPortsCatalog < InstanceGroupManagerNamedPorts
+      class InstanceGroupManagerNamedportsCatalog < InstanceGroupManagerNamedports
         def initialize(args)
           @name = Google::Compute::Property::String.catalog_parse(args[:name])
           @port = Google::Compute::Property::Integer.catalog_parse(args[:port])
@@ -104,48 +104,48 @@ module Google
 
     module Property
       # A class to manage input to NamedPorts for instance_group_manager.
-      class InstanceGroupManagerNamedPorts
+      class InstanceGroupManagerNamedports
         def self.coerce
-          ->(x) { ::Google::Compute::Property::InstanceGroupManagerNamedPorts.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::InstanceGroupManagerNamedports.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceGroupManagerNamedPorts
-          Data::InstanceGroupManagerNamedPortsCatalog.new(value)
+          return value if value.is_a? Data::InstanceGroupManagerNamedports
+          Data::InstanceGroupManagerNamedportsCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceGroupManagerNamedPorts
-          Data::InstanceGroupManagerNamedPortsApi.new(value)
+          return value if value.is_a? Data::InstanceGroupManagerNamedports
+          Data::InstanceGroupManagerNamedportsApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class InstanceGroupManagerNamedPortsArray < Google::Compute::Property::Array
+      class InstanceGroupManagerNamedportsArray < Google::Compute::Property::Array
         def self.coerce
           lambda do |x|
-            ::Google::Compute::Property::InstanceGroupManagerNamedPortsArray.catalog_parse(x)
+            ::Google::Compute::Property::InstanceGroupManagerNamedportsArray.catalog_parse(x)
           end
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return InstanceGroupManagerNamedPorts.catalog_parse(value) \
+          return InstanceGroupManagerNamedports.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceGroupManagerNamedPorts.catalog_parse(v) }
+          value.map { |v| InstanceGroupManagerNamedports.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return InstanceGroupManagerNamedPorts.api_parse(value) \
+          return InstanceGroupManagerNamedports.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceGroupManagerNamedPorts.api_parse(v) }
+          value.map { |v| InstanceGroupManagerNamedports.api_parse(v) }
         end
       end
     end

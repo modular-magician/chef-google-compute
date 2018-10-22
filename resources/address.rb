@@ -70,8 +70,8 @@ module Google
                equal_to: %w[PREMIUM STANDARD],
                coerce: ::Google::Compute::Property::Enum.coerce, desired_state: true
       property :subnetwork,
-               [String, ::Google::Compute::Data::SubnetworkSelfLinkRef],
-               coerce: ::Google::Compute::Property::SubnetworkSelfLinkRef.coerce,
+               [String, ::Google::Compute::Data::SubnetworkSelflinkRef],
+               coerce: ::Google::Compute::Property::SubnetworkSelflinkRef.coerce,
                desired_state: true
       # users is Array of Google::Compute::Property::StringArray
       property :users,
@@ -117,7 +117,7 @@ module Google
           @current_resource.network_tier =
             ::Google::Compute::Property::Enum.api_parse(fetch['networkTier'])
           @current_resource.subnetwork =
-            ::Google::Compute::Property::SubnetworkSelfLinkRef.api_parse(fetch['subnetwork'])
+            ::Google::Compute::Property::SubnetworkSelflinkRef.api_parse(fetch['subnetwork'])
           @current_resource.users =
             ::Google::Compute::Property::StringArray.api_parse(fetch['users'])
           @new_resource.__fetched = fetch

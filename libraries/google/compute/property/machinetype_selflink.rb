@@ -31,11 +31,11 @@ module Google
     module Data
       # Base class for ResourceRefs
       # Imports self_link from machine_type
-      class MachineTypeSelfLinkRef
+      class MachineTypeSelflinkRef
         include Comparable
 
         def ==(other)
-          return false unless other.is_a? MachineTypeSelfLinkRef
+          return false unless other.is_a? MachineTypeSelflinkRef
           return false if resource != other.resource
           true
         end
@@ -53,7 +53,7 @@ module Google
 
       # A class to fetch the resource value from a referenced block
       # Will return the value exported from a different Chef resource
-      class MachineTypeSelfLinkRefCatalog < MachineTypeSelfLinkRef
+      class MachineTypeSelflinkRefCatalog < MachineTypeSelflinkRef
         def initialize(title, parent_resource)
           @title = title
           @parent_resource = parent_resource
@@ -93,7 +93,7 @@ module Google
 
       # A class to manage a JSON blob from GCP API
       # Will immediately return value from JSON blob without changes
-      class MachineTypeSelfLinkRefApi < MachineTypeSelfLinkRef
+      class MachineTypeSelflinkRefApi < MachineTypeSelflinkRef
         attr_reader :resource
 
         def initialize(resource)
@@ -112,9 +112,9 @@ module Google
 
     module Property
       # A class to manage fetching self_link from a machine_type
-      class MachineTypeSelfLinkRef
+      class MachineTypeSelflinkRef
         def self.coerce
-          ->(parent_resource, value) { ::Google::Compute::Property::MachineTypeSelfLinkRef.catalog_parse(value, parent_resource) }
+          ->(parent_resource, value) { ::Google::Compute::Property::MachineTypeSelflinkRef.catalog_parse(value, parent_resource) }
         end
 
         def catalog_parse(value, parent_resource = nil)
@@ -124,15 +124,15 @@ module Google
 
         def self.catalog_parse(value, parent_resource = nil)
           return if value.nil?
-          return value if value.is_a? Data::MachineTypeSelfLinkRef
-          Data::MachineTypeSelfLinkRefCatalog.new(value, parent_resource)
+          return value if value.is_a? Data::MachineTypeSelflinkRef
+          Data::MachineTypeSelflinkRefCatalog.new(value, parent_resource)
         end
 
         # Used for fetched JSON values
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::MachineTypeSelfLinkRef
-          Data::MachineTypeSelfLinkRefApi.new(value)
+          return value if value.is_a? Data::MachineTypeSelflinkRef
+          Data::MachineTypeSelflinkRefApi.new(value)
         end
       end
     end

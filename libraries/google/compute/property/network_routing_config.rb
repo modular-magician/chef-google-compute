@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for RoutingConfig for network.
-      class NetworkRoutingConfig
+      class NetworkRoutingconfig
         include Comparable
 
         attr_reader :routing_mode
@@ -48,7 +48,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? NetworkRoutingConfig
+          return false unless other.is_a? NetworkRoutingconfig
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -57,7 +57,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? NetworkRoutingConfig
+          return false unless other.is_a? NetworkRoutingconfig
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -79,17 +79,17 @@ module Google
         end
       end
 
-      # Manages a NetworkRoutingConfig nested object
+      # Manages a NetworkRoutingconfig nested object
       # Data is coming from the GCP API
-      class NetworkRoutingConfigApi < NetworkRoutingConfig
+      class NetworkRoutingconfigApi < NetworkRoutingconfig
         def initialize(args)
           @routing_mode = Google::Compute::Property::Enum.api_parse(args['routingMode'])
         end
       end
 
-      # Manages a NetworkRoutingConfig nested object
+      # Manages a NetworkRoutingconfig nested object
       # Data is coming from the Chef catalog
-      class NetworkRoutingConfigCatalog < NetworkRoutingConfig
+      class NetworkRoutingconfigCatalog < NetworkRoutingconfig
         def initialize(args)
           @routing_mode = Google::Compute::Property::Enum.catalog_parse(args[:routing_mode])
         end
@@ -98,46 +98,46 @@ module Google
 
     module Property
       # A class to manage input to RoutingConfig for network.
-      class NetworkRoutingConfig
+      class NetworkRoutingconfig
         def self.coerce
-          ->(x) { ::Google::Compute::Property::NetworkRoutingConfig.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::NetworkRoutingconfig.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::NetworkRoutingConfig
-          Data::NetworkRoutingConfigCatalog.new(value)
+          return value if value.is_a? Data::NetworkRoutingconfig
+          Data::NetworkRoutingconfigCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::NetworkRoutingConfig
-          Data::NetworkRoutingConfigApi.new(value)
+          return value if value.is_a? Data::NetworkRoutingconfig
+          Data::NetworkRoutingconfigApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class NetworkRoutingConfigArray < Google::Compute::Property::Array
+      class NetworkRoutingconfigArray < Google::Compute::Property::Array
         def self.coerce
-          ->(x) { ::Google::Compute::Property::NetworkRoutingConfigArray.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::NetworkRoutingconfigArray.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return NetworkRoutingConfig.catalog_parse(value) \
+          return NetworkRoutingconfig.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| NetworkRoutingConfig.catalog_parse(v) }
+          value.map { |v| NetworkRoutingconfig.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return NetworkRoutingConfig.api_parse(value) \
+          return NetworkRoutingconfig.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| NetworkRoutingConfig.api_parse(v) }
+          value.map { |v| NetworkRoutingconfig.api_parse(v) }
         end
       end
     end

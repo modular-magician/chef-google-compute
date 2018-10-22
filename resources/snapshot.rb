@@ -64,10 +64,10 @@ module Google
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :storage_bytes,
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
-      # licenses is Array of Google::Compute::Property::LicenseSelfLinkRefArray
+      # licenses is Array of Google::Compute::Property::LicenseSelflinkRefArray
       property :licenses,
                Array,
-               coerce: ::Google::Compute::Property::LicenseSelfLinkRefArray.coerce,
+               coerce: ::Google::Compute::Property::LicenseSelflinkRefArray.coerce,
                desired_state: true
       # labels is Array of Google::Compute::Property::StringArray
       property :labels,
@@ -79,12 +79,12 @@ module Google
                [String, ::Google::Compute::Data::ZoneNameRef],
                coerce: ::Google::Compute::Property::ZoneNameRef.coerce, desired_state: true
       property :snapshot_encryption_key,
-               [Hash, ::Google::Compute::Data::SnapshotSnapshotEncryptionKey],
-               coerce: ::Google::Compute::Property::SnapshotSnapshotEncryptionKey.coerce,
+               [Hash, ::Google::Compute::Data::SnapshotSnapshotencryptionkey],
+               coerce: ::Google::Compute::Property::SnapshotSnapshotencryptionkey.coerce,
                desired_state: true
       property :source_disk_encryption_key,
-               [Hash, ::Google::Compute::Data::SnapshotSourceDiskEncryptionKey],
-               coerce: ::Google::Compute::Property::SnapshotSourceDiskEncryptionKey.coerce,
+               [Hash, ::Google::Compute::Data::SnapshotSourcediskencryptionkey],
+               coerce: ::Google::Compute::Property::SnapshotSourcediskencryptionkey.coerce,
                desired_state: true
 
       property :credential, String, desired_state: false, required: true
@@ -122,7 +122,7 @@ module Google
           @current_resource.storage_bytes =
             ::Google::Compute::Property::Integer.api_parse(fetch['storageBytes'])
           @current_resource.licenses =
-            ::Google::Compute::Property::LicenseSelfLinkRefArray.api_parse(fetch['licenses'])
+            ::Google::Compute::Property::LicenseSelflinkRefArray.api_parse(fetch['licenses'])
           @current_resource.labels =
             ::Google::Compute::Property::StringArray.api_parse(fetch['labels'])
           @new_resource.__fetched = fetch

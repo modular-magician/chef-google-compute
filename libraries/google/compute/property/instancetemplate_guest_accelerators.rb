@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for GuestAccelerators for instance_template.
-      class InstanceTemplateGuestAccelerators
+      class InstanceTemplateGuestaccelerators
         include Comparable
 
         attr_reader :accelerator_count
@@ -51,7 +51,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceTemplateGuestAccelerators
+          return false unless other.is_a? InstanceTemplateGuestaccelerators
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -60,7 +60,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceTemplateGuestAccelerators
+          return false unless other.is_a? InstanceTemplateGuestaccelerators
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -83,9 +83,9 @@ module Google
         end
       end
 
-      # Manages a InstanceTemplateGuestAccelerators nested object
+      # Manages a InstanceTemplateGuestaccelerators nested object
       # Data is coming from the GCP API
-      class InstanceTemplateGuestAcceleratorsApi < InstanceTemplateGuestAccelerators
+      class InstanceTemplateGuestacceleratorsApi < InstanceTemplateGuestaccelerators
         def initialize(args)
           @accelerator_count =
             Google::Compute::Property::Integer.api_parse(args['acceleratorCount'])
@@ -93,9 +93,9 @@ module Google
         end
       end
 
-      # Manages a InstanceTemplateGuestAccelerators nested object
+      # Manages a InstanceTemplateGuestaccelerators nested object
       # Data is coming from the Chef catalog
-      class InstanceTemplateGuestAcceleratorsCatalog < InstanceTemplateGuestAccelerators
+      class InstanceTemplateGuestacceleratorsCatalog < InstanceTemplateGuestaccelerators
         def initialize(args)
           @accelerator_count =
             Google::Compute::Property::Integer.catalog_parse(args[:accelerator_count])
@@ -107,48 +107,48 @@ module Google
 
     module Property
       # A class to manage input to GuestAccelerators for instance_template.
-      class InstanceTemplateGuestAccelerators
+      class InstanceTemplateGuestaccelerators
         def self.coerce
-          ->(x) { ::Google::Compute::Property::InstanceTemplateGuestAccelerators.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::InstanceTemplateGuestaccelerators.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceTemplateGuestAccelerators
-          Data::InstanceTemplateGuestAcceleratorsCatalog.new(value)
+          return value if value.is_a? Data::InstanceTemplateGuestaccelerators
+          Data::InstanceTemplateGuestacceleratorsCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceTemplateGuestAccelerators
-          Data::InstanceTemplateGuestAcceleratorsApi.new(value)
+          return value if value.is_a? Data::InstanceTemplateGuestaccelerators
+          Data::InstanceTemplateGuestacceleratorsApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class InstanceTemplateGuestAcceleratorsArray < Google::Compute::Property::Array
+      class InstanceTemplateGuestacceleratorsArray < Google::Compute::Property::Array
         def self.coerce
           lambda do |x|
-            ::Google::Compute::Property::InstanceTemplateGuestAcceleratorsArray.catalog_parse(x)
+            ::Google::Compute::Property::InstanceTemplateGuestacceleratorsArray.catalog_parse(x)
           end
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return InstanceTemplateGuestAccelerators.catalog_parse(value) \
+          return InstanceTemplateGuestaccelerators.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceTemplateGuestAccelerators.catalog_parse(v) }
+          value.map { |v| InstanceTemplateGuestaccelerators.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return InstanceTemplateGuestAccelerators.api_parse(value) \
+          return InstanceTemplateGuestaccelerators.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceTemplateGuestAccelerators.api_parse(v) }
+          value.map { |v| InstanceTemplateGuestaccelerators.api_parse(v) }
         end
       end
     end

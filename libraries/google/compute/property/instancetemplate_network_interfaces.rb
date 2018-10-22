@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for NetworkInterfaces for instance_template.
-      class InstanceTemplateNetworkInterfaces
+      class InstanceTemplateNetworkinterfaces
         include Comparable
 
         attr_reader :access_configs
@@ -67,7 +67,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceTemplateNetworkInterfaces
+          return false unless other.is_a? InstanceTemplateNetworkinterfaces
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -76,7 +76,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceTemplateNetworkInterfaces
+          return false unless other.is_a? InstanceTemplateNetworkinterfaces
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -103,45 +103,45 @@ module Google
         end
       end
 
-      # Manages a InstanceTemplateNetworkInterfaces nested object
+      # Manages a InstanceTemplateNetworkinterfaces nested object
       # Data is coming from the GCP API
-      class InstanceTemplateNetworkInterfacesApi < InstanceTemplateNetworkInterfaces
+      class InstanceTemplateNetworkinterfacesApi < InstanceTemplateNetworkinterfaces
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
-          @access_configs = Google::Compute::Property::InstanceTemplateAccessConfigsArray.api_parse(
+          @access_configs = Google::Compute::Property::InstanceTemplateAccessconfigsArray.api_parse(
             args['accessConfigs']
           )
           @alias_ip_ranges =
-            Google::Compute::Property::InstanceTemplateAliasIpRangesArray.api_parse(
+            Google::Compute::Property::InstanceTemplateAliasiprangesArray.api_parse(
               args['aliasIpRanges']
             )
           @name = Google::Compute::Property::String.api_parse(args['name'])
-          @network = Google::Compute::Property::NetworkSelfLinkRef.api_parse(args['network'])
+          @network = Google::Compute::Property::NetworkSelflinkRef.api_parse(args['network'])
           @network_ip = Google::Compute::Property::String.api_parse(args['networkIP'])
           @subnetwork =
-            Google::Compute::Property::SubnetworkSelfLinkRef.api_parse(args['subnetwork'])
+            Google::Compute::Property::SubnetworkSelflinkRef.api_parse(args['subnetwork'])
         end
         # rubocop:enable Metrics/MethodLength
       end
 
-      # Manages a InstanceTemplateNetworkInterfaces nested object
+      # Manages a InstanceTemplateNetworkinterfaces nested object
       # Data is coming from the Chef catalog
-      class InstanceTemplateNetworkInterfacesCatalog < InstanceTemplateNetworkInterfaces
+      class InstanceTemplateNetworkinterfacesCatalog < InstanceTemplateNetworkinterfaces
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
           @access_configs =
-            Google::Compute::Property::InstanceTemplateAccessConfigsArray.catalog_parse(
+            Google::Compute::Property::InstanceTemplateAccessconfigsArray.catalog_parse(
               args[:access_configs]
             )
           @alias_ip_ranges =
-            Google::Compute::Property::InstanceTemplateAliasIpRangesArray.catalog_parse(
+            Google::Compute::Property::InstanceTemplateAliasiprangesArray.catalog_parse(
               args[:alias_ip_ranges]
             )
           @name = Google::Compute::Property::String.catalog_parse(args[:name])
-          @network = Google::Compute::Property::NetworkSelfLinkRef.catalog_parse(args[:network])
+          @network = Google::Compute::Property::NetworkSelflinkRef.catalog_parse(args[:network])
           @network_ip = Google::Compute::Property::String.catalog_parse(args[:network_ip])
           @subnetwork =
-            Google::Compute::Property::SubnetworkSelfLinkRef.catalog_parse(args[:subnetwork])
+            Google::Compute::Property::SubnetworkSelflinkRef.catalog_parse(args[:subnetwork])
         end
         # rubocop:enable Metrics/MethodLength
       end
@@ -149,48 +149,48 @@ module Google
 
     module Property
       # A class to manage input to NetworkInterfaces for instance_template.
-      class InstanceTemplateNetworkInterfaces
+      class InstanceTemplateNetworkinterfaces
         def self.coerce
-          ->(x) { ::Google::Compute::Property::InstanceTemplateNetworkInterfaces.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::InstanceTemplateNetworkinterfaces.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceTemplateNetworkInterfaces
-          Data::InstanceTemplateNetworkInterfacesCatalog.new(value)
+          return value if value.is_a? Data::InstanceTemplateNetworkinterfaces
+          Data::InstanceTemplateNetworkinterfacesCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceTemplateNetworkInterfaces
-          Data::InstanceTemplateNetworkInterfacesApi.new(value)
+          return value if value.is_a? Data::InstanceTemplateNetworkinterfaces
+          Data::InstanceTemplateNetworkinterfacesApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class InstanceTemplateNetworkInterfacesArray < Google::Compute::Property::Array
+      class InstanceTemplateNetworkinterfacesArray < Google::Compute::Property::Array
         def self.coerce
           lambda do |x|
-            ::Google::Compute::Property::InstanceTemplateNetworkInterfacesArray.catalog_parse(x)
+            ::Google::Compute::Property::InstanceTemplateNetworkinterfacesArray.catalog_parse(x)
           end
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return InstanceTemplateNetworkInterfaces.catalog_parse(value) \
+          return InstanceTemplateNetworkinterfaces.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceTemplateNetworkInterfaces.catalog_parse(v) }
+          value.map { |v| InstanceTemplateNetworkinterfaces.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return InstanceTemplateNetworkInterfaces.api_parse(value) \
+          return InstanceTemplateNetworkinterfaces.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceTemplateNetworkInterfaces.api_parse(v) }
+          value.map { |v| InstanceTemplateNetworkinterfaces.api_parse(v) }
         end
       end
     end

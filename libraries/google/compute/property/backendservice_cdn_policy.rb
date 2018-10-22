@@ -29,7 +29,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for CdnPolicy for backend_service.
-      class BackendServiceCdnPolicy
+      class BackendServiceCdnpolicy
         include Comparable
 
         attr_reader :cache_key_policy
@@ -47,7 +47,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? BackendServiceCdnPolicy
+          return false unless other.is_a? BackendServiceCdnpolicy
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -56,7 +56,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? BackendServiceCdnPolicy
+          return false unless other.is_a? BackendServiceCdnpolicy
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -78,21 +78,21 @@ module Google
         end
       end
 
-      # Manages a BackendServiceCdnPolicy nested object
+      # Manages a BackendServiceCdnpolicy nested object
       # Data is coming from the GCP API
-      class BackendServiceCdnPolicyApi < BackendServiceCdnPolicy
+      class BackendServiceCdnpolicyApi < BackendServiceCdnpolicy
         def initialize(args)
-          @cache_key_policy = Google::Compute::Property::BackendServiceCacheKeyPolicy.api_parse(
+          @cache_key_policy = Google::Compute::Property::BackendServiceCachekeypolicy.api_parse(
             args['cacheKeyPolicy']
           )
         end
       end
 
-      # Manages a BackendServiceCdnPolicy nested object
+      # Manages a BackendServiceCdnpolicy nested object
       # Data is coming from the Chef catalog
-      class BackendServiceCdnPolicyCatalog < BackendServiceCdnPolicy
+      class BackendServiceCdnpolicyCatalog < BackendServiceCdnpolicy
         def initialize(args)
-          @cache_key_policy = Google::Compute::Property::BackendServiceCacheKeyPolicy.catalog_parse(
+          @cache_key_policy = Google::Compute::Property::BackendServiceCachekeypolicy.catalog_parse(
             args[:cache_key_policy]
           )
         end
@@ -101,23 +101,23 @@ module Google
 
     module Property
       # A class to manage input to CdnPolicy for backend_service.
-      class BackendServiceCdnPolicy
+      class BackendServiceCdnpolicy
         def self.coerce
-          ->(x) { ::Google::Compute::Property::BackendServiceCdnPolicy.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::BackendServiceCdnpolicy.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::BackendServiceCdnPolicy
-          Data::BackendServiceCdnPolicyCatalog.new(value)
+          return value if value.is_a? Data::BackendServiceCdnpolicy
+          Data::BackendServiceCdnpolicyCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::BackendServiceCdnPolicy
-          Data::BackendServiceCdnPolicyApi.new(value)
+          return value if value.is_a? Data::BackendServiceCdnpolicy
+          Data::BackendServiceCdnpolicyApi.new(value)
         end
       end
     end

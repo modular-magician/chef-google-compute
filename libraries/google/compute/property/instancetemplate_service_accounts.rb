@@ -30,7 +30,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for ServiceAccounts for instance_template.
-      class InstanceTemplateServiceAccounts
+      class InstanceTemplateServiceaccounts
         include Comparable
 
         attr_reader :email
@@ -51,7 +51,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceTemplateServiceAccounts
+          return false unless other.is_a? InstanceTemplateServiceaccounts
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -60,7 +60,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceTemplateServiceAccounts
+          return false unless other.is_a? InstanceTemplateServiceaccounts
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -83,18 +83,18 @@ module Google
         end
       end
 
-      # Manages a InstanceTemplateServiceAccounts nested object
+      # Manages a InstanceTemplateServiceaccounts nested object
       # Data is coming from the GCP API
-      class InstanceTemplateServiceAccountsApi < InstanceTemplateServiceAccounts
+      class InstanceTemplateServiceaccountsApi < InstanceTemplateServiceaccounts
         def initialize(args)
           @email = Google::Compute::Property::String.api_parse(args['email'])
           @scopes = Google::Compute::Property::StringArray.api_parse(args['scopes'])
         end
       end
 
-      # Manages a InstanceTemplateServiceAccounts nested object
+      # Manages a InstanceTemplateServiceaccounts nested object
       # Data is coming from the Chef catalog
-      class InstanceTemplateServiceAccountsCatalog < InstanceTemplateServiceAccounts
+      class InstanceTemplateServiceaccountsCatalog < InstanceTemplateServiceaccounts
         def initialize(args)
           @email = Google::Compute::Property::String.catalog_parse(args[:email])
           @scopes = Google::Compute::Property::StringArray.catalog_parse(args[:scopes])
@@ -104,48 +104,48 @@ module Google
 
     module Property
       # A class to manage input to ServiceAccounts for instance_template.
-      class InstanceTemplateServiceAccounts
+      class InstanceTemplateServiceaccounts
         def self.coerce
-          ->(x) { ::Google::Compute::Property::InstanceTemplateServiceAccounts.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::InstanceTemplateServiceaccounts.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceTemplateServiceAccounts
-          Data::InstanceTemplateServiceAccountsCatalog.new(value)
+          return value if value.is_a? Data::InstanceTemplateServiceaccounts
+          Data::InstanceTemplateServiceaccountsCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceTemplateServiceAccounts
-          Data::InstanceTemplateServiceAccountsApi.new(value)
+          return value if value.is_a? Data::InstanceTemplateServiceaccounts
+          Data::InstanceTemplateServiceaccountsApi.new(value)
         end
       end
 
       # A Chef property that holds an integer
-      class InstanceTemplateServiceAccountsArray < Google::Compute::Property::Array
+      class InstanceTemplateServiceaccountsArray < Google::Compute::Property::Array
         def self.coerce
           lambda do |x|
-            ::Google::Compute::Property::InstanceTemplateServiceAccountsArray.catalog_parse(x)
+            ::Google::Compute::Property::InstanceTemplateServiceaccountsArray.catalog_parse(x)
           end
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return InstanceTemplateServiceAccounts.catalog_parse(value) \
+          return InstanceTemplateServiceaccounts.catalog_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceTemplateServiceAccounts.catalog_parse(v) }
+          value.map { |v| InstanceTemplateServiceaccounts.catalog_parse(v) }
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return InstanceTemplateServiceAccounts.api_parse(value) \
+          return InstanceTemplateServiceaccounts.api_parse(value) \
             unless value.is_a?(::Array)
-          value.map { |v| InstanceTemplateServiceAccounts.api_parse(v) }
+          value.map { |v| InstanceTemplateServiceaccounts.api_parse(v) }
         end
       end
     end

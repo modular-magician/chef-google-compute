@@ -59,15 +59,15 @@ module Google
       property :id,
                Integer, coerce: ::Google::Compute::Property::Integer.coerce, desired_state: true
       property :network,
-               [String, ::Google::Compute::Data::NetworkSelfLinkRef],
-               coerce: ::Google::Compute::Property::NetworkSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::NetworkSelflinkRef],
+               coerce: ::Google::Compute::Property::NetworkSelflinkRef.coerce, desired_state: true
       # tunnels is Array of Google::Compute::Property::StringArray
       property :tunnels,
                Array, coerce: ::Google::Compute::Property::StringArray.coerce, desired_state: true
-      # forwarding_rules is Array of Google::Compute::Property::ForwardingRuleSelfLinkRefArray
+      # forwarding_rules is Array of Google::Compute::Property::ForwardingRuleSelflinkRefArray
       property :forwarding_rules,
                Array,
-               coerce: ::Google::Compute::Property::ForwardingRuleSelfLinkRefArray.coerce,
+               coerce: ::Google::Compute::Property::ForwardingRuleSelflinkRefArray.coerce,
                desired_state: true
       property :region,
                [String, ::Google::Compute::Data::RegionNameRef],
@@ -103,7 +103,7 @@ module Google
           @current_resource.tunnels =
             ::Google::Compute::Property::StringArray.api_parse(fetch['tunnels'])
           @current_resource.forwarding_rules =
-            ::Google::Compute::Property::ForwardingRuleSelfLinkRefArray.api_parse(
+            ::Google::Compute::Property::ForwardingRuleSelflinkRefArray.api_parse(
               fetch['forwardingRules']
             )
           @new_resource.__fetched = fetch

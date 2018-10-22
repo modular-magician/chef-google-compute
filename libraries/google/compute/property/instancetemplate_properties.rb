@@ -138,17 +138,17 @@ module Google
             Google::Compute::Property::MachineTypeNameRef.api_parse(args['machineType'])
           @metadata = Google::Compute::Property::NameValues.api_parse(args['metadata'])
           @guest_accelerators =
-            Google::Compute::Property::InstanceTemplateGuestAcceleratorsArray.api_parse(
+            Google::Compute::Property::InstanceTemplateGuestacceleratorsArray.api_parse(
               args['guestAccelerators']
             )
           @network_interfaces =
-            Google::Compute::Property::InstanceTemplateNetworkInterfacesArray.api_parse(
+            Google::Compute::Property::InstanceTemplateNetworkinterfacesArray.api_parse(
               args['networkInterfaces']
             )
           @scheduling =
             Google::Compute::Property::InstanceTemplateScheduling.api_parse(args['scheduling'])
           @service_accounts =
-            Google::Compute::Property::InstanceTemplateServiceAccountsArray.api_parse(
+            Google::Compute::Property::InstanceTemplateServiceaccountsArray.api_parse(
               args['serviceAccounts']
             )
           @tags = Google::Compute::Property::InstanceTemplateTags.api_parse(args['tags'])
@@ -168,17 +168,17 @@ module Google
             Google::Compute::Property::MachineTypeNameRef.catalog_parse(args[:machine_type])
           @metadata = Google::Compute::Property::NameValues.catalog_parse(args[:metadata])
           @guest_accelerators =
-            Google::Compute::Property::InstanceTemplateGuestAcceleratorsArray.catalog_parse(
+            Google::Compute::Property::InstanceTemplateGuestacceleratorsArray.catalog_parse(
               args[:guest_accelerators]
             )
           @network_interfaces =
-            Google::Compute::Property::InstanceTemplateNetworkInterfacesArray.catalog_parse(
+            Google::Compute::Property::InstanceTemplateNetworkinterfacesArray.catalog_parse(
               args[:network_interfaces]
             )
           @scheduling =
             Google::Compute::Property::InstanceTemplateScheduling.catalog_parse(args[:scheduling])
           @service_accounts =
-            Google::Compute::Property::InstanceTemplateServiceAccountsArray.catalog_parse(
+            Google::Compute::Property::InstanceTemplateServiceaccountsArray.catalog_parse(
               args[:service_accounts]
             )
           @tags = Google::Compute::Property::InstanceTemplateTags.catalog_parse(args[:tags])

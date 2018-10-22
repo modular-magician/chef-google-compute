@@ -29,7 +29,7 @@ module Google
   module Compute
     module Data
       # A class to manage data for InitializeParams for instance.
-      class InstanceInitializeParams
+      class InstanceInitializeparams
         include Comparable
 
         attr_reader :disk_name
@@ -59,7 +59,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstanceInitializeParams
+          return false unless other.is_a? InstanceInitializeparams
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -68,7 +68,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstanceInitializeParams
+          return false unless other.is_a? InstanceInitializeparams
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -94,32 +94,32 @@ module Google
         end
       end
 
-      # Manages a InstanceInitializeParams nested object
+      # Manages a InstanceInitializeparams nested object
       # Data is coming from the GCP API
-      class InstanceInitializeParamsApi < InstanceInitializeParams
+      class InstanceInitializeparamsApi < InstanceInitializeparams
         def initialize(args)
           @disk_name = Google::Compute::Property::String.api_parse(args['diskName'])
           @disk_size_gb = Google::Compute::Property::Integer.api_parse(args['diskSizeGb'])
-          @disk_type = Google::Compute::Property::DiskTypeSelfLinkRef.api_parse(args['diskType'])
+          @disk_type = Google::Compute::Property::DiskTypeSelflinkRef.api_parse(args['diskType'])
           @source_image = Google::Compute::Property::String.api_parse(args['sourceImage'])
           @source_image_encryption_key =
-            Google::Compute::Property::InstanceSourceImageEncryptionKey.api_parse(
+            Google::Compute::Property::InstanceSourceimageencryptionkey.api_parse(
               args['sourceImageEncryptionKey']
             )
         end
       end
 
-      # Manages a InstanceInitializeParams nested object
+      # Manages a InstanceInitializeparams nested object
       # Data is coming from the Chef catalog
-      class InstanceInitializeParamsCatalog < InstanceInitializeParams
+      class InstanceInitializeparamsCatalog < InstanceInitializeparams
         def initialize(args)
           @disk_name = Google::Compute::Property::String.catalog_parse(args[:disk_name])
           @disk_size_gb = Google::Compute::Property::Integer.catalog_parse(args[:disk_size_gb])
           @disk_type =
-            Google::Compute::Property::DiskTypeSelfLinkRef.catalog_parse(args[:disk_type])
+            Google::Compute::Property::DiskTypeSelflinkRef.catalog_parse(args[:disk_type])
           @source_image = Google::Compute::Property::String.catalog_parse(args[:source_image])
           @source_image_encryption_key =
-            Google::Compute::Property::InstanceSourceImageEncryptionKey.catalog_parse(
+            Google::Compute::Property::InstanceSourceimageencryptionkey.catalog_parse(
               args[:source_image_encryption_key]
             )
         end
@@ -128,23 +128,23 @@ module Google
 
     module Property
       # A class to manage input to InitializeParams for instance.
-      class InstanceInitializeParams
+      class InstanceInitializeparams
         def self.coerce
-          ->(x) { ::Google::Compute::Property::InstanceInitializeParams.catalog_parse(x) }
+          ->(x) { ::Google::Compute::Property::InstanceInitializeparams.catalog_parse(x) }
         end
 
         # Used for parsing Chef catalog
         def self.catalog_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceInitializeParams
-          Data::InstanceInitializeParamsCatalog.new(value)
+          return value if value.is_a? Data::InstanceInitializeparams
+          Data::InstanceInitializeparamsCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_parse(value)
           return if value.nil?
-          return value if value.is_a? Data::InstanceInitializeParams
-          Data::InstanceInitializeParamsApi.new(value)
+          return value if value.is_a? Data::InstanceInitializeparams
+          Data::InstanceInitializeparamsApi.new(value)
         end
       end
     end

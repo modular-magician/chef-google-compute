@@ -58,12 +58,12 @@ module Google
       property :description,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :target_vpn_gateway,
-               [String, ::Google::Compute::Data::TargetVpnGatewaySelfLinkRef],
-               coerce: ::Google::Compute::Property::TargetVpnGatewaySelfLinkRef.coerce,
+               [String, ::Google::Compute::Data::TargetVpnGatewaySelflinkRef],
+               coerce: ::Google::Compute::Property::TargetVpnGatewaySelflinkRef.coerce,
                desired_state: true
       property :router,
-               [String, ::Google::Compute::Data::RouterSelfLinkRef],
-               coerce: ::Google::Compute::Property::RouterSelfLinkRef.coerce, desired_state: true
+               [String, ::Google::Compute::Data::RouterSelflinkRef],
+               coerce: ::Google::Compute::Property::RouterSelflinkRef.coerce, desired_state: true
       property :peer_ip,
                String, coerce: ::Google::Compute::Property::String.coerce, desired_state: true
       property :shared_secret,
